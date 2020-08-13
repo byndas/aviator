@@ -20,7 +20,7 @@ function Video() {
           </ul>
         </div>
       </div>
-      <video autoPlay loop>
+      <video autoPlay muted loop>
         <source src={video} />
       </video>
     </div>

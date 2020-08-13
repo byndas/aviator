@@ -6,7 +6,7 @@ function Video() {
   return (
     <div className="bg_video">
       <div className="mini_navbar">
-        <div className="card background_for_li">
+        <div className="cardx background_for_li">
           <ul className="list-group list-group-flush">
             <li className="list-group-item background_for_li">
               Cras justo odio

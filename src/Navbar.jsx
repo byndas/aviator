@@ -20,49 +20,59 @@ class Navbar extends Component {
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            href="https://www.youtube.com/"
           >
             <span className="navbar-toggler-icon"></span>
           </a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link">
-                  Home <span className="sr-only">(current)</span>
+                <a className="nav-link" href="https://www.youtube.com/">
+                  Home{" "}
+                  <span className="sr-only" href="https://www.youtube.com/">
+                    (current)
+                  </span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link">
+                <a className="nav-link" href="https://www.youtube.com/">
                   News <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link">
+                <a className="nav-link" href="https://www.youtube.com/">
                   About Us <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link">
+                <a className="nav-link" href="https://www.youtube.com/">
                   Projects <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link">
+                <a className="nav-link" href="https://www.youtube.com/">
                   Gallery <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link"></a>
+                <a className="nav-link" href="https://www.youtube.com/">
+                  +
+                </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Calendar</a>
+                <a className="nav-link" href="https://www.youtube.com/">
+                  Calendar
+                </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Contact</a>
+                <a className="nav-link" href="https://www.youtube.com/">
+                  Contact
+                </a>
               </li>
             </ul>
             <div>

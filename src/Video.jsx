@@ -1,26 +1,30 @@
 import React from "react";
-import video from "./images/video.webm";
 import "./video.css";
+import video from "./images/video.webm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudSun } from '@fortawesome/free-solid-svg-icons'
+import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 
 function Video() {
   return (
     <div className="bg_video">
       <div className="mini_navbar">
-        <div className="cardx background_for_li">
+        <div className="cardx">
           <ul className="list-group list-group-flush">
             <li className="list-group-item background_for_li">
-              Cras justo odio
+              Runway  <FontAwesomeIcon icon={faPlaneDeparture}/>
             </li>
             <li className="list-group-item background_for_li">
-              Dapibus ac facilisis in
+              Weather <FontAwesomeIcon icon={faCloudSun}/>
             </li>
             <li className="list-group-item background_for_li">
-              Vestibulum at eros
+              Useful links  <FontAwesomeIcon icon={faShare}/>
             </li>
           </ul>
         </div>
       </div>
-      <video autoPlay muted loop>
+      <video className='bg_video_content' autoPlay muted loop>
         <source src={video} />
       </video>
     </div>

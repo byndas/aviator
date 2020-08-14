@@ -1,26 +1,26 @@
 import React, { Component } from "react";
-import Logo from "./Images/logo.png";
-import youtube from "./Images/youtube.svg";
-import instagramIcon from "./Images/instagramIcon.svg";
-import facebookIcon from "./Images/facebookIcon.svg";
-import georgiaIcon from "./Images/georgiaIcon.svg";
-import englishIcon from "./Images/englishIcon.svg";
+import Logo from "./images/logo.png";
+import youtube from './images/youtube.svg';
+import instagramIcon from './images/instagramIcon.svg';
+import facebookIcon from './images/facebookIcon.svg';
+import georgiaIcon from './images/georgiaIcon.svg';
+import englishIcon from './images/englishIcon.svg';
 
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 class Navbar extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
-      flag: true
-    };
+       flag : true
+    }
     this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
+  } 
+  handleClick(){
     this.setState({
-      flag: !this.state.flag
-    });
+      flag : !this.state.flag
+    })
   }
   render() {
     const { flag } = this.state;
@@ -42,13 +42,10 @@ class Navbar extends Component {
           >
             <span className="navbar-toggler-icon"></span>
           </a>
-          <div
-            className="collapse navbar-collapse margin_left"
-            id="navbarSupportedContent"
-          >
+          <div className="collapse navbar-collapse margin_left" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link link_color" to="/">
+                <Link className="nav-link link_color" to='/'>
                   Home{" "}
                   <span className="sr-only" href="https://www.youtube.com/">
                     (current)
@@ -57,59 +54,41 @@ class Navbar extends Component {
               </li>
 
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   News <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link link_color" to="/about">
+                <Link className="nav-link link_color" to='/about'>
                   About Us <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   Projects <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   Gallery <span className="sr-only">(current)</span>
                 </a>
               </li>
 
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   +
                 </a>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   Calendar
                 </a>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link link_color"
-                  href="https://www.youtube.com/"
-                >
+                <a className="nav-link link_color" href="https://www.youtube.com/">
                   Contact
                 </a>
               </li>
@@ -118,31 +97,17 @@ class Navbar extends Component {
               <ul className="nav justify-content-end">
                 <li className="nav-item">
                   <a className="nav-link" href="https://www.youtube.com/">
-                    <img className="youtube_icon" src={youtube} alt="youtube" />
+                    <img className='youtube_icon' src={youtube} alt='youtube'/>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a
-                    href="https://www.instagram.com/?hl=en"
-                    className="nav-link"
-                  >
-                    <img
-                      className="instagram_icon"
-                      src={instagramIcon}
-                      alt="instagram"
-                    />
+                  <a href='https://www.instagram.com/?hl=en' className="nav-link">
+                    <img className='instagram_icon' src={instagramIcon} alt='instagram'/>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a
-                    href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
-                    className="nav-link"
-                  >
-                    <img
-                      className="facebook_icon"
-                      src={facebookIcon}
-                      alt="facebook"
-                    />
+                  <a href='https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797' className="nav-link">
+                    <img className='facebook_icon' src={facebookIcon} alt='facebook'/>
                   </a>
                 </li>
               </ul>
@@ -162,12 +127,8 @@ class Navbar extends Component {
               </button>
             </form>
             <div onClick={this.handleClick} class="btn-group-vertical">
-              {flag && (
-                <img className="flag_icon" src={georgiaIcon} alt="gerogia" />
-              )}
-              {!flag && (
-                <img className="flag_icon" src={englishIcon} alt="english" />
-              )}
+                   {flag && <img className='flag_icon' src={georgiaIcon} alt='gerogia'/>}
+                   {!flag && <img className='flag_icon' src={englishIcon} alt='english'/>}
             </div>
           </div>
         </nav>

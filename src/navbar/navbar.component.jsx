@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Logo from "../images/logo.png";
 import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
@@ -7,9 +7,9 @@ import georgiaIcon from "../images/georgiaIcon.svg";
 import englishIcon from "../images/englishIcon.svg";
 
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "./navbar.styles.css";
 
-class Navbar extends Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

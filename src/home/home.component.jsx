@@ -1,12 +1,12 @@
 import React from "react";
-import "./Video.css";
+import "./home.styles.css";
 import video from "../images/video.webm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
 import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 
-function Video() {
+function Home() {
   return (
     <div className="bg_video">
       <div className="mini_navbar">
@@ -31,4 +31,4 @@ function Video() {
   );
 }
 
-export default Video;
+export default Home;

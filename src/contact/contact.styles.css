@@ -1,0 +1,27 @@
+.contact_container {
+    height: 500px;
+}
+
+.facebook_icon {
+    width: 25px;
+    height: 25px;
+}
+
+.instagram_icon{
+    width: 25px;
+    height: 25px;
+    background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+  border-radius: 5px;
+}
+
+.contact_hover{
+    background-image: linear-gradient(to right, #539de2, #3737a0);
+    color: white;
+    transition: all .5s;
+}
+
+.contact_hover:hover{
+    background-image: linear-gradient(to right, #74afe6, #1f1f9e);
+}

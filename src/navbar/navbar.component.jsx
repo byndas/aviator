@@ -94,7 +94,7 @@ class Navbar extends React.Component {
                   className="nav-link link_color"
                   href="https://www.youtube.com/"
                 >
-                  +
+                  Catalog
                 </a>
               </li>
               <li className="nav-item">
@@ -106,12 +106,12 @@ class Navbar extends React.Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link link_color"
-                  href="https://www.youtube.com/"
+                  to='/contact'
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
             <div>
@@ -134,8 +134,7 @@ class Navbar extends React.Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a
-                    href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
+                  <a href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
                     className="nav-link"
                   >
                     <img

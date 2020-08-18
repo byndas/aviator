@@ -7,4 +7,5 @@ const backgroundImage = image => ({
     backgroundPosition: 'center'
   });
 
-  export default backgroundImage;
+
+export default backgroundImage;

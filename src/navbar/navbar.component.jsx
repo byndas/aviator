@@ -81,12 +81,12 @@ class Navbar extends React.Component {
               </li>
 
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link link_color"
-                  href="https://www.youtube.com/"
+                  to='/gallery'
                 >
                   Gallery <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
@@ -117,7 +117,7 @@ class Navbar extends React.Component {
             <div>
               <ul className="nav justify-content-end">
                 <li className="nav-item">
-                  <a className="nav-link" href="https://www.youtube.com/">
+                  <a className="nav-link ml-3" href="https://www.youtube.com/">
                     <img className="youtube_icon" src={youtube} alt="youtube" />
                   </a>
                 </li>
@@ -160,7 +160,7 @@ class Navbar extends React.Component {
                 Search
               </button>
             </form>
-            <div onClick={this.handleClick} class="btn-group-vertical">
+            <div onClick={this.handleClick} className="btn-group-vertical">
               {flag && (
                 <img className="flag_icon" src={georgiaIcon} alt="gerogia" />
               )}

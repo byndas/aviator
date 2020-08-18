@@ -15,7 +15,7 @@ function About() {
           <h1 className="display-3 heading-secondary mt-5">about us</h1>
           <div className="jumbotron jumbotron-fluid shadow p-9 mb-2 bg-white mt-5  paragraph_background">
               <div className="container">
-                <p className="lead font-weight-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <p className="lead font-weight-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Quod rem culpa voluptatum officiis. Harum autem, quas eum in veritatis, 
                   culpa ratione deleniti adipisci magnam fugit recusandae inventore iusto doloribus aspernatur.
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptas,

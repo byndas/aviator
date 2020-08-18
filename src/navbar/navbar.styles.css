@@ -1,11 +1,12 @@
 .youtube_icon {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
 }
 
 .instagram_icon{
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
     background: #d6249f;
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
   box-shadow: 0px 3px 10px rgba(0,0,0,.25);
@@ -13,8 +14,8 @@
 }
 
 .facebook_icon {
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
 }
 
 .flag_icon {

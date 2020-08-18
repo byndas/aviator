@@ -7,53 +7,59 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
+
+
 function Contact(){
     return(
         <div>
          <div className='contact_container'>
-            <div className='container text-center mt-5'>
-              <div class="row border rounded-pill shadow p-1 mb-5 bg-white w-50 p-1 contact_hover">
-                 <div class="col">
-                           <div class="media">
+            <div className='container text-center mt-5 position-relative'>
+              <div className="row border rounded-pill shadow p-1 mb-2 bg-white  p-1 contact_hover">
+                 <div className="col">
+                           <div className="media">
                                 <img className='facebook_icon mt-3' src={facebook} alt='facebookIcon'/>
-                                <div class="media-body">
+                                <div className="media-body">
                                    <p className='mt-3'> dkodkfo@dm.com</p>
                                 </div>
                             </div>
                     </div>
                 </div>
-            <div class="row border rounded-pill shadow p-1 mb-5 bg-white w-50 p-1 contact_hover">
-                    <div class="col">
-                        <div class="media">
+            <div className="row border rounded-pill shadow p-1 mb-2 bg-white  p-1 contact_hover">
+                    <div className="col">
+                        <div className="media">
                                 <img src={InstagramIcon} className='instagram_icon mt-3' alt="instagramIcon"/>
-                                <div class="media-body">
+                                <div className="media-body">
                                 <p className='mt-3'> dkodkfo@instagram.com</p>
                                 </div>
                         </div>
                    </div>
              </div>
-             <div class="row border rounded-pill shadow p-1 mb-5 bg-white w-50 p-1 contact_hover">
-                    <div class="col">
-                        <div class="media">
+             <div className="row border rounded-pill shadow p-1 mb-2 bg-white  p-1 contact_hover">
+                    <div className="col">
+                        <div className="media">
                              <FontAwesomeIcon icon={faPhone} className='mt-3'/>
-                                <div class="media-body">
+                                <div className="media-body">
                                 <p className='mt-3'>+995 595 595</p>
                                 </div>
                         </div>
                    </div>
              </div>
-             <div class="row border rounded-pill shadow p-1 mb-5 bg-white w-50 p-1 contact_hover">
-                    <div class="col">
-                        <div class="media">
+             <div className="row border rounded-pill shadow p-1 mb-2 bg-white  p-1 contact_hover">
+                    <div className="col">
+                        <div className="media">
                              <FontAwesomeIcon icon={faEnvelope} className='mt-3'/>
-                                <div class="media-body">
+                                <div className="media-body">
                                 <p className='mt-3'>georgiaAviation@gmail.com</p>
                                 </div>
                         </div>
                    </div>
              </div>
+               <div className='google_map'>
+                    <iframe src="https://maps.google.com/maps?q=tbilisi&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                  allowfullscreen></iframe>
+                </div>
             </div>
-        </div>
+            </div>
           <Footer/>
     </div>
     )

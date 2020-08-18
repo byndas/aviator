@@ -39,7 +39,7 @@ function Footer(){
                            <div className='col-sm-6 col-md-3 item mt-5 text-uppercase'>
                               <ul>
                                   <li>
-                                    <Link className="nav-link" to="/about">
+                                    <Link className="nav-link" to="/gallery">
                                       Gallery <span className="sr-only">(current)</span>
                                     </Link>
                                   </li>
@@ -54,7 +54,7 @@ function Footer(){
                                     </Link>
                                   </li>
                                   <li>
-                                   <Link className="nav-link" to="/about">
+                                   <Link className="nav-link" to="/contact">
                                       Contact <span className="sr-only">(current)</span>
                                     </Link>
                                   </li>

@@ -5,11 +5,10 @@ import Footer from '../footer/Footer.component';
 
 
 
-
 function Gallery(){
     return(
         <div>
-             <div className='container'>
+             <div className='container  mt-5 mb-5 shadow p-3 mb-5 bg-white rounded'>
              <div id="carouselExampleCaptions" className="carousel carousel-fade slide" data-ride="carousel">
                         <ol className="carousel-indicators">
                             <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>

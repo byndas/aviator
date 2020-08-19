@@ -6,7 +6,7 @@ import Home from "./home/home.component";
 import About from "./about/about.component";
 import Contact from './contact/Contact.component';
 import Gallery from "./gallery/Gallery.component";
-
+import Catalog from './catalog/Catalog.component';
 
 
 const App = () => (
@@ -15,8 +15,9 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
-      <Route extact path='/contact' component={Contact}/>
+      <Route exact path='/contact' component={Contact}/>
       <Route exact path='/gallery' component={Gallery}/>
+      <Route exact path='/catalog' component={Catalog}/>
     </Switch>
  
   </div>

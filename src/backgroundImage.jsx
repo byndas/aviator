@@ -1,5 +1,5 @@
 const backgroundImage = image => ({
-    width: '100%',
+    width: '100vw',
     height: '100vh',
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',

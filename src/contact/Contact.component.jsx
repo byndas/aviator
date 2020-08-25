@@ -6,12 +6,12 @@ import './contact.styles.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
+import { backgroundColor } from '../catalog/Catalog.component';
 
 
 function Contact(){
     return(
-        <div>
+        <div style={backgroundColor}>
          <div className='contact_container'>
             <div className='container text-center mt-5 position-relative'>
               <div className="row border rounded-pill shadow p-1 mb-2 bg-white  p-1 contact_hover">

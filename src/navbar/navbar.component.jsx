@@ -72,12 +72,12 @@ class Navbar extends React.Component {
               </li>
 
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link link_color"
-                  href="https://www.youtube.com/"
+                  to='/projects'
                 >
                   Projects <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">

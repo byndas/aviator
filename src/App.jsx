@@ -7,6 +7,7 @@ import About from "./about/about.component";
 import Contact from './contact/Contact.component';
 import Gallery from "./gallery/Gallery.component";
 import Catalog from './catalog/Catalog.component';
+import Projects from "./projects/Projects.component";
 
 
 const App = () => (
@@ -18,8 +19,8 @@ const App = () => (
       <Route exact path='/contact' component={Contact}/>
       <Route exact path='/gallery' component={Gallery}/>
       <Route exact path='/catalog' component={Catalog}/>
+      <Route exact path='/projects' component={Projects}/>
     </Switch>
- 
   </div>
 );
 

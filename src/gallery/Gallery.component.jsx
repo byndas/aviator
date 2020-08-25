@@ -28,9 +28,9 @@ function Gallery(){
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5 className='text-dark'>Second slide label</h5>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit
                                     </p>
                                 </div>
                             </div>

@@ -1,0 +1,10 @@
+.calendar_content {
+   
+
+    transition: .3s ease-in-out;
+}
+
+.calendar_content:hover {
+   transform: scale(1.05);
+   cursor: pointer;
+}

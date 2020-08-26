@@ -2,31 +2,46 @@ import React from "react";
 import "./home.styles.css";
 import video from "../images/video.webm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
+
 import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 
+import UsefulLinks from "./UsefulLinks.component";
+
 function Home() {
   return (
-    <div className="bg_video">
-      <div className="mini_navbar">
-        <div className="cardx">
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item background_for_li">
-              Runway <FontAwesomeIcon icon={faPlaneDeparture} />
-            </li>
-            <li className="list-group-item background_for_li">
-              Weather <FontAwesomeIcon icon={faCloudSun} />
-            </li>
-            <li className="list-group-item background_for_li">
-              Useful links <FontAwesomeIcon icon={faShare} />
-            </li>
-          </ul>
-        </div>
-      </div>
-      <video className="bg_video_content" autoPlay muted loop>
-        <source src={video} />
-      </video>
+    <div  className='slideshow'>
+      <ul>
+         <li class="img-fluid"></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+      </ul>
+        <div className='links'>
+          <div className="btn-group dropright runways">
+              <button type="button" className="btn"> 
+                  Weather on the runways 
+              </button>
+              <button type="button" className="btn dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <FontAwesomeIcon icon={faPlaneDeparture}/>
+              </button>
+              <div className="dropdown-menu">
+                
+              </div>
+          </div>
+          <div class="btn-group dropright usefulLinks">
+              <button type="button" className="btn">
+                useful links 
+              </button>
+              <button type="button" className="btn dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <FontAwesomeIcon icon={faShare}/>
+              </button>
+              <div className="dropdown-menu">
+                 <UsefulLinks/>
+              </div>
+          </div>
+       </div>
     </div>
   );
 }

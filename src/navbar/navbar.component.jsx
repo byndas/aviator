@@ -98,12 +98,12 @@ class Navbar extends React.Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link link_color"
-                  href="https://www.youtube.com/"
+                  to='/calendar'
                 >
                   Calendar
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link

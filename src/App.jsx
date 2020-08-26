@@ -8,6 +8,7 @@ import Contact from './contact/Contact.component';
 import Gallery from "./gallery/Gallery.component";
 import Catalog from './catalog/Catalog.component';
 import Projects from "./projects/Projects.component";
+import Calendar from "./calendar/Calendar.component";
 
 
 const App = () => (
@@ -20,6 +21,7 @@ const App = () => (
       <Route exact path='/gallery' component={Gallery}/>
       <Route exact path='/catalog' component={Catalog}/>
       <Route exact path='/projects' component={Projects}/>
+      <Route exact path='/calendar' component={Calendar}/>
     </Switch>
   </div>
 );

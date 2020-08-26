@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.styles.css";
+import "./home.styles.css";
 import video from "../images/video.webm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudSun } from "@fortawesome/free-solid-svg-icons";

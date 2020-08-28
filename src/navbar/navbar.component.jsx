@@ -67,7 +67,7 @@ class Navbar extends React.Component {
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/about">
-                  About Us <span className="sr-only">(current)</span>
+                  About <span className="sr-only">(current)</span>
                 </Link>
               </li>
 

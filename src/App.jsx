@@ -15,16 +15,13 @@ import Projects from "./projects/Projects.component";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      auth: false
-    };
+    // this.authorize = this.authorize.bind(this);
+    this.state = { authorized: false };
   }
-  authorize(event) {
-    event.preventDefault();
-    this.setState({ auth: true });
-    alert("AUTHORIZED!");
-    console.log(this.state.auth);
-  }
+  authorize() {
+    this.setState({ authorized: true });
+    console.log(this.state.authorized);
+  };
   render() {
     return (
       <div>
@@ -37,7 +34,16 @@ class App extends React.Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/gallery" component={Gallery} />
           <Route exact path="/projects" component={Projects} />
-          <Route exact path="/login" component={Login} login={this.authorize} />
+          <Route exact path="/login" 
+            render={
+              (props) => (
+                <Login {...props} 
+                  auth={this.authorize.bind(this)} 
+                  adminIn={this.state.authorized}
+                />
+              )
+            }
+          />
         </Switch>
       </div>
     );

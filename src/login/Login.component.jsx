@@ -4,9 +4,10 @@ import "./Login.styles.css";
 class Login extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       input: "",
-      password: () => "ok"
+      password: "ok"
     };
   }
   handleChange(event) {
@@ -14,41 +15,39 @@ class Login extends React.Component {
       input: event.target.value
     });
   }
-  checkPassword(event) {
-    event.preventDefault();
-    if (this.state.input === "ok") {
-      return this.props.login;
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log(this.props.auth);
+    if (this.state.input === this.state.password) {
+      document.getElementById("hiddenButton").click();
+      document.getElementById("login-container").style.display="none";
     }
-    this.setState({
-      input: ""
-    });
+    this.setState({ input: "" });
   }
 
   render() {
     return (
       <div id="container">
         <div id="login-container">
-          <form id="form">
+          <form id="form" onSubmit={this.handleSubmit.bind(this)} >
+           
             <div className="form-group">
+              ADMINISTRATOR
               <input
                 id="password"
                 name="password"
                 className="form-control"
                 type="password"
-                placeholder="Enter password ... "
-                onChange={this.handleChange.bind(this)}
+                placeholder="enter password"
                 value={this.state.input}
+                onChange={this.handleChange.bind(this)}
               />
             </div>
             <div className="form-group">
-              <button
-                type="submit"
-                id="submit"
-                className="form-btn"
-                onClick={this.checkPassword.bind(this)}
-              >
-                LOGIN >>
+              <button id="submit" className="form-btn" type="submit">
+                Sign In >>
               </button>
+              <button id="hiddenButton" type="button" onClick={this.props.auth} />
             </div>
           </form>
         </div>

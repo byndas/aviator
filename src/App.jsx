@@ -10,12 +10,11 @@ import Contact from "./contact/Contact.component";
 import Gallery from "./gallery/Gallery.component";
 import Login from "./login/Login.component";
 import Projects from "./projects/Projects.component";
-// import { ConsoleWriter } from "istanbul-lib-report";
+import { ConsoleWriter } from "istanbul-lib-report";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.authorize = this.authorize.bind(this);
     this.state = { authorized: false };
   }
   authorize() {
@@ -29,21 +28,13 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/calendar" component={Calendar} />
-          <Route exact path="/catalog" component={Catalog} />
           <Route exact path="/contact" component={Contact} />
-          <Route exact path="/gallery" component={Gallery} />
-          <Route exact path="/projects" component={Projects} />
-          <Route exact path="/login" 
-            render={
-              (props) => (
-                <Login {...props} 
-                  auth={this.authorize.bind(this)} 
-                  adminIn={this.state.authorized}
-                />
-              )
-            }
-          />
+{/* this render={} is the only way to pass props to Route components */}
+          <Route exact path="/calendar" render={ props => <Calendar {...props} adminIn={this.state.authorized}/> } />
+          <Route exact path="/catalog" render={ props => <Catalog {...props} adminIn={this.state.authorized}/> } />
+          <Route exact path="/gallery" render={ props => <Gallery {...props} adminIn={this.state.authorized}/> } />
+          <Route exact path="/projects" render={ props => <Projects {...props} adminIn={this.state.authorized}/> } />
+          <Route exact path="/login" render={ props => <Login {...props} auth={this.authorize.bind(this)} adminIn={this.state.authorized}/> } />
         </Switch>
       </div>
     );

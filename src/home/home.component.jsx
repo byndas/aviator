@@ -34,7 +34,7 @@ function Home() {
           </button>
           <div className="dropdown-menu"></div>
         </div>
-        <div class="btn-group dropright usefulLinks">
+        <div className="btn-group dropright usefulLinks">
           <button type="button" className="btn">
             useful links
           </button>

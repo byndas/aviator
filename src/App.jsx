@@ -8,19 +8,22 @@ import Calendar from "./calendar/Calendar.component";
 import Catalog from "./catalog/Catalog.component";
 import Contact from "./contact/Contact.component";
 import Gallery from "./gallery/Gallery.component";
-import Login from "./login/Login.component";
-import Projects from "./projects/Projects.component";
-import { ConsoleWriter } from "istanbul-lib-report";
+// import Login from "./login/Login.component";
+import News from "./news/News.component";
+import Projects from './projects/Projects.component';
+import projects from './projects/ProjectList';
+import SingleProject from './projects/SingleProject';
+
 
 class App extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.state = { authorized: false };
-  }
-  authorize() {
-    this.setState({ authorized: true });
-    console.log(this.state.authorized);
-  };
+    this.state = ({projects : projects});
+    this.findProject = this.findProject.bind(this);
+}
+findProject(id){
+  return this.state.projects.find(prj => prj.id === id)
+}
   render() {
     return (
       <div>
@@ -29,12 +32,12 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
-{/* this render={} is the only way to pass props to Route components */}
-          <Route exact path="/calendar" render={ props => <Calendar {...props} adminIn={this.state.authorized}/> } />
-          <Route exact path="/catalog" render={ props => <Catalog {...props} adminIn={this.state.authorized}/> } />
-          <Route exact path="/gallery" render={ props => <Gallery {...props} adminIn={this.state.authorized}/> } />
-          <Route exact path="/projects" render={ props => <Projects {...props} adminIn={this.state.authorized}/> } />
-          <Route exact path="/login" render={ props => <Login {...props} auth={this.authorize.bind(this)} adminIn={this.state.authorized}/> } />
+          <Route exact path="/calendar" render={ () => <Calendar/>} />
+          <Route exact path="/catalog" render={ () => <Catalog />} />
+          <Route exact path="/gallery" render={ () => <Gallery />} />
+          <Route exact path="/news" render={ () => <News />} />
+          <Route exact path="/projects" render={ () => <Projects projects={this.state.projects}/>} />
+          <Route exact path="/projects/:id" render={ (props) => <SingleProject projects={this.findProject(props.match.params.id)}/>} />
         </Switch>
       </div>
     );

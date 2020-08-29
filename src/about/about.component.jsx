@@ -1,7 +1,7 @@
 import React from "react";
 import Plane from "../images/1209image.jpg";
 import backgroundImage from "../backgroundImage";
-import "./About.styles.css";
+import "./about.styles.css";
 import Footer from "../footer/Footer.component";
 
 function About() {

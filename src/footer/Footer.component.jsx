@@ -20,7 +20,7 @@ function Footer(){
                                     </Link>
                                 </li>
                               <li>
-                                    <Link className="nav-link" to="/about">
+                                    <Link className="nav-link" to="/news">
                                       News <span className="sr-only">(current)</span>
                                     </Link>
                                 </li>

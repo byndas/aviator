@@ -12,7 +12,7 @@ function Home() {
   return (
     <div className="slideshow">
       <ul>
-        <li class="img-fluid"></li>
+        <li className="img-fluid"></li>
         <li></li>
         <li></li>
         <li></li>

@@ -8,10 +8,10 @@ class ProjectGroup extends Component{
         return(
             <div>
                 <div class="card project_content_title">
-                <div class="card-header">{name}<span className='ml-5'>31.08.2020</span></div>
+                <div class="card-header project_content_header">{name}<span className='ml-5'>31.08.2020</span></div>
                     <h5 class="card-title text-center">{subTitle}</h5>
                 <div class="card-body d-flex">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <img src={img} alt="..." class="img-thumbnail"/>
                     </div>
                     <div class="col-md-8">
@@ -21,6 +21,7 @@ class ProjectGroup extends Component{
                      <Link className="btn btn-primary" type="button" to={`/projects/${id}`}>
                         Read More...
                      </Link>
+                     
                   </div>
                 </div>
            </div>

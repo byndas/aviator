@@ -7,7 +7,7 @@ import georgiaIcon from "../images/georgiaIcon.svg";
 import englishIcon from "../images/englishIcon.svg";
 
 import { Link } from "react-router-dom";
-import "./navbar.styles.css";
+import "./Navbar.styles.css";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -57,10 +57,7 @@ class Navbar extends React.Component {
               </li>
 
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/news'
-                >
+                <Link className="nav-link link_color" to="/news">
                   News <span className="sr-only">(current)</span>
                 </Link>
               </li>
@@ -72,44 +69,29 @@ class Navbar extends React.Component {
               </li>
 
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/projects'
-                >
+                <Link className="nav-link link_color" to="/projects">
                   Projects <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/gallery'
-                >
+                <Link className="nav-link link_color" to="/gallery">
                   Gallery <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/catalog'
-                >
+                <Link className="nav-link link_color" to="/catalog">
                   Catalog
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/calendar'
-                >
+                <Link className="nav-link link_color" to="/calendar">
                   Calendar
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link link_color"
-                  to='/contact'
-                >
+                <Link className="nav-link link_color" to="/contact">
                   Contact
                 </Link>
               </li>
@@ -134,7 +116,8 @@ class Navbar extends React.Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
+                  <a
+                    href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
                     className="nav-link"
                   >
                     <img

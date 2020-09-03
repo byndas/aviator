@@ -1,8 +1,8 @@
-import firebase from "firebase/app";
-import "firebase.firestore";
-import "firebase.auth";
+import firebase from "firebase";
+// import "firebase.firestore";
+// import "firebase.auth";
 
-config = {
+const config = {
   apiKey: "AIzaSyCEu3WsvqugTOqBDfNmVR8sVp524ylAkhs",
   authDomain: "aviator-db.firebaseapp.com",
   databaseURL: "https://aviator-db.firebaseio.com",
@@ -15,5 +15,5 @@ config = {
 
 firebase.initializeApp(config);
 
-export const firestore = firebase.firestore();
-export const auth = firebase.auth();
+// export const firestore = firebase.firestore();
+// export const auth = firebase.auth();

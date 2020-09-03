@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./home/home.component";
 import About from "./about/about.component";
 import Calendar from "./calendar/Calendar.component";
-import Catalog from "./catalog/catalog.component";
+import Catalog from "./catalog/Catalog.component";
 import Contact from "./contact/Contact.component";
 import Gallery from "./gallery/Gallery.component";
 // import Login from "./login/Login.component";
@@ -17,6 +17,7 @@ import calendar from "./calendar/CalendarList";
 import gallery from "./gallery/GalleryList";
 import SingleProject from "./projects/SingleProject";
 import { LanguageProvider } from './context/LanguageContext';
+
 
 
 class App extends React.Component {

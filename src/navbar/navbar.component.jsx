@@ -4,18 +4,26 @@ import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
 import { Link } from "react-router-dom";
-import "./navbar.styles.css";
-import  translate  from './translate';
-import { LanguageContext } from '../context/LanguageContext';
-
-
+import "./Navbar.styles.css";
+import translate from "./translate";
+import { LanguageContext } from "../context/LanguageContext";
 
 class Navbar extends React.Component {
   static contextType = LanguageContext;
-  
+
   render() {
     const { language, handleChange } = this.context;
-    const { News, Home, AboutUs, Projects, Gallery, Catalog, Calendar, Contact, Search } = translate[language];
+    const {
+      News,
+      Home,
+      AboutUs,
+      Projects,
+      Gallery,
+      Catalog,
+      Calendar,
+      Contact,
+      Search
+    } = translate[language];
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark background">
@@ -121,27 +129,34 @@ class Navbar extends React.Component {
                 </li>
               </ul>
             </div>
-            <form style={{marginLeft: '30px'}} className="form-inline my-2 my-lg-0">
+            <form
+              style={{ marginLeft: "30px" }}
+              className="form-inline my-2 my-lg-0"
+            >
               <input
-              style={{width: '150px', height: '35px'}}
+                style={{ width: "150px", height: "35px" }}
                 className="form-control mr-sm-2"
                 type="search"
                 placeholder={Search}
                 aria-label="Search"
               />
               <button
-               style={{width: '75px', height: '35px'}}
+                style={{ width: "75px", height: "35px" }}
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="submit"
               >
                 {Search}
               </button>
             </form>
-            <select className='language' value={language} onChange={handleChange}>
-                <option value='Geo'>Geo</option>
-                <option value='Eng'>Engl</option>
-                <option value='Rus'>Rus</option>
-             </select>
+            <select
+              className="language"
+              value={language}
+              onChange={handleChange}
+            >
+              <option value="Geo">Geo</option>
+              <option value="Eng">Engl</option>
+              <option value="Rus">Rus</option>
+            </select>
           </div>
         </nav>
       </div>

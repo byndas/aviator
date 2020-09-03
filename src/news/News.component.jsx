@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
-import { backgroundColor } from "../catalog/catalog.component";
+import { backgroundColor } from "../catalog/Catalog.component";
 import NewsGroup from "./NewsGroup.component";
-import "./news.style.css";
+import "./News.styles.css";
 
 class News extends Component {
   render() {

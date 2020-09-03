@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Poster from "../images/1209poster.jpg";
 import GalleryGroup from "./GalleryGroup";
 import Footer from "../footer/Footer.component";
-import "./Gallery.style.css";
-import { backgroundColor } from "../catalog/catalog.component";
+import "./Gallery.styles.css";
+import { backgroundColor } from "../catalog/Catalog.component";
 
 class Gallery extends Component {
   render() {

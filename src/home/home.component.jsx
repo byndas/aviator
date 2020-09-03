@@ -1,5 +1,5 @@
 import React from "react";
-import "./home.styles.css";
+import "./Home.styles.css";
 // import video from "../images/video.webm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

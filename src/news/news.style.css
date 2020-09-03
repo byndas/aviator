@@ -1,10 +1,10 @@
 .project_content {
-    background-image: linear-gradient(to right, #1b62a5, #01012b);
-    color: white;
-    transition: all .3s ease-in-out;
+  background-image: linear-gradient(to right, #1b62a5, #01012b);
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
 
 .project_content:hover {
-   transform: scale(1.05);
-   cursor: pointer;
+  transform: scale(1.05);
+  cursor: pointer;
 }

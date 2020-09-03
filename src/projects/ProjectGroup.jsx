@@ -6,18 +6,18 @@ class ProjectGroup extends Component {
     const { name, text, img, subTitle, id } = this.props;
     return (
       <div>
-        <div class="card project_content_title">
-          <div class="card-header project_content_header">
+        <div className="card project_content_title">
+          <div className="card-header project_content_header">
             {name}
             <span className="ml-5">31.08.2020</span>
           </div>
-          <h5 class="card-title text-center">{subTitle}</h5>
-          <div class="card-body d-flex">
-            <div class="col-md-3">
-              <img src={img} alt="..." class="img-thumbnail" />
+          <h5 className="card-title text-center">{subTitle}</h5>
+          <div className="card-body d-flex">
+            <div className="col-md-3">
+              <img src={img} alt="..." className="img-thumbnail" />
             </div>
-            <div class="col-md-8">
-              <p class="card-text text-truncate">{text}</p>
+            <div className="col-md-8">
+              <p className="card-text text-truncate">{text}</p>
               <Link
                 className="btn btn-primary"
                 type="button"

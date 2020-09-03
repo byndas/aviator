@@ -1,12 +1,20 @@
-import React from "react";
-import "./Footer.styles.css";
+import React, { Component } from "react";
+import "./footer.styles.css";
 import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
+import translate from '../navbar/translate';
+import { LanguageContext } from '../context/LanguageContext';
 
-function Footer() {
+
+
+class Footer extends Component{
+  static contextType = LanguageContext;
+  render(){
+    const { language } = this.context;
+    const { News, Home, AboutUs, Projects, Gallery, Catalog, Calendar, Contact, Abouttext } = translate[language];
   return (
     <div className="footer-dark">
       <footer>
@@ -16,22 +24,22 @@ function Footer() {
               <ul>
                 <li>
                   <Link className="nav-link" to="/">
-                    Home <span className="sr-only">(current)</span>
+                    {Home} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/news">
-                    News <span className="sr-only">(current)</span>
+                    {News} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/about">
-                    About us <span className="sr-only">(current)</span>
+                    {AboutUs} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/projects">
-                    Projects <span className="sr-only">(current)</span>
+                    {Projects} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
               </ul>
@@ -40,22 +48,22 @@ function Footer() {
               <ul>
                 <li>
                   <Link className="nav-link" to="/gallery">
-                    Gallery <span className="sr-only">(current)</span>
+                    {Gallery} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/catalog">
-                    Catalog <span className="sr-only">(current)</span>
+                    {Catalog} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/calendar">
-                    Calendar <span className="sr-only">(current)</span>
+                    {Calendar} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/contact">
-                    Contact <span className="sr-only">(current)</span>
+                    {Contact} <span className="sr-only">(current)</span>
                   </Link>
                 </li>
               </ul>
@@ -70,10 +78,7 @@ function Footer() {
                 />
               </p>
               <p className="about">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-                eaque atque, rem ratione animi deserunt labore qui nihil ab
-                eveniet sapiente beatae illum reprehenderit magni placeat! Iste
-                libero sunt voluptas!
+                {Abouttext}
               </p>
             </div>
             <div className="col item d-flex justify-content-center">
@@ -104,6 +109,7 @@ function Footer() {
       <p className="copyright text-center">1*209 © 2020</p>
     </div>
   );
+  } 
 }
 
 export default Footer;

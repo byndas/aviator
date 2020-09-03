@@ -3,27 +3,19 @@ import Logo from "../images/logo.png";
 import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
-import georgiaIcon from "../images/georgiaIcon.svg";
-import englishIcon from "../images/englishIcon.svg";
-
 import { Link } from "react-router-dom";
-import "./Navbar.styles.css";
+import "./navbar.styles.css";
+import  translate  from './translate';
+import { LanguageContext } from '../context/LanguageContext';
+
+
 
 class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      flag: true
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-    this.setState({
-      flag: !this.state.flag
-    });
-  }
+  static contextType = LanguageContext;
+  
   render() {
-    const { flag } = this.state;
+    const { language, handleChange } = this.context;
+    const { News, Home, AboutUs, Projects, Gallery, Catalog, Calendar, Contact, Search } = translate[language];
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark background">
@@ -49,7 +41,7 @@ class Navbar extends React.Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/">
-                  Home{" "}
+                  {Home}
                   <span className="sr-only" href="https://www.youtube.com/">
                     (current)
                   </span>
@@ -58,48 +50,48 @@ class Navbar extends React.Component {
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/news">
-                  News <span className="sr-only">(current)</span>
+                  {News} <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/about">
-                  About us <span className="sr-only">(current)</span>
+                  {AboutUs} <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/projects">
-                  Projects <span className="sr-only">(current)</span>
+                  {Projects} <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/gallery">
-                  Gallery <span className="sr-only">(current)</span>
+                  {Gallery} <span className="sr-only">(current)</span>
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/catalog">
-                  Catalog
+                  {Catalog}
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/calendar">
-                  Calendar
+                  {Calendar}
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/contact">
-                  Contact
+                  {Contact}
                 </Link>
               </li>
             </ul>
             <div>
-              <ul className="nav justify-content-end">
+              <ul className="nav mr-auto">
                 <li className="nav-item">
-                  <a className="nav-link ml-3" href="https://www.youtube.com/">
+                  <a className="nav-link" href="https://www.youtube.com/">
                     <img className="youtube_icon" src={youtube} alt="youtube" />
                   </a>
                 </li>
@@ -129,28 +121,27 @@ class Navbar extends React.Component {
                 </li>
               </ul>
             </div>
-            <form className="form-inline my-2 my-lg-0">
+            <form style={{marginLeft: '30px'}} className="form-inline my-2 my-lg-0">
               <input
+              style={{width: '150px', height: '35px'}}
                 className="form-control mr-sm-2"
                 type="search"
-                placeholder="Search"
+                placeholder={Search}
                 aria-label="Search"
               />
               <button
+               style={{width: '75px', height: '35px'}}
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="submit"
               >
-                Search
+                {Search}
               </button>
             </form>
-            <div onClick={this.handleClick} className="btn-group-vertical">
-              {flag && (
-                <img className="flag_icon" src={georgiaIcon} alt="gerogia" />
-              )}
-              {!flag && (
-                <img className="flag_icon" src={englishIcon} alt="english" />
-              )}
-            </div>
+            <select className='language' value={language} onChange={handleChange}>
+                <option value='Geo'>Geo</option>
+                <option value='Eng'>Engl</option>
+                <option value='Rus'>Rus</option>
+             </select>
           </div>
         </nav>
       </div>

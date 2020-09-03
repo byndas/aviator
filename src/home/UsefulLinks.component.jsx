@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.styles.css";
+import "./home.styles.css";
 
 const UsefulLinks = () => {
   return (

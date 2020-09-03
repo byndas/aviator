@@ -8,6 +8,7 @@ import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { LanguageContext } from "../context/LanguageContext";
 import UsefulLinks from "./UsefulLinks.component";
 
+
 const translate = {
   Geo: {
     WeatherOnTheRunways: "ამინდი ასაფრენ ბილიკებზე",

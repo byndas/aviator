@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import translate from "../navbar/translate";
 import { LanguageContext } from "../context/LanguageContext";
 
+
 class Footer extends Component {
   static contextType = LanguageContext;
   render() {

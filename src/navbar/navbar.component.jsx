@@ -8,6 +8,8 @@ import "./Navbar.styles.css";
 import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
 
+
+
 class Navbar extends React.Component {
   static contextType = LanguageContext;
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
-import "./Projects.style.css";
+import "./Projects.styles.css";
 import ProjectGroup from "./ProjectGroup";
 
 import firebase from "firebase";
@@ -12,7 +12,7 @@ class Projects extends Component {
 
     dbRef.on("value", snapshot => {
       // save to Redux store ( not this.setState() )
-      this.setState(snapshot.val());
+      console.log(snapshot.val());
     });
   }
   render() {

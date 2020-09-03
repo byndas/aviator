@@ -30,12 +30,12 @@ const projects = [
     id: "project3"
   },
   {
-    name: "project03",
+    name: "project04",
     img: Project03,
-    subTitle: "projcet 03 subTitle",
+    subTitle: "projcet 04 subTitle",
     text:
       "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
-    id: "project3"
+    id: "project4"
   }
 ];
 

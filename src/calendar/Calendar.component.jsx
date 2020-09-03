@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import CalendarGroup from "./CalendarGroup.component";
-import "./Calendar.style.css";
+import "./Calendar.styles.css";
 
 class Calendar extends Component {
   render() {

@@ -3,7 +3,7 @@ import "./App.styles.css";
 import Navbar from "./navbar/navbar.component";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./home/home.component";
-import About from "./about/about.component";
+import About from "./about/About.component";
 import Calendar from "./calendar/Calendar.component";
 import Catalog from "./catalog/Catalog.component";
 import Contact from "./contact/Contact.component";

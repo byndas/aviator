@@ -1,12 +1,12 @@
 .youtube_icon {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     margin-left: 10px;
 }
 
 .instagram_icon{
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     background: #d6249f;
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
   box-shadow: 0px 3px 10px rgba(0,0,0,.25);
@@ -18,23 +18,15 @@
     height: 15px;
 }
 
-.flag_icon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-    padding: 2px;
-}
-
 
 .background {
     text-transform: uppercase;
     background-image: linear-gradient(to right, #1b62a5, #01012b);
-    
+    font-size: 13px;
 }
 
 .link_color {
-    font-weight: bold;
+    font-weight: 500;
     transition: all .3s ease-in-out;
     
 }
@@ -44,5 +36,16 @@
 }
 
 .margin_left {
-    margin-left: 50px;
+    margin-left: 35px;
+}
+
+.language {
+    width: 50px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    background-color: #01012b;
+    border: none;
 }

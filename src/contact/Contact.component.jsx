@@ -2,11 +2,11 @@ import React from "react";
 import Footer from "../footer/Footer.component";
 import facebook from "../images/facebookIcon.svg";
 import InstagramIcon from "../images/instagramIcon.svg";
-import "./Contact.styles.css";
+import "./contact.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { backgroundColor } from "../catalog/Catalog.component";
+import { backgroundColor } from "../catalog/catalog.component";
 
 function Contact() {
   return (

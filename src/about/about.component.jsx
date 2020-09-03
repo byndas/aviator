@@ -1,26 +1,40 @@
-import React from "react";
+import React, { Component } from "react";
 import Plane from "../images/1209image.jpg";
-import backgroundImage from "../BackgroundImage";
-import "./About.styles.css";
+import backgroundImage from "../backgroundImage";
+import "./about.styles.css";
 import Footer from "../footer/Footer.component";
+import { LanguageContext } from '../context/LanguageContext';
 
-function About() {
+
+const translate = {
+  Geo:{
+    AboutUs: 'ჩვენ შესახებ',
+    Abouttext: 'ფადიკო გოგიტიძე პირველი ქართველი მფრინავი ქალია. იგი 1916 წელს ქობულეთში დაიბადა. 1936 წელს დაამთავრა თბილისის საფრენოსნო სკოლა. როგორც გაზეთი “საბჭოთა აჭარა” 1936 წლის აგვისტოს ნომერში წერდა, ფადიკო გოგიტიძეს საფრენოსნო საქმე ერთ წელში უნდა შეესწავლა: „ერთ წელში უნდა დაუფლებოდა მანქანის მართვას. ერთ წელში უნდა გამხდარიყო მფრინავი…'
+  },
+  Eng: {
+    AboutUs: 'About Us',
+    Abouttext: 'Fadiko Gogitidze is the first Georgian woman pilot. He was born in 1916 in Kobuleti. In 1936 he graduated from Tbilisi Flying School. As the newspaper "Soviet Adjara" wrote in the August issue of 1936, Fadiko Gogitidze had to study the flight case in one year: "In one year he had to master driving a car. Must have become a pilot in one year…'
+  },
+  Rus: {
+    AboutUs: 'насчет нас',
+    Abouttext: 'Фадико Гогитидзе - первая грузинка-пилот. Он родился в 1916 году в Кобулети. В 1936 году окончил Тбилисское летное училище. Как писала газета «Советская Аджария» в августовском номере 1936 года, Фадико Гогитидзе должен был изучить случай полета за один год: «За год он должен был освоить управление автомобилем. За год он должен был стать летчиком…'
+  }
+}
+
+class About extends Component {
+  static contextType = LanguageContext;
+  render(){
+    const { language } = this.context;
+    const { AboutUs, Abouttext } = translate[language];
   return (
     <div>
       <div style={backgroundImage(Plane)}>
         <div className="container text-center">
-          <h1 className="display-3 heading-secondary mt-5">about us</h1>
+          <h1 className="display-3 heading-secondary mt-4">{AboutUs}</h1>
           <div className="jumbotron jumbotron-fluid shadow p-9 mb-2 bg-white mt-5  paragraph_background">
             <div className="container">
               <p className="lead font-weight-bold">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-                rem culpa voluptatum officiis. Harum autem, quas eum in
-                veritatis, culpa ratione deleniti adipisci magnam fugit
-                recusandae inventore iusto doloribus aspernatur. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Obcaecati,
-                voluptas, minus suscipit eum expedita voluptatum aliquid ipsa
-                labore odit consectetur, atque non veniam harum impedit esse.
-                Vel illo tempora possimus.
+               {Abouttext}
               </p>
             </div>
           </div>
@@ -29,6 +43,7 @@ function About() {
       <Footer />
     </div>
   );
+ }
 }
 
 export default About;

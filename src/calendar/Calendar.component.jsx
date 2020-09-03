@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
-import { backgroundColor } from "../catalog/Catalog.component";
+import { backgroundColor } from "../catalog/catalog.component";
 import CalendarGroup from "./CalendarGroup.component";
 import "./Calendar.styles.css";
 

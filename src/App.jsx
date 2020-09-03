@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.styles.css";
-import Navbar from "./navbar/Navbar.component";
+import Navbar from "./navbar/navbar.component";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Home from "./home/Home.component";
-import About from "./about/About.component";
+import Home from "./home/home.component";
+import About from "./about/about.component";
 import Calendar from "./calendar/Calendar.component";
-import Catalog from "./catalog/Catalog.component";
+import Catalog from "./catalog/catalog.component";
 import Contact from "./contact/Contact.component";
 import Gallery from "./gallery/Gallery.component";
 // import Login from "./login/Login.component";
@@ -16,6 +16,8 @@ import news from "./news/NewsList";
 import calendar from "./calendar/CalendarList";
 import gallery from "./gallery/GalleryList";
 import SingleProject from "./projects/SingleProject";
+import { LanguageProvider } from './context/LanguageContext';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <LanguageProvider>
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
@@ -67,6 +70,7 @@ class App extends React.Component {
           />
           <Redirect to="/" />
         </Switch>
+        </LanguageProvider>
       </div>
     );
   }

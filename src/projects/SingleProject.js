@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./Projects.style.css";
+import "./Projects.styles.css";
 
 class SingleProject extends Component {
   render() {

@@ -27,16 +27,16 @@ const projects = [
     subTitle: "projcet 03 subTitle",
     text:
       "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
-    id: "project3"
-  },
-  {
-    name: "project04",
-    img: Project03,
-    subTitle: "projcet 04 subTitle",
-    text:
-      "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
     id: "project4"
-  }
+  },
+  // {
+  //   name: "project04",
+  //   img: Project03,
+  //   subTitle: "projcet 04 subTitle",
+  //   text:
+  //     "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
+  //   id: "project4"
+  // }
 ];
 
 export default projects;

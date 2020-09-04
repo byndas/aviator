@@ -8,3 +8,16 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+
+.icons {
+  color: #c6d7e7;
+  transition: all .3s ease-in-out;
+  font-size: 1.3rem;
+  
+}
+
+.icons:hover {
+  color: #7ba0c4;
+  transform: scale(1.05);
+  cursor: pointer;
+}

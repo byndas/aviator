@@ -5,7 +5,7 @@ import AirPlaneGroup from './AirPlanegroup';
 
 class  AirPlane extends Component {
     render(){
-        const { airPlane } = this.props;
+        const { airPlane, auth } = this.props;
         const airPlaneGroup = airPlane.map(air => (
             <AirPlaneGroup 
               name={air.name}
@@ -13,6 +13,7 @@ class  AirPlane extends Component {
               img={air.img}
               key={air.id}
               id={air.id}
+              auth={auth}
             />
         ))
     return (

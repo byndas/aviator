@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
 import "./Projects.styles.css";
 import ProjectGroup from "./ProjectGroup";
-
+import ProjectsForm from './ProjectsForm';
 import firebase from "firebase";
 import "../firebase/Firebase.config";
 
@@ -17,7 +17,8 @@ class Projects extends Component {
     });
   }
   render() {
-    const { projects } = this.props;
+    const { projects, auth, createProject, removeProject } = this.props;
+
     const projectgroup = projects.map(prj => (
       <ProjectGroup
         id={prj.id}
@@ -26,12 +27,25 @@ class Projects extends Component {
         name={prj.name}
         text={prj.text}
         subTitle={prj.subTitle}
+        auth={auth}
+        removeProject={removeProject}
       />
     ));
     return (
       <div>
         <div className="project_container">
           <h1 className="project_title font-italic">Projects</h1>
+           {auth && <div className='container project_form'>
+           <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target="#create">Create</button>
+            <div className='modal fade' id='create' role="dialog">
+              <div className='modal-dialog modal-md'>
+                <div className='modal-content'>
+                   <ProjectsForm createProject={createProject}/>
+                   <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                 </div>
+              </div>
+            </div>
+          </div>}
           {projectgroup}
         </div>
         <Footer />

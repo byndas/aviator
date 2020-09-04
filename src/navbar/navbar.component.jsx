@@ -4,7 +4,7 @@ import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
 import { Link } from "react-router-dom";
-import "./navbar.styles.css";
+import "./Navbar.styles.css";
 import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
 

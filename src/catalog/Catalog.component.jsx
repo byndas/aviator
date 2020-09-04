@@ -24,9 +24,10 @@ class Catalog extends Component {
     });
   }
   render() {
+    const { auth } = this.props;
     return (
       <div style={backgroundColor}>
-        <AirPlane airPlane={airPlane} />
+        <AirPlane airPlane={airPlane}  auth={auth}/>
         <Pilots />
         <Footer />
       </div>

@@ -5,6 +5,8 @@ import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
 import firebase from "firebase";
 import "../firebase/Firebase.config";
+import NewsForm from './NewsForm';
+
 
 class News extends Component {
   componentDidMount() {
@@ -16,7 +18,8 @@ class News extends Component {
     });
   }
   render() {
-    const { news } = this.props;
+    const { news, auth, createNews, removeNews } = this.props;
+    
     const newsList = news.map(nw => (
       <NewsGroup
         name={nw.name}
@@ -25,11 +28,14 @@ class News extends Component {
         img={nw.img}
         key={nw.id}
         id={nw.id}
+        auth={auth}
+        removeNews={removeNews}
       />
     ));
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">News</h1>
+         {auth && <NewsForm  createNews={createNews}/>}
         <div className="container">
           {newsList}
           <br />

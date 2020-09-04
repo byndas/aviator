@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 class AirPlaneGroup extends Component {
   constructor(props) {
@@ -10,7 +14,7 @@ class AirPlaneGroup extends Component {
     this.setState({ expanded: !this.state.expanded });
   }
   render() {
-    const { text, name, img, id } = this.props;
+    const { text, name, img, id, auth } = this.props;
     const { expanded } = this.state;
     return (
       <div className="col mb-4">
@@ -36,6 +40,10 @@ class AirPlaneGroup extends Component {
             >
               Read More...
             </button>
+            { auth && <div className='float-right'> 
+                      <FontAwesomeIcon className='icons' icon={faEdit}/>
+                      <FontAwesomeIcon className='icons' icon={faTrash}/>
+                    </div> }
           </div>
           <div className="collapse" id={id}>
             <div className="card-body">

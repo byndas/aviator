@@ -16,7 +16,7 @@ class Calendar extends Component {
     });
   }
   render() {
-    const { calendar } = this.props;
+    const { calendar, auth } = this.props;
     const calendarGroup = calendar.map(cl => (
       <div className="col mt-5 px-md-4 ml-5">
         <CalendarGroup
@@ -27,6 +27,7 @@ class Calendar extends Component {
           text={cl.text}
           key={cl.id}
           id={cl.id}
+          auth={auth}
         />
       </div>
     ));

@@ -16,39 +16,31 @@ class Login extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.input === this.state.password) {
-      // document.getElementById("hiddenButton").click();
-      document.getElementById("login-container").style.display = "none";
-    }
-    this.setState({ input: "" });
-  }
-  // password is "1nt3rnat10nal";
-
-  handleClick() {
     firebase
-      .auth()
-      .signInWithEmailAndPassword("webdev.byndasma@gmail.com", this.state.input)
-      .catch(error => {
-        const errorCode = error.code;
-        if (errorCode === "auth/invalid-email") {
-          console.log({ eError: "Format error", pError: "" });
-        } else if (errorCode === "auth/user-disabled") {
-          console.log({ eError: "User is disabled", pError: "" });
-        } else if (errorCode === "auth/user-not-found") {
-          console.log({ eError: "User not found", pError: "" });
-        } else if (errorCode === "auth/wrong-password") {
-          console.log({ eError: "", pError: "Wrong password" });
-        }
-      })
-      .then(success => {
-        if (success) {
-          // must use REDUX no more props
-          alert("ADMIN LOGGED IN");
-          // this.props.auth
-        }
-      });
-  }
-
+    .auth()
+    .signInWithEmailAndPassword("webdev.byndasma@gmail.com", this.state.input)
+    .catch(error => {
+      const errorCode = error.code;
+      if (errorCode === "auth/invalid-email") {
+        console.log({ eError: "Format error", pError: "" });
+      } else if (errorCode === "auth/user-disabled") {
+        console.log({ eError: "User is disabled", pError: "" });
+      } else if (errorCode === "auth/user-not-found") {
+        console.log({ eError: "User not found", pError: "" });
+      } else if (errorCode === "auth/wrong-password") {
+        console.log({ eError: "", pError: "Wrong password" });
+      }
+    })
+    .then(success => {
+      if (success) {
+        // must use REDUX no more props
+        this.props.authenticated();
+        this.props.history.push('/news');
+      }
+    });
+    this.setState({ input: "" });
+    //1nt3rnat10nal
+  } 
   render() {
     return (
       <div id="container">
@@ -67,14 +59,14 @@ class Login extends React.Component {
               />
             </div>
             <div className="form-group">
-              <button
-                onClick={this.handleClick.bind(this)}
+              <input
+               
                 id="submit"
                 className="form-btn"
                 type="submit"
-              >
-                Log In
-              </button>
+                value='log in'
+              />
+             
             </div>
           </form>
         </div>

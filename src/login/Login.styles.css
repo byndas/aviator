@@ -1,9 +1,9 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: monospace;
-}
+} */
 #container {
   position: absolute;
   width: 100%;
@@ -11,7 +11,7 @@
   background-color: #333333;
 }
 #login-container {
-  width: 250px;
+  width: 260px;
   position: absolute;
   top: 50%;
   left: 50%;

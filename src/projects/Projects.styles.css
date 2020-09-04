@@ -68,3 +68,9 @@
     width: 95%;
   }
 }
+
+.project_form {
+  position: absolute;
+  width: 50px;
+  top: 2%;
+}

@@ -3,8 +3,18 @@ import Footer from "../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
+import firebase from "firebase";
+import "../firebase/Firebase.config";
 
 class News extends Component {
+  componentDidMount() {
+    const dbRef = firebase.database().ref("news");
+
+    dbRef.on("value", snapshot => {
+      // save to Redux store ( not this.setState() )
+      console.log(snapshot.val());
+    });
+  }
   render() {
     const { news } = this.props;
     const newsList = news.map(nw => (

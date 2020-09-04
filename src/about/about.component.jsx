@@ -3,10 +3,8 @@ import Plane from "../images/1209image.jpg";
 import backgroundImage from "../backgroundImage";
 import "./About.styles.css";
 import Footer from "../footer/Footer.component";
-import translate from './translaet';
+import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
-
-
 
 class About extends Component {
   static contextType = LanguageContext;

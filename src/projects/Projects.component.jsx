@@ -11,7 +11,8 @@ class Projects extends Component {
     const dbRef = firebase.database().ref("projects");
 
     dbRef.on("value", snapshot => {
-      // save to Redux store ( not this.setState() )
+      // save snapshot.val() to Redux store ( not this.setState() )
+      // Redux store needs to map projects from database
       console.log(snapshot.val());
     });
   }

@@ -3,8 +3,18 @@ import Footer from "../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import CalendarGroup from "./CalendarGroup.component";
 import "./Calendar.styles.css";
+import firebase from "firebase";
+import "../firebase/Firebase.config";
 
 class Calendar extends Component {
+  componentDidMount() {
+    const dbRef = firebase.database().ref("calendar");
+
+    dbRef.on("value", snapshot => {
+      // save to Redux store ( not this.setState() )
+      console.log(snapshot.val());
+    });
+  }
   render() {
     const { calendar } = this.props;
     const calendarGroup = calendar.map(cl => (

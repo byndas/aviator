@@ -4,8 +4,18 @@ import GalleryGroup from "./GalleryGroup";
 import Footer from "../footer/Footer.component";
 import "./Gallery.styles.css";
 import { backgroundColor } from "../catalog/Catalog.component";
+import firebase from "firebase";
+import "../firebase/Firebase.config";
 
 class Gallery extends Component {
+  componentDidMount() {
+    const dbRef = firebase.database().ref("gallery");
+
+    dbRef.on("value", snapshot => {
+      // save to Redux store ( not this.setState() )
+      console.log(snapshot.val());
+    });
+  }
   render() {
     const { gallery } = this.props;
     const galleryGroup = gallery.map(glr => (

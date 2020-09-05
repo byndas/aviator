@@ -4,9 +4,10 @@ import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
 import { Link } from "react-router-dom";
-import "./Navbar.styles.css";
+import "./navbar.styles.css";
 import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
+import { fireAuth } from "../firebase/Firebase.config";
 
 class Navbar extends React.Component {
   static contextType = LanguageContext;
@@ -148,6 +149,11 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
+            {/* {this.props.adminObj ? (
+              <div className="option" onClick="{() => fireAuth.signOut()}">
+                LOG OUT
+              </div>
+            ) : null} */}
             <select
               className="language"
               value={language}

@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "firebase";
+import { fireAuth } from "../firebase/Firebase.config";
 import "./Login.styles.css";
 
 class Login extends React.Component {
@@ -16,14 +16,11 @@ class Login extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    firebase
-      .auth()
+    fireAuth
       .signInWithEmailAndPassword("webdev.byndasma@gmail.com", this.state.input)
       .catch(error => {
         const errorCode = error.code;
-        if (errorCode === "auth/invalid-email") {
-          console.log({ eError: "Format error", pError: "" });
-        } else if (errorCode === "auth/user-disabled") {
+        if (errorCode === "auth/user-disabled") {
           console.log({ eError: "User is disabled", pError: "" });
         } else if (errorCode === "auth/user-not-found") {
           console.log({ eError: "User not found", pError: "" });
@@ -34,12 +31,13 @@ class Login extends React.Component {
       .then(success => {
         if (success) {
           // must use REDUX no more props
-          this.props.authenticated();
+          console.log("ADMIN LOGGED IN");
+          this.props.adminModeTrue();
           this.props.history.push("/news");
         }
       });
     this.setState({ input: "" });
-    //1nt3rnat10nal
+    // 1nt3rnat10nal
   }
   render() {
     return (

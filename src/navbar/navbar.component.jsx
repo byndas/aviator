@@ -1,16 +1,21 @@
 import React from "react";
+import "./navbar.styles.css";
+import { Link } from "react-router-dom";
 import Logo from "../images/logo.png";
 import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
-import { Link } from "react-router-dom";
-import "./navbar.styles.css";
 import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
 import { fireAuth } from "../firebase/Firebase.config";
 
 class Navbar extends React.Component {
   static contextType = LanguageContext;
+
+  // logOut() {
+  //   this.props.adminModeFalse();
+  //   fireAuth.signOut();
+  // }
 
   render() {
     const { language, handleChange } = this.context;
@@ -25,6 +30,7 @@ class Navbar extends React.Component {
       Contact,
       Search
     } = translate[language];
+
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark background">
@@ -86,11 +92,13 @@ class Navbar extends React.Component {
                   {Catalog}
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/calendar">
                   {Calendar}
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/contact">
                   {Contact}
@@ -149,8 +157,8 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
-            {/* {this.props.adminObj ? (
-              <div className="option" onClick="{() => fireAuth.signOut()}">
+            {/* {this.props.adminMode ? (
+              <div className="option" onClick={this.logOut.bind(this)}>
                 LOG OUT
               </div>
             ) : null} */}
@@ -160,7 +168,7 @@ class Navbar extends React.Component {
               onChange={handleChange}
             >
               <option value="Geo">Geo</option>
-              <option value="Eng">Engl</option>
+              <option value="Eng">Eng</option>
               <option value="Rus">Rus</option>
             </select>
           </div>

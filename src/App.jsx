@@ -17,7 +17,7 @@ import calendar from "./calendar/CalendarList";
 import gallery from "./gallery/GalleryList";
 import SingleProject from "./projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
-import { fireAuth } from "./firebase/Firebase.config";
+// import { fireAuth } from "./firebase/Firebase.config";
 
 // 1nt3rnat10nal
 
@@ -25,21 +25,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: true,
-      adminObj: null,
+      adminMode: false,
+      adminId: null,
       projects: projects,
       news: news,
       calendar: calendar,
       gallery: gallery
     };
     this.findProject = this.findProject.bind(this);
-    this.authenticated = this.authenticated.bind(this);
+    this.adminModeTrue = this.adminModeTrue.bind(this);
+    this.adminModeFalse = this.adminModeFalse.bind(this);
     this.createNews = this.createNews.bind(this);
     this.removeNews = this.removeNews.bind(this);
     this.createProject = this.createProject.bind(this);
     this.removeProject = this.removeProject.bind(this);
   }
 
+  /*
   unsubscribeFireAuth = null;
   componentDidMount() {
     this.unsubscribeFireAuth = fireAuth.onAuthStateChanged(user => {
@@ -52,13 +54,17 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unsubscribeFireAuth();
   }
-
+*/
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
   }
-  authenticated() {
-    this.setState({ auth: true });
+  adminModeTrue() {
+    this.setState({ adminMode: true });
   }
+  adminModeFalse() {
+    this.setState({ adminMode: false });
+  }
+
   createNews(name, title, text) {
     this.setState({
       news: [{ name, title, text, id: "news03" }, ...this.state.news]
@@ -90,18 +96,17 @@ class App extends React.Component {
     return (
       <div>
         <LanguageProvider>
-          <Navbar adminObj={this.state.adminObj} />
+          <Navbar
+            adminMode={this.state.adminMode}
+            adminModeFalse={this.adminModeFalse}
+          />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route
               exact
               path="/login"
               render={props => (
-                <Login
-                  {...props}
-                  auth={this.state.auth}
-                  authenticated={this.authenticated}
-                />
+                <Login {...props} adminModeTrue={this.adminModeTrue} />
               )}
             />
             <Route exact path="/about" component={About} />

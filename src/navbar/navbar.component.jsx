@@ -15,7 +15,6 @@ class Navbar extends React.Component {
   }
   static contextType = LanguageContext;
   logOut() {
-    this.props.adminModeFalse();
     fireAuth.signOut();
   }
   render() {

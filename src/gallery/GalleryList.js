@@ -5,30 +5,30 @@ import Project04 from "../images/Project04.jpg";
 
 const gallery = [
   {
-    img: Project03,
     id: "1",
-    name: "first Foto Name",
+    name: "First Photo Name",
+    img: Project03,
     text:
       "Nulla vitae elit libero, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
   },
   {
-    img: logo,
     id: "2",
-    name: "Second Foto Name",
+    name: "Second Photo Name",
+    img: logo,
     text:
       "Nulla vitae elit libero, mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
   },
   {
-    img: Project01,
     id: "3",
-    name: "third Foto Name",
+    name: "Third Photo Name",
+    img: Project01,
     text:
       "Nulla, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
   },
   {
-    img: Project04,
     id: "4",
-    name: "fourth Foto Name",
+    name: "Fourth Photo Name",
+    img: Project04,
     text:
       "Nulla vitae elit libero, Nulla vitae elit libero, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
   }

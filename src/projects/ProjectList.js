@@ -6,36 +6,36 @@ import Project03 from "../images/Project03.jpg";
 
 const projects = [
   {
+    id: "project1",
     name: "project01",
     img: Project01,
-    subTitle: "projcet 01 sub",
+    subTitle: "project 01 subTitle",
     text:
-      "lorem ipsam img simmg kmkmm dsnjnjn, lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn",
-    id: "project1"
+      "lorem ipsam img simmg kmkmm dsnjnjn, lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn"
   },
   {
+    id: "project2",
     name: "project02",
     img: Project02,
-    subTitle: "projcet 02 subTitle",
+    subTitle: "project 02 subTitle",
     text:
-      "lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn ",
-    id: "project2"
+      "lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn "
   },
   {
+    id: "project4",
     name: "project03",
     img: Project03,
-    subTitle: "projcet 03 subTitle",
+    subTitle: "project 03 subTitle",
     text:
-      "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
-    id: "project4"
-  },
+      "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn"
+  }
   // {
+  //   id: "project4",
   //   name: "project04",
   //   img: Project03,
-  //   subTitle: "projcet 04 subTitle",
+  //   subTitle: "project 04 subTitle",
   //   text:
   //     "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn",
-  //   id: "project4"
   // }
 ];
 

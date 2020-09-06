@@ -26,15 +26,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       adminMode: false,
-      adminId: null,
       projects: projects,
       news: news,
       calendar: calendar,
       gallery: gallery
     };
     this.findProject = this.findProject.bind(this);
-    this.adminModeTrue = this.adminModeTrue.bind(this);
-    this.adminModeFalse = this.adminModeFalse.bind(this);
     this.createNews = this.createNews.bind(this);
     this.removeNews = this.removeNews.bind(this);
     this.createProject = this.createProject.bind(this);
@@ -44,8 +41,12 @@ class App extends React.Component {
   unsubscribeFireAuth = null;
   componentDidMount() {
     this.unsubscribeFireAuth = fireAuth.onAuthStateChanged(user => {
-      this.setState({ adminId: user.uid });
-      console.log("adminID = " + user.uid);
+      if (user) {
+        this.setState({ adminMode: true });
+      } else {
+        this.setState({ adminMode: false });
+      }
+      console.log("adminMode = " + this.state.adminMode);
     });
   }
   // closes messaging system between website and firebase to prevent memory leaks
@@ -55,12 +56,6 @@ class App extends React.Component {
 
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
-  }
-  adminModeTrue() {
-    this.setState({ adminMode: true });
-  }
-  adminModeFalse() {
-    this.setState({ adminMode: false });
   }
 
   createNews(name, title, text) {
@@ -94,19 +89,10 @@ class App extends React.Component {
     return (
       <div>
         <LanguageProvider>
-          <Navbar
-            adminMode={this.state.adminMode}
-            adminModeFalse={this.adminModeFalse}
-          />
+          <Navbar adminMode={this.state.adminMode} />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <Login {...props} adminModeTrue={this.adminModeTrue} />
-              )}
-            />
+            <Route exact path="/login" render={props => <Login {...props} />} />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route

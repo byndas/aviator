@@ -1,36 +1,36 @@
 const calendar = [
   {
+    id: "name01",
     name: "name01",
     month: "September",
     day: "30",
-    id: "name01",
     year: "2020",
     text:
       "lorem ipus lorem ipusma koko, lorem ipus lorem ipusma koko,lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko"
   },
   {
-    name: "name02",
-    month: "october",
-    day: "5",
     id: "name02",
+    name: "name02",
+    month: "October",
+    day: "5",
     year: "2020",
     text:
       "lorem ipus lorem ipusma koko, lorem ipus lorem ipusma koko,lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko"
   },
   {
-    name: "name03",
-    month: "october",
-    day: "15",
     id: "name03",
+    name: "name03",
+    month: "October",
+    day: "15",
     year: "2020",
     text:
       "lorem ipus lorem ipusma koko, lorem ipus lorem ipusma koko,lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko"
   },
   {
-    name: "name04",
-    month: "november",
-    day: "7",
     id: "name04",
+    name: "name04",
+    month: "November",
+    day: "7",
     year: "2020",
     text:
       "lorem ipus lorem ipusma koko, lorem ipus lorem ipusma koko,lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko.lorem ipus lorem ipusma koko"

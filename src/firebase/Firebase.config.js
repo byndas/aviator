@@ -13,5 +13,10 @@ const config = {
 
 initializeApp(config);
 
+// const addPageData = (collectionKey, objectsToAdd) => {
+//   const collectionRef = firestore.collection(collectionKey);
+//   console.log(collectionRef);
+// };
+
 export const fireStore = firestore();
 export const fireAuth = auth();

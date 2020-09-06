@@ -17,7 +17,7 @@ import calendar from "./calendar/CalendarList";
 import gallery from "./gallery/GalleryList";
 import SingleProject from "./projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
-// import { fireAuth } from "./firebase/Firebase.config";
+import { fireAuth } from "./firebase/Firebase.config";
 
 // 1nt3rnat10nal
 
@@ -41,20 +41,18 @@ class App extends React.Component {
     this.removeProject = this.removeProject.bind(this);
   }
 
-  /*
   unsubscribeFireAuth = null;
   componentDidMount() {
     this.unsubscribeFireAuth = fireAuth.onAuthStateChanged(user => {
       this.setState({ adminId: user.uid });
-      console.log("adminID = ");
-      console.log(user.uid);
+      console.log("adminID = " + user.uid);
     });
   }
-  // closes messaging system between website and firebase
+  // closes messaging system between website and firebase to prevent memory leaks
   componentWillUnmount() {
     this.unsubscribeFireAuth();
   }
-*/
+
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
   }

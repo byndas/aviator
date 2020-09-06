@@ -10,13 +10,14 @@ import { LanguageContext } from "../context/LanguageContext";
 import { fireAuth } from "../firebase/Firebase.config";
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   static contextType = LanguageContext;
-
-  // logOut() {
-  //   this.props.adminModeFalse();
-  //   fireAuth.signOut();
-  // }
-
+  logOut() {
+    this.props.adminModeFalse();
+    fireAuth.signOut();
+  }
   render() {
     const { language, handleChange } = this.context;
     const {
@@ -157,11 +158,11 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
-            {/* {this.props.adminMode ? (
+            {this.props.adminMode ? (
               <div className="option" onClick={this.logOut.bind(this)}>
                 LOG OUT
               </div>
-            ) : null} */}
+            ) : null}
             <select
               className="language"
               value={language}

@@ -1,7 +1,7 @@
 .youtube_icon {
   width: 15px;
   height: 15px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .instagram_icon {
@@ -40,9 +40,9 @@
   transform: scale(1.1);
 }
 
-.margin_left {
-  margin-left: 35px;
-}
+/* .margin_left {
+  margin-left: 40px;
+} */
 
 .language {
   width: 50px;
@@ -60,4 +60,10 @@
   color: #4285f4;
   border: 1px solid #4285f4;
   text-align: center;
+}
+
+
+.social_icon_container{
+  width: 30px;
+  height: 30px;
 }

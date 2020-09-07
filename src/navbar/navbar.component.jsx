@@ -9,6 +9,8 @@ import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
 import { fireAuth } from "../firebase/Firebase.config";
 
+
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class Navbar extends React.Component {
   static contextType = LanguageContext;
   logOut() {
     fireAuth.signOut();
+    
   }
   render() {
     const { language, handleChange } = this.context;
@@ -50,7 +53,7 @@ class Navbar extends React.Component {
             <span className="navbar-toggler-icon"></span>
           </a>
           <div
-            className="collapse navbar-collapse margin_left"
+            className="collapse navbar-collapse"
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav mr-auto">
@@ -105,14 +108,14 @@ class Navbar extends React.Component {
                 </Link>
               </li>
             </ul>
-            <div>
+            <div className='mr-auto'>
               <ul className="nav mr-auto">
-                <li className="nav-item">
+                <li className="nav-item social_icon_container">
                   <a className="nav-link" href="https://www.youtube.com/">
                     <img className="youtube_icon" src={youtube} alt="youtube" />
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item social_icon_container">
                   <a
                     href="https://www.instagram.com/?hl=en"
                     className="nav-link"
@@ -124,7 +127,7 @@ class Navbar extends React.Component {
                     />
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item social_icon_container">
                   <a
                     href="https://www.facebook.com/LIVE.Branding.Official/posts/3465174490183797"
                     className="nav-link"
@@ -140,7 +143,7 @@ class Navbar extends React.Component {
             </div>
             <form
               style={{ marginLeft: "30px" }}
-              className="form-inline my-2 my-lg-0"
+              className="form-inline my-2 my-lg-0 mr-auto"
             >
               <input
                 style={{ width: "150px", height: "35px" }}
@@ -157,11 +160,9 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
-            {this.props.adminMode ? (
-              <div className="option" onClick={this.logOut.bind(this)}>
+            {this.props.adminMode &&  <div className="option" onClick={this.logOut.bind(this)}>
                 LOG OUT
-              </div>
-            ) : null}
+             </div>}
             <select
               className="language"
               value={language}

@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { Component} from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import Pilot01 from '../images/Pilot01.jpg';
 import Pilot02 from '../images/Pilot02.jpg';
 import Pilot03 from '../images/Pilot03.jpg';
 import './Catalog.styles.css';
 
 
-const Pilots = () => {
+
+const translate = {
+  Geo : {
+   Pilots: 'მფრინავები',
+  },
+  Eng : {
+    Pilots: 'Pilots'
+  },
+  Rus : {
+    Pilots: 'Пилоты'
+  }
+}
+
+
+class Pilots extends Component  {
+  static contextType = LanguageContext;
+  render(){
+    const { language } = this.context;
+    const { Pilots } = translate[language];
     return (
         <div className='container mt-5 mb-5'>
-            <h1 className='text-center font-italic heading'>PILOTS</h1>
+            <h1 className='text-center font-italic heading'>{Pilots}</h1>
             <div className="media">
                 <img src={Pilot01} className="align-self-center mr-3 rounded-circle pilot_images" alt="..."/>
               <div className="media-body">
@@ -44,6 +63,7 @@ const Pilots = () => {
           </div>
         </div>
     )
+ }
 }
 
 export default Pilots;

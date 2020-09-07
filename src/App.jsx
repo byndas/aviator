@@ -84,12 +84,11 @@ class App extends React.Component {
     });
   }
   render() {
-    const { auth } = this.state;
-
+    const { adminMode } = this.state;
     return (
       <div>
         <LanguageProvider>
-          <Navbar adminMode={this.state.adminMode} />
+          <Navbar adminMode={adminMode}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" render={props => <Login {...props} />} />
@@ -98,17 +97,17 @@ class App extends React.Component {
             <Route
               exact
               path="/calendar"
-              render={() => <Calendar calendar={calendar} auth={auth} />}
+              render={() => <Calendar calendar={calendar} auth={adminMode} />}
             />
             <Route
               exact
               path="/catalog"
-              render={() => <Catalog auth={auth} />}
+              render={() => <Catalog auth={adminMode} />}
             />
             <Route
               exact
               path="/gallery"
-              render={() => <Gallery gallery={gallery} auth={auth} />}
+              render={() => <Gallery gallery={gallery} auth={adminMode} />}
             />
             <Route
               exact
@@ -116,7 +115,7 @@ class App extends React.Component {
               render={() => (
                 <News
                   news={this.state.news}
-                  auth={auth}
+                  auth={adminMode}
                   createNews={this.createNews}
                   removeNews={this.removeNews}
                 />
@@ -128,7 +127,7 @@ class App extends React.Component {
               render={() => (
                 <Projects
                   projects={this.state.projects}
-                  auth={auth}
+                  auth={adminMode}
                   createProject={this.createProject}
                   removeProject={this.removeProject}
                 />

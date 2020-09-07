@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import Footer from "../footer/Footer.component";
 import "./Projects.styles.css";
+import { LanguageContext } from "../context/LanguageContext";
 import ProjectGroup from "./ProjectGroup";
 import ProjectsForm from './ProjectsForm';
 import firebase from "firebase";
 import "../firebase/Firebase.config";
 
+
+const translate = {
+  Geo : {
+    Projects: 'პროექტები',
+  },
+  Eng : {
+    Projects: 'Projects'
+  },
+  Rus : {
+    Projects: 'Проекты',
+  }
+}
+
 class Projects extends Component {
+  static contextType = LanguageContext;
   componentDidMount() {
     const dbRef = firebase.database().ref("projects");
 
@@ -18,7 +33,8 @@ class Projects extends Component {
   }
   render() {
     const { projects, auth, createProject, removeProject } = this.props;
-
+    const { language } = this.context;
+    const { Projects } = translate[language];
     const projectgroup = projects.map(prj => (
       <ProjectGroup
         id={prj.id}
@@ -34,7 +50,7 @@ class Projects extends Component {
     return (
       <div>
         <div className="project_container">
-          <h1 className="project_title font-italic">Projects</h1>
+          <h1 className="project_title font-italic">{Projects}</h1>
            {auth && <div className='container project_form'>
            <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target="#create">Create</button>
             <div className='modal fade' id='create' role="dialog">

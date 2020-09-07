@@ -3,12 +3,27 @@ import Footer from "../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
+import { LanguageContext } from "../context/LanguageContext";
 import firebase from "firebase";
 import "../firebase/Firebase.config";
 import NewsForm from './NewsForm';
 
 
+const translate = {
+  Geo : {
+    News: 'სიახლეები',
+  },
+  Eng : {
+    News: 'News'
+  },
+  Rus : {
+    News: 'Новости'
+  }
+}
+
+
 class News extends Component {
+  static contextType = LanguageContext;
   componentDidMount() {
     const dbRef = firebase.database().ref("news");
 
@@ -17,9 +32,11 @@ class News extends Component {
       console.log(snapshot.val());
     });
   }
+
   render() {
     const { news, auth, createNews, removeNews } = this.props;
-    
+    const { language } = this.context;
+    const { News } = translate[language];
     const newsList = news.map(nw => (
       <NewsGroup
         name={nw.name}
@@ -34,7 +51,7 @@ class News extends Component {
     ));
     return (
       <div style={backgroundColor}>
-        <h1 className="text-center font-italic heading">News</h1>
+        <h1 className="text-center font-italic heading">{News}</h1>
          {auth && <NewsForm  createNews={createNews}/>}
         <div className="container">
           {newsList}

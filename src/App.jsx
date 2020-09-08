@@ -1,9 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { fireAuth } from "./firebase/Firebase.config";
+
 import "./App.styles.css";
 import Navbar from "./navbar/Navbar.component";
-import { Route, Switch, Redirect } from "react-router-dom";
-import Home from "./pages/home/Home.component";
-import About from "./pages/about/About.component";
+import Home from "./pages/home/home.component";
+import About from "./pages/about/about.component";
 import Calendar from "./pages/calendar/Calendar.component";
 import Catalog from "./pages/catalog/Catalog.component";
 import Contact from "./pages/contact/Contact.component";
@@ -17,7 +20,9 @@ import calendar from "./pages/calendar/CalendarList";
 import gallery from "./pages/gallery/GalleryList";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
-import { fireAuth } from "./firebase/Firebase.config";
+
+import { setDate } from "./redux/calendar/calendar.actions";
+import { logAdmin } from "./redux/admin/admin.actions";
 
 // 1nt3rnat10nal
 
@@ -150,4 +155,10 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+  
+// logAdmin is the action function
+// adminObj is the action object payload
+const mapDispatchToProps = dispatch => ({
+  admin: adminObj => dispatch(logAdmin(adminObj))
+});
+export default connect(null, mapDispatchToProps)(App);

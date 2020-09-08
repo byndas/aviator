@@ -1,6 +1,8 @@
-import { combineReducers } from "redux ";
+import { combineReducers } from "redux";
+import { adminReducer } from "./admin/admin.reducer";
 import { calendarReducer } from "./calendar/calendar.reducer";
 
 export default combineReducers({
-  calendar: calendarReducer
+  admin: adminReducer,
+  calendar: calendarReducer,
 });

@@ -1,24 +1,23 @@
 import React, { Component } from "react";
-import Footer from "../footer/Footer.component";
+import Footer from "../../footer/Footer.component";
 import "./Projects.styles.css";
-import { LanguageContext } from "../context/LanguageContext";
+import { LanguageContext } from "../../context/LanguageContext";
 import ProjectGroup from "./ProjectGroup";
-import ProjectsForm from './ProjectsForm';
+import ProjectsForm from "./ProjectsForm";
 import firebase from "firebase";
-import "../firebase/Firebase.config";
-
+import "../../firebase/Firebase.config";
 
 const translate = {
-  Geo : {
-    Projects: 'პროექტები',
+  Geo: {
+    Projects: "პროექტები"
   },
-  Eng : {
-    Projects: 'Projects'
+  Eng: {
+    Projects: "Projects"
   },
-  Rus : {
-    Projects: 'Проекты',
+  Rus: {
+    Projects: "Проекты"
   }
-}
+};
 
 class Projects extends Component {
   static contextType = LanguageContext;
@@ -51,17 +50,32 @@ class Projects extends Component {
       <div>
         <div className="project_container">
           <h1 className="project_title font-italic">{Projects}</h1>
-           {auth && <div className='container project_form'>
-           <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target="#create">Create</button>
-            <div className='modal fade' id='create' role="dialog">
-              <div className='modal-dialog modal-md'>
-                <div className='modal-content'>
-                   <ProjectsForm createProject={createProject}/>
-                   <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                 </div>
+          {auth && (
+            <div className="container project_form">
+              <button
+                type="button"
+                className="btn btn-info btn-sm"
+                data-toggle="modal"
+                data-target="#create"
+              >
+                Create
+              </button>
+              <div className="modal fade" id="create" role="dialog">
+                <div className="modal-dialog modal-md">
+                  <div className="modal-content">
+                    <ProjectsForm createProject={createProject} />
+                    <button
+                      type="button"
+                      className="btn btn-default"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>}
+          )}
           {projectgroup}
         </div>
         <Footer />

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Footer from "../footer/Footer.component";
+import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
-import CalendarGroup from "./CalendarGroup.component";
+import CalendarGroup from "./CalendarGroup";
 import "./Calendar.styles.css";
 import firebase from "firebase";
-import "../firebase/Firebase.config";
+import "../../firebase/Firebase.config";
 
 class Calendar extends Component {
   componentDidMount() {

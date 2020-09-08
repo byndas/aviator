@@ -1,5 +1,5 @@
 import React from "react";
-import "./navbar.styles.css";
+import "./Navbar.styles.css";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo.png";
 import youtube from "../images/youtube.svg";
@@ -9,8 +9,6 @@ import translate from "./translate";
 import { LanguageContext } from "../context/LanguageContext";
 import { fireAuth } from "../firebase/Firebase.config";
 
-
-
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +16,6 @@ class Navbar extends React.Component {
   static contextType = LanguageContext;
   logOut() {
     fireAuth.signOut();
-    
   }
   render() {
     const { language, handleChange } = this.context;
@@ -52,10 +49,7 @@ class Navbar extends React.Component {
           >
             <span className="navbar-toggler-icon"></span>
           </a>
-          <div
-            className="collapse navbar-collapse"
-            id="navbarSupportedContent"
-          >
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link link_color" to="/">
@@ -108,7 +102,7 @@ class Navbar extends React.Component {
                 </Link>
               </li>
             </ul>
-            <div className='mr-auto'>
+            <div className="mr-auto">
               <ul className="nav mr-auto">
                 <li className="nav-item social_icon_container">
                   <a className="nav-link" href="https://www.youtube.com/">
@@ -160,9 +154,11 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
-            {this.props.adminMode &&  <div className="option" onClick={this.logOut.bind(this)}>
+            {this.props.adminMode && (
+              <div className="option" onClick={this.logOut.bind(this)}>
                 LOG OUT
-             </div>}
+              </div>
+            )}
             <select
               className="language"
               value={language}

@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "../footer/Footer.component";
-import facebook from "../images/facebookIcon.svg";
-import InstagramIcon from "../images/instagramIcon.svg";
+import Footer from "../../footer/Footer.component";
+import facebook from "../../images/facebookIcon.svg";
+import InstagramIcon from "../../images/instagramIcon.svg";
 import "./Contact.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";

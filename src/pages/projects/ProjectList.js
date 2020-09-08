@@ -1,6 +1,6 @@
-import Project01 from "../images/Project01.jpg";
-import Project02 from "../images/Project02.jpg";
-import Project03 from "../images/Project03.jpg";
+import Project01 from "../../images/Project01.jpg";
+import Project02 from "../../images/Project02.jpg";
+import Project03 from "../../images/Project03.jpg";
 
 // img: link to firebase storage (not realtime database)
 

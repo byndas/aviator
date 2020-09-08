@@ -1,7 +1,7 @@
-import Project03 from "../images/Project03.jpg";
-import logo from "../images/1209image.jpg";
-import Project01 from "../images/Project01.jpg";
-import Project04 from "../images/Project04.jpg";
+import Project03 from "../../images/Project03.jpg";
+import logo from "../../images/1209image.jpg";
+import Project01 from "../../images/Project01.jpg";
+import Project04 from "../../images/Project04.jpg";
 
 const gallery = [
   {

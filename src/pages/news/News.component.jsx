@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import Footer from "../footer/Footer.component";
+import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
-import { LanguageContext } from "../context/LanguageContext";
+import { LanguageContext } from "../../context/LanguageContext";
 import firebase from "firebase";
-import "../firebase/Firebase.config";
-import NewsForm from './NewsForm';
-
+import "../../firebase/Firebase.config";
+import NewsForm from "./NewsForm";
 
 const translate = {
-  Geo : {
-    News: 'სიახლეები',
+  Geo: {
+    News: "სიახლეები"
   },
-  Eng : {
-    News: 'News'
+  Eng: {
+    News: "News"
   },
-  Rus : {
-    News: 'Новости'
+  Rus: {
+    News: "Новости"
   }
-}
-
+};
 
 class News extends Component {
   static contextType = LanguageContext;
@@ -52,7 +50,7 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-         {auth && <NewsForm  createNews={createNews}/>}
+        {auth && <NewsForm createNews={createNews} />}
         <div className="container">
           {newsList}
           <br />

@@ -1,23 +1,28 @@
 import React from "react";
-import "./App.styles.css";
-import Navbar from "./navbar/navbar.component";
+import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Home from "./home/home.component";
-import About from "./about/about.component";
-import Calendar from "./calendar/Calendar.component";
-import Catalog from "./catalog/Catalog.component";
-import Contact from "./contact/Contact.component";
-import Gallery from "./gallery/Gallery.component";
-import Login from "./login/Login.component";
-import News from "./news/News.component";
-import Projects from "./projects/Projects.component";
-import projects from "./projects/ProjectList";
-import news from "./news/NewsList";
-import calendar from "./calendar/CalendarList";
-import gallery from "./gallery/GalleryList";
-import SingleProject from "./projects/SingleProject";
-import { LanguageProvider } from "./context/LanguageContext";
 import { fireAuth } from "./firebase/Firebase.config";
+
+import "./App.styles.css";
+import Navbar from "./navbar/Navbar.component";
+import Home from "./pages/home/home.component";
+import About from "./pages/about/about.component";
+import Calendar from "./pages/calendar/Calendar.component";
+import Catalog from "./pages/catalog/Catalog.component";
+import Contact from "./pages/contact/Contact.component";
+import Gallery from "./pages/gallery/Gallery.component";
+import Login from "./pages/login/Login.component";
+import News from "./pages/news/News.component";
+import Projects from "./pages/projects/Projects.component";
+import projects from "./pages/projects/ProjectList";
+import news from "./pages/news/NewsList";
+import calendar from "./pages/calendar/CalendarList";
+import gallery from "./pages/gallery/GalleryList";
+import SingleProject from "./pages/projects/SingleProject";
+import { LanguageProvider } from "./context/LanguageContext";
+
+import { setDate } from "./redux/calendar/calendar.actions";
+import { logAdmin } from "./redux/admin/admin.actions";
 
 // 1nt3rnat10nal
 
@@ -52,6 +57,7 @@ class App extends React.Component {
   // closes messaging system between website and firebase to prevent memory leaks
   componentWillUnmount() {
     this.unsubscribeFireAuth();
+    fireAuth.signOut();
   }
 
   findProject(id) {
@@ -88,7 +94,7 @@ class App extends React.Component {
     return (
       <div>
         <LanguageProvider>
-          <Navbar adminMode={adminMode}/>
+          <Navbar adminMode={adminMode} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" render={props => <Login {...props} />} />
@@ -149,4 +155,10 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+  
+// logAdmin is the action function
+// adminObj is the action object payload
+const mapDispatchToProps = dispatch => ({
+  admin: adminObj => dispatch(logAdmin(adminObj))
+});
+export default connect(null, mapDispatchToProps)(App);

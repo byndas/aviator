@@ -30,7 +30,6 @@ class Login extends React.Component {
       })
       .then(success => {
         if (success) {
-          // must use REDUX -- no more this.props
           console.log("ADMIN LOGGED IN");
           this.props.history.push("/news");
         }

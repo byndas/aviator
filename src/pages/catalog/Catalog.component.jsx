@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import Footer from "../../footer/Footer.component";
 import AirPlane from "./AirPlane.component";
 import Pilots from "./Pilots.component";
@@ -34,5 +36,9 @@ class Catalog extends Component {
     );
   }
 }
+
+// const mapDispatchToProps = state => ({})
+
+// export default connect()(Catalog);
 
 export default Catalog;

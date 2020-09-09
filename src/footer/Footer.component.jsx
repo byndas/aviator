@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Footer.styles.css";
+import "./footer.styles.css";
 import youtube from "../images/youtube.svg";
 import instagramIcon from "../images/instagramIcon.svg";
 import facebookIcon from "../images/facebookIcon.svg";
@@ -7,7 +7,6 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import translate from "../navbar/translate";
 import { LanguageContext } from "../context/LanguageContext";
-
 
 class Footer extends Component {
   static contextType = LanguageContext;

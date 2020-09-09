@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { fireAuth } from "./firebase/Firebase.config";
 
 import "./App.styles.css";
-import Navbar from "./navbar/Navbar.component";
+import Navbar from "./navbar/navbar.component";
 import Home from "./pages/home/home.component";
 import About from "./pages/about/about.component";
 import Calendar from "./pages/calendar/Calendar.component";
@@ -31,6 +31,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       adminMode: false,
+      searchInput: "",
       projects: projects,
       news: news,
       calendar: calendar,
@@ -41,6 +42,7 @@ class App extends React.Component {
     this.removeNews = this.removeNews.bind(this);
     this.createProject = this.createProject.bind(this);
     this.removeProject = this.removeProject.bind(this);
+    this.setSearchInput = this.setSearchInput.bind(this);
   }
 
   unsubscribeFireAuth = null;
@@ -89,12 +91,21 @@ class App extends React.Component {
       projects: filtered
     });
   }
+  setSearchInput(event) {
+    this.setState({
+      searchInput: event.target.value
+    });
+  }
   render() {
     const { adminMode } = this.state;
     return (
       <div>
         <LanguageProvider>
-          <Navbar adminMode={adminMode} />
+          <Navbar
+            adminMode={adminMode}
+            searchInput={this.state.searchInput}
+            setSearchInput={this.setSearchInput}
+          />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" render={props => <Login {...props} />} />
@@ -155,10 +166,10 @@ class App extends React.Component {
     );
   }
 }
-  
-// logAdmin is the action function
-// adminObj is the action object payload
+
 const mapDispatchToProps = dispatch => ({
+  // logAdmin is the action creator function
+  // adminObj is the action object payload
   admin: adminObj => dispatch(logAdmin(adminObj))
 });
 export default connect(null, mapDispatchToProps)(App);

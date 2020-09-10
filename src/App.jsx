@@ -30,7 +30,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminMode: false,
+      auth: false,
       searchInput: "",
       projects: projects,
       news: news,
@@ -45,20 +45,19 @@ class App extends React.Component {
     this.setSearchInput = this.setSearchInput.bind(this);
   }
 
-  unsubscribeFireAuth = null;
   componentDidMount() {
-    this.unsubscribeFireAuth = fireAuth.onAuthStateChanged(user => {
+    fireAuth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({ adminMode: true });
+        this.setState({ auth: true });
       } else {
-        this.setState({ adminMode: false });
+        this.setState({ auth: false });
       }
-      console.log("adminMode = " + this.state.adminMode);
+      console.log("adminMode = " + this.state.auth);
     });
   }
-  // closes messaging system between website and firebase to prevent memory leaks
+  // prevents firebase memory leaks
+  // signs out admin if closes website without logging out
   componentWillUnmount() {
-    this.unsubscribeFireAuth();
     fireAuth.signOut();
   }
 
@@ -97,13 +96,13 @@ class App extends React.Component {
     });
   }
   render() {
-    const { adminMode } = this.state;
+    const { auth, searchInput, news, projects, calendar } = this.state;
     return (
       <div>
         <LanguageProvider>
           <Navbar
-            adminMode={adminMode}
-            searchInput={this.state.searchInput}
+            auth={auth}
+            searchInput={searchInput}
             setSearchInput={this.setSearchInput}
           />
           <Switch>
@@ -114,25 +113,25 @@ class App extends React.Component {
             <Route
               exact
               path="/calendar"
-              render={() => <Calendar calendar={calendar} auth={adminMode} />}
+              render={() => <Calendar calendar={calendar} auth={auth} />}
             />
             <Route
               exact
               path="/catalog"
-              render={() => <Catalog auth={adminMode} />}
+              render={() => <Catalog auth={auth} />}
             />
             <Route
               exact
               path="/gallery"
-              render={() => <Gallery gallery={gallery} auth={adminMode} />}
+              render={() => <Gallery gallery={gallery} auth={auth} />}
             />
             <Route
               exact
               path="/news"
               render={() => (
                 <News
-                  news={this.state.news}
-                  auth={adminMode}
+                  news={news}
+                  auth={auth}
                   createNews={this.createNews}
                   removeNews={this.removeNews}
                 />
@@ -143,8 +142,8 @@ class App extends React.Component {
               path="/projects"
               render={() => (
                 <Projects
-                  projects={this.state.projects}
-                  auth={adminMode}
+                  projects={projects}
+                  auth={auth}
                   createProject={this.createProject}
                   removeProject={this.removeProject}
                 />

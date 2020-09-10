@@ -113,17 +113,29 @@ class App extends React.Component {
             <Route
               exact
               path="/calendar"
-              render={() => <Calendar calendar={calendar} auth={auth} />}
+              render={() => (
+                <Calendar
+                  calendar={calendar}
+                  auth={auth}
+                  searchInput={searchInput}
+                />
+              )}
             />
             <Route
               exact
               path="/catalog"
-              render={() => <Catalog auth={auth} />}
+              render={() => <Catalog auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact
               path="/gallery"
-              render={() => <Gallery gallery={gallery} auth={auth} />}
+              render={() => (
+                <Gallery
+                  gallery={gallery}
+                  auth={auth}
+                  searchInput={searchInput}
+                />
+              )}
             />
             <Route
               exact
@@ -132,6 +144,7 @@ class App extends React.Component {
                 <News
                   news={news}
                   auth={auth}
+                  searchInput={searchInput}
                   createNews={this.createNews}
                   removeNews={this.removeNews}
                 />
@@ -144,6 +157,7 @@ class App extends React.Component {
                 <Projects
                   projects={projects}
                   auth={auth}
+                  searchInput={searchInput}
                   createProject={this.createProject}
                   removeProject={this.removeProject}
                 />
@@ -169,6 +183,6 @@ class App extends React.Component {
 const mapDispatchToProps = dispatch => ({
   // logAdmin is the action creator function
   // adminObj is the action object payload
-  admin: adminObj => dispatch(logAdmin(adminObj))
+  adminState: adminObj => dispatch(logAdmin(adminObj))
 });
 export default connect(null, mapDispatchToProps)(App);

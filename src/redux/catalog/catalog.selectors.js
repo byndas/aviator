@@ -5,10 +5,10 @@ const selectCatalog = state => state.catalog;
 
 export const selectCatalogItems = createSelector(
   [selectCatalog],
-  catalog => catalog.catalogItems
+  catalog => catalog.items
 );
 
 export const searchCatalogItems = createSelector(
-  [selectCatalogItems],
-  catalogItems => catalogItems.filter();
+  [selectCatalogItems]
+  //   items => items.filter();
 );

@@ -160,7 +160,7 @@ class Navbar extends React.Component {
                 {Search}
               </button>
             </form>
-            {this.props.adminMode && (
+            {this.props.auth && (
               <div className="option" onClick={logOut}>
                 LOG OUT
               </div>
@@ -186,10 +186,11 @@ class Navbar extends React.Component {
   }
 }
 
-// adminState is the prop passed into Navbar component
 // state is the root reducer
+// adminState is the prop passed into Navbar component
 // admin is the admin reducer in the root reducer
 // adminMode is the key in the admin reducer
+
 // const mapStateToProps = state => ({
 //   adminState: state.admin.adminMode
 // });

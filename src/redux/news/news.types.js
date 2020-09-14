@@ -1,0 +1,6 @@
+export const newsActionTypes = {
+  SET_NEWS_ITEM: "SET_NEWS_ITEM"
+  //   CREATE_NEWS_ITEM: "CREATE_NEWS_ITEM",
+  //   EDIT_NEWS_ITEM: "EDIT_NEWS_ITEM",
+  //   DELETE_NEWS_ITEM: "DELETE_NEWS_ITEM"
+};

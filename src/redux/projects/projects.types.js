@@ -1,0 +1,6 @@
+export const projectsActionTypes = {
+  SET_PROJECT: "SET_PROJECT"
+  //   CREATE_PROJECT: "CREATE_PROJECT",
+  //   EDIT_PROJECT: "EDIT_PROJECT",
+  //   DELETE_PROJECT: "DELETE_PROJECT"
+};

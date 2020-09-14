@@ -1,4 +1,4 @@
-
+import { calendarActionTypes } from "./calendar.types";
 
 const INITIAL_STATE = {
   // day: null,
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 
 export const calendarReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_DATE":
+    case calendarActionTypes.SET_DATE:
       return {
         ...state,
         date: action.payload

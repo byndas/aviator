@@ -1,0 +1,6 @@
+export const galleryActionTypes = {
+  SET_GALLERY_ID: "SET_GALLERY_ID"
+  //   CREATE_GALLERY_ID: "CREATE_GALLERY_ID",
+  //   EDIT_GALLERY_ID: "EDIT_GALLERY_ID",
+  //   DELETE_GALLERY_ID: "DELETE_GALLERY_ID"
+};

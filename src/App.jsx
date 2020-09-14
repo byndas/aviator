@@ -5,6 +5,7 @@ import { fireAuth } from "./firebase/Firebase.config";
 
 import "./App.styles.css";
 import Navbar from "./navbar/navbar.component";
+// import Navbar2 from "./navbar/navbar2.component";
 import Home from "./pages/home/home.component";
 import About from "./pages/about/about.component";
 import Calendar from "./pages/calendar/Calendar.component";
@@ -31,6 +32,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       auth: false,
+      searchMode: false,
       searchInput: "",
       projects: projects,
       news: news,
@@ -44,7 +46,6 @@ class App extends React.Component {
     this.removeProject = this.removeProject.bind(this);
     this.setSearchInput = this.setSearchInput.bind(this);
   }
-
   componentDidMount() {
     fireAuth.onAuthStateChanged(user => {
       if (user) {
@@ -55,12 +56,6 @@ class App extends React.Component {
       console.log("adminMode = " + this.state.auth);
     });
   }
-  // prevents firebase memory leaks
-  // signs out admin if closes website without logging out
-  componentWillUnmount() {
-    fireAuth.signOut();
-  }
-
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
   }
@@ -95,19 +90,36 @@ class App extends React.Component {
       searchInput: event.target.value
     });
   }
+  searchResultsPage() {}
   render() {
-    const { auth, searchInput, news, projects, calendar } = this.state;
+    const {
+      auth,
+      searchMode,
+      searchInput,
+      news,
+      projects,
+      calendar
+    } = this.state;
     return (
       <div>
         <LanguageProvider>
           <Navbar
             auth={auth}
+            searchMode={searchMode}
             searchInput={searchInput}
             setSearchInput={this.setSearchInput}
           />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" render={props => <Login {...props} />} />
+            {/* <Route exact path="/login" render={props => <Login {...props} />} /> */}
+            <Route
+              exact
+              path="/login"
+              render={() =>
+                this.state.auth ? <Redirect to="/news" /> : <Login />
+              }
+            />
+
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route
@@ -180,9 +192,11 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  // logAdmin is the action creator function
-  // adminObj is the action object payload
-  adminState: adminObj => dispatch(logAdmin(adminObj))
-});
-export default connect(null, mapDispatchToProps)(App);
+// const mapDispatchToProps = dispatch => ({
+//   // logAdmin is the action creator function
+//   // adminObj is the action object payload
+//   adminState: adminObj => dispatch(logAdmin(adminObj))
+// });
+// export default connect(null, mapDispatchToProps)(App);
+
+export default App;

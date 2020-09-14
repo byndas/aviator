@@ -165,11 +165,6 @@ class Navbar extends React.Component {
                 LOG OUT
               </div>
             )}
-            {/* {adminState && (
-          <div className="option" onClick={() => fireAuth.signOut()}>
-            LOG OUT
-          </div>
-          )} */}
             <select
               className="language"
               value={language}
@@ -185,15 +180,5 @@ class Navbar extends React.Component {
     );
   }
 }
-
-// state is the root reducer
-// adminState is the prop passed into Navbar component
-// admin is the admin reducer in the root reducer
-// adminMode is the key in the admin reducer
-
-// const mapStateToProps = state => ({
-//   adminState: state.admin.adminMode
-// });
-// export default connect(mapStateToProps)(Navbar);
 
 export default Navbar;

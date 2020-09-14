@@ -1,13 +1,13 @@
 const mapStateToProps = state => ({
-    // state is the root reducer
-    // calendar is a reducer in in the root reducer
+    // state is the root reducer 
+    // calendar is a reducer in the root reducer
     // date is the key in the calender reducer
     calendar: state.calendar.date
   });
     
   const mapDispatchToProps = dispatch => ({
-    // setDate is the action function
-    // dateObj is the action object payload
+    // setDate is the action creator function
+    // dateObj is the action object payload value
     calendar: dateObj => dispatch(setDate(dateObj))
   });
   
@@ -43,7 +43,7 @@ store.js:
 
 import { createStore } from 'redux'
 
-function modify_username(state = {username: 'initial name'}, action) {
+function userNameReducer(state = {username: 'initial name'}, action) {
     switch (action.type) {
         case 'MODIFY_USERNAME':
             return {username: action.payload}
@@ -52,4 +52,4 @@ function modify_username(state = {username: 'initial name'}, action) {
     }
 }
 
-export default createStore(modify_username);
+export default createStore(userNameReducer);

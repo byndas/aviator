@@ -31,7 +31,7 @@ class Login extends React.Component {
       .then(success => {
         if (success) {
           console.log("ADMIN LOGGED IN");
-          this.props.history.push("/news");
+          // this.props.history.push("/news");
         }
       });
     this.setState({ input: "" });

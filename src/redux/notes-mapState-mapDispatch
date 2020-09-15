@@ -53,3 +53,16 @@ function userNameReducer(state = {username: 'initial name'}, action) {
 }
 
 export default createStore(userNameReducer);
+
+/////////////////////////////////////////////////////////////
+  on a successful firebase save, call firebase GET to fetch new 
+  updated data (implies extra call for api)
+  which is fine since only one admin doing that
+  
+  /////////////////////////////////////////////////////////////
+  export const selectCollection = memoize((collectionUrlParam) =>
+  createSelector(
+    [selectCollections],
+    (collections) => collections[collectionUrlParam]
+  )
+);

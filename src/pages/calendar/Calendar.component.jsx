@@ -8,12 +8,15 @@ import "../../firebase/Firebase.config";
 
 class Calendar extends Component {
   componentDidMount() {
+    // firebase GET method
     const dbRef = firebase.database().ref("calendar");
 
     dbRef.on("value", snapshot => {
-      // save to Redux store ( not this.setState() )
       console.log(snapshot.val());
     });
+    // save to Redux store ( not this.setState() )
+    // console.log() every step
+    // take the payload (snapshot value) and save to component and then redux store
   }
   render() {
     const { calendar, auth } = this.props;

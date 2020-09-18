@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
+import firebase from "firebase";
+import "./firebase/Firebase.config";
 import { fireAuth } from "./firebase/Firebase.config";
 
 import "./App.styles.css";
@@ -24,6 +26,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { setDate } from "./redux/calendar/calendar.actions";
 import { logAdmin } from "./redux/admin/admin.actions";
 
+import { storeFirebaseData } from "./redux/siteActions";
 // 1nt3rnat10nal
 
 class App extends React.Component {
@@ -46,6 +49,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const dbRef = firebase.database().ref("calendar");
+    dbRef.on("value", snapshot => {
+      this.props.storeFirebaseData(snapshot.val());
+    });
+
     fireAuth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ auth: true });
@@ -180,9 +188,11 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  // logAdmin is the action creator function
-  // adminObj is the action object payload
-  adminState: adminObj => dispatch(logAdmin(adminObj))
-});
-export default connect(null, mapDispatchToProps)(App);
+// const mapDispatchToProps = dispatch => ({
+//   // logAdmin is the action creator function
+//   // adminObj is the action object payload
+//   storeFirebaseData,
+//   adminState: adminObj => dispatch(logAdmin(adminObj))
+// });
+
+export default connect(null, { storeFirebaseData })(App);

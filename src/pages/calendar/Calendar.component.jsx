@@ -1,23 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import CalendarGroup from "./CalendarGroup";
 import "./Calendar.styles.css";
-import firebase from "firebase";
-import "../../firebase/Firebase.config";
 
 class Calendar extends Component {
-  componentDidMount() {
-    const dbRef = firebase.database().ref("calendar");
-
-    dbRef.on("value", snapshot => {
-      // save to Redux store ( not this.setState() )
-      console.log(snapshot.val());
-    });
-  }
   render() {
-    const { calendar, auth } = this.props;
-    const calendarGroup = calendar.map(cl => (
+    const { auth, calendar } = this.props;
+    const calendarGroup = this.props.siteData.map(cl => (
       <div className="col mt-5 px-md-4 ml-5">
         <CalendarGroup
           name={cl.name}
@@ -42,4 +33,8 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+const mapStateToProps = reduxStore => {
+  return { siteData: reduxStore.siteData };
+};
+
+export default connect(mapStateToProps, null)(Calendar);

@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { fireAuth } from "./firebase/Firebase.config";
+import { createStructuredSelector } from "reselect";
+import {
+  fireAuth,
+  addCollectionsAndDocuments
+} from "./firebase/Firebase.config";
 
 import "./App.styles.css";
 import Navbar from "./navbar/navbar.component";
@@ -22,8 +26,10 @@ import gallery from "./pages/gallery/GalleryList";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
 
-import { setDate } from "./redux/calendar/calendar.actions";
-import { logAdmin } from "./redux/admin/admin.actions";
+// import { setDate } from "./redux/calendar/calendar.actions";
+// import { logAdmin } from "./redux/admin/admin.actions";
+import { selectCollectionsForPreview } from "./redux/site/site.selectors";
+import { storeFirebaseData } from "./redux/site/site.actions";
 
 // 1nt3rnat10nal
 
@@ -47,6 +53,15 @@ class App extends React.Component {
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
+    /////////////////////////////////////////////
+    const dbRef = firebase.database().ref("calendar");
+    dbRef.on("value", snapshot => {
+      this.props.storeFirebaseData(snapshot.val());
+    });
+    /////////////////////////////////////////////
+
+    const { collectionsArray } = this.props;
+
     fireAuth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ auth: true });
@@ -55,6 +70,11 @@ class App extends React.Component {
       }
       console.log("adminMode = " + this.state.auth);
     });
+
+    addCollectionsAndDocuments(
+      "collections",
+      collectionsArray.map(({ title, items }) => ({ title, items }))
+    );
   }
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
@@ -199,4 +219,19 @@ class App extends React.Component {
 // });
 // export default connect(null, mapDispatchToProps)(App);
 
-export default App;
+// export default App;
+
+/*
+const mapStateToProps = createStructuredSelector({
+  // currentUser: selectCurrentUser
+  collectionsArray: selectCollectionsForPreview
+});
+*/
+
+// const mapDispatchToProps = dispatch => ({
+//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// });
+
+// export default connect(mapStateToProps)(App);
+
+export default connect(null, { storeFirebaseData })(App);

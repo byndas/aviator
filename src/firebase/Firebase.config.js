@@ -1,4 +1,5 @@
 import { auth, firestore, initializeApp } from "firebase";
+import { updateCollections } from "../redux/site/site.actions";
 
 const config = {
   apiKey: "AIzaSyCEu3WsvqugTOqBDfNmVR8sVp524ylAkhs",
@@ -17,6 +18,21 @@ initializeApp(config);
 //   const collectionRef = firestore.collection(collectionKey);
 //   console.log(collectionRef);
 // };
-
 export const fireStore = firestore();
 export const fireAuth = auth();
+
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = fireStore.collection(collectionKey);
+  console.log(collectionRef);
+
+  const batch = fireStore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    console.log(newDocRef);
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
+};

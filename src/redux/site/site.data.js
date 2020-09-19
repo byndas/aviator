@@ -1,4 +1,4 @@
-const SITE_DATA = {
+export const SITE_DATA = {
   calendar: {
     id: 1,
     title: "Calendar",

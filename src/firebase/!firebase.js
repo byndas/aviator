@@ -1,7 +1,7 @@
 // contains the Firebase context and provider
 
 import React, { createContext, useEffect } from "react";
-import firebaseConfig from "./firebaseConfig";
+import firebaseConfig from "./Firebase.config";
 import app from "firebase/app";
 import "firebase/database";
 import { useDispatch } from "react-redux";

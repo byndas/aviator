@@ -29,6 +29,8 @@ import { LanguageProvider } from "./context/LanguageContext";
 // import { setDate } from "./redux/calendar/calendar.actions";
 // import { logAdmin } from "./redux/admin/admin.actions";
 import { selectCollectionsForPreview } from "./redux/site/site.selectors";
+import { storeFirebaseData } from "./redux/site/site.actions";
+
 // 1nt3rnat10nal
 
 class App extends React.Component {
@@ -51,6 +53,13 @@ class App extends React.Component {
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
+    /////////////////////////////////////////////
+    const dbRef = firebase.database().ref("calendar");
+    dbRef.on("value", snapshot => {
+      this.props.storeFirebaseData(snapshot.val());
+    });
+    /////////////////////////////////////////////
+
     const { collectionsArray } = this.props;
 
     fireAuth.onAuthStateChanged(user => {
@@ -212,13 +221,17 @@ class App extends React.Component {
 
 // export default App;
 
+/*
 const mapStateToProps = createStructuredSelector({
   // currentUser: selectCurrentUser
   collectionsArray: selectCollectionsForPreview
 });
+*/
 
 // const mapDispatchToProps = dispatch => ({
 //   setCurrentUser: user => dispatch(setCurrentUser(user))
 // });
 
-export default connect(mapStateToProps)(App);
+// export default connect(mapStateToProps)(App);
+
+export default connect(null, { storeFirebaseData })(App);

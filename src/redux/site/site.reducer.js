@@ -1,3 +1,15 @@
+import { FIREBASE_DATA } from "./site.actions";
+
+export default (siteData = [], action) => {
+  switch (action.type) {
+    case FIREBASE_DATA:
+      return siteData.concat(Object.values(action.payload));
+    default:
+      return siteData;
+  }
+};
+
+/*
 import SiteActionTypes from "./site.types";
 
 const INITIAL_STATE = {
@@ -31,3 +43,5 @@ const siteReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default siteReducer;
+*/
+//////////////////////////////////////////////

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Catalog.styles.css";
 import AirPlaneGroup from "./AirPlanegroup";
 import { LanguageContext } from "../../context/LanguageContext";
+import { connect } from "react-redux";
 
 const translate = {
   Geo: {
@@ -21,7 +22,7 @@ class AirPlane extends Component {
     const { language } = this.context;
     const { AirPlane } = translate[language];
     const { airPlane, auth } = this.props;
-    const airPlaneGroup = airPlane.map(air => (
+    const airPlaneGroup = this.props.siteData.map(air => (
       <AirPlaneGroup
         name={air.name}
         text={air.text}
@@ -40,4 +41,10 @@ class AirPlane extends Component {
   }
 }
 
-export default AirPlane;
+// export default AirPlane;
+
+const mapStateToProps = reduxStore => {
+  return { siteData: reduxStore.siteData };
+};
+
+export default connect(mapStateToProps, null)(AirPlane);

@@ -21,18 +21,18 @@ initializeApp(config);
 export const fireStore = firestore();
 export const fireAuth = auth();
 
-export const addCollectionsAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
-  const collectionRef = fireStore.collection(collectionKey);
-  console.log(collectionRef);
+// export const addCollectionsAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = fireStore.collection(collectionKey);
+//   console.log(collectionRef);
 
-  const batch = fireStore.batch();
-  objectsToAdd.forEach(obj => {
-    const newDocRef = collectionRef.doc();
-    console.log(newDocRef);
-    batch.set(newDocRef, obj);
-  });
-  return await batch.commit();
-};
+//   const batch = fireStore.batch();
+//   objectsToAdd.forEach(obj => {
+//     const newDocRef = collectionRef.doc();
+//     console.log(newDocRef);
+//     batch.set(newDocRef, obj);
+//   });
+//   return await batch.commit();
+// };

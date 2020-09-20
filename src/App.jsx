@@ -6,6 +6,7 @@ import {
   fireAuth,
   addCollectionsAndDocuments
 } from "./firebase/Firebase.config";
+import firebase from "firebase";
 
 import "./App.styles.css";
 import Navbar from "./navbar/navbar.component";
@@ -60,7 +61,7 @@ class App extends React.Component {
     });
     /////////////////////////////////////////////
 
-    const { collectionsArray } = this.props;
+    // const { collectionsArray } = this.props;
 
     fireAuth.onAuthStateChanged(user => {
       if (user) {
@@ -71,10 +72,10 @@ class App extends React.Component {
       console.log("adminMode = " + this.state.auth);
     });
 
-    addCollectionsAndDocuments(
-      "collections",
-      collectionsArray.map(({ title, items }) => ({ title, items }))
-    );
+    // addCollectionsAndDocuments(
+    //   "collections",
+    //   collectionsArray.map(({ title, items }) => ({ title, items }))
+    // );
   }
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);

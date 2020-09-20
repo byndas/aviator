@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-
 class AirPlaneGroup extends Component {
   constructor(props) {
     super(props);
@@ -40,10 +39,12 @@ class AirPlaneGroup extends Component {
             >
               Read More...
             </button>
-            { auth && <div className='float-right'> 
-                      <FontAwesomeIcon className='icons' icon={faEdit}/>
-                      <FontAwesomeIcon className='icons' icon={faTrash}/>
-                    </div> }
+            {auth && (
+              <div className="float-right">
+                <FontAwesomeIcon className="icons" icon={faEdit} />
+                <FontAwesomeIcon className="icons" icon={faTrash} />
+              </div>
+            )}
           </div>
           <div className="collapse" id={id}>
             <div className="card-body">

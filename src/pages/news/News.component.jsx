@@ -7,6 +7,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 import firebase from "firebase";
 import "../../firebase/Firebase.config";
 import NewsForm from "./NewsForm";
+import { connect } from "react-redux";
 
 const translate = {
   Geo: {
@@ -22,20 +23,20 @@ const translate = {
 
 class News extends Component {
   static contextType = LanguageContext;
-  componentDidMount() {
-    const dbRef = firebase.database().ref("news");
+  // componentDidMount() {
+  //   const dbRef = firebase.database().ref("news");
 
-    dbRef.on("value", snapshot => {
-      // save to Redux store ( not this.setState() )
-      console.log(snapshot.val());
-    });
-  }
+  //   dbRef.on("value", snapshot => {
+  //     // save to Redux store ( not this.setState() )
+  //     console.log(snapshot.val());
+  //   });
+  // }
 
   render() {
     const { news, auth, createNews, removeNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
-    const newsList = news.map(nw => (
+    const newsList = this.props.siteData.map(nw => (
       <NewsGroup
         name={nw.name}
         title={nw.title}
@@ -61,4 +62,10 @@ class News extends Component {
   }
 }
 
-export default News;
+// export default News;
+
+const mapStateToProps = reduxStore => {
+  return { siteData: reduxStore.siteData };
+};
+
+export default connect(mapStateToProps, null)(News);

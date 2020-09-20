@@ -9,12 +9,12 @@ import { newsReducer } from "./news/news.reducer";
 import { projectsReducer } from "./projects/projects.reducer";
 
 export default combineReducers({
-  site: siteReducer,
+  siteData: siteReducer,
   directory: directoryReducer,
   admin: adminReducer,
-  calendar: calendarReducer
-  // catalog: catalogReducer,
-  // gallery: galleryReducer,
-  // news: newsReducer,
-  // projects: projectsReducer
+  calendar: calendarReducer,
+  catalog: catalogReducer,
+  gallery: galleryReducer,
+  news: newsReducer,
+  projects: projectsReducer
 });

@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   newsItem: null
 };
 
-export const Reducer = (state = INITIAL_STATE, action) => {
+export const newsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case newsActionTypes.SET_NEWS_ITEM:
       return {

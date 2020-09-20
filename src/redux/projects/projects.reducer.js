@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   project: null
 };
 
-export const Reducer = (state = INITIAL_STATE, action) => {
+export const projectsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case projectsActionTypes.SET_PROJECT:
       return {

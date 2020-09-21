@@ -18,8 +18,11 @@ initializeApp(config);
 //   const collectionRef = firestore.collection(collectionKey);
 //   console.log(collectionRef);
 // };
+
 export const fireStore = firestore();
 export const fireAuth = auth();
+
+fireStore.settings( { timestampsInSnapshots:true } );
 
 // export const addCollectionsAndDocuments = async (
 //   collectionKey,

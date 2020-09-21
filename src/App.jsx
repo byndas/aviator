@@ -42,7 +42,7 @@ class App extends React.Component {
       searchMode: false,
       searchInput: "",
       projects: projects,
-      news: news,
+      news: news,\
       calendar: calendar,
       gallery: gallery
     };

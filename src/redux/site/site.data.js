@@ -50,28 +50,28 @@ export const SITE_DATA = {
       {
         name: "P-51 Mustang",
         id: "pl01",
-        img: Plane01,
+        img: 1,
         text:
           "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
       },
       {
         name: "Private Jet",
         id: "pl02",
-        img: Plane02,
+        img: 2,
         text:
           "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
       },
       {
         name: "Carenado Aircraft to 10.30",
         id: "pl03",
-        img: Plane03,
+        img: 3,
         text:
           "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
       },
       {
         name: "Beechcraft Bonanza Model 35",
         id: "pl04",
-        img: Plane04,
+        img: 4,
         text:
           "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
       }
@@ -85,7 +85,7 @@ export const SITE_DATA = {
       {
         id: "1",
         name: "First Photo Name",
-        img: Project03,
+        img: 3,
         text:
           "Nulla vitae elit libero, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
       },
@@ -99,14 +99,14 @@ export const SITE_DATA = {
       {
         id: "3",
         name: "Third Photo Name",
-        img: Project01,
+        img: 1,
         text:
           "Nulla, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
       },
       {
         id: "4",
         name: "Fourth Photo Name",
-        img: Project04,
+        img: 4,
         text:
           "Nulla vitae elit libero, Nulla vitae elit libero, a pharetra augue mollis interdum.Nulla vitae elit libero, a pharetra augue mollis interdum."
       }
@@ -143,7 +143,7 @@ export const SITE_DATA = {
       {
         id: "project1",
         name: "project01",
-        img: Project01,
+        img: 1,
         subTitle: "project 01 subTitle",
         text:
           "lorem ipsam img simmg kmkmm dsnjnjn, lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn"
@@ -151,7 +151,7 @@ export const SITE_DATA = {
       {
         id: "project2",
         name: "project02",
-        img: Project02,
+        img: 2,
         subTitle: "project 02 subTitle",
         text:
           "lorem ipsam img simmg kmkmm dsnjnjn,lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn "
@@ -159,7 +159,7 @@ export const SITE_DATA = {
       {
         id: "project4",
         name: "project03",
-        img: Project03,
+        img: 3,
         subTitle: "project 03 subTitle",
         text:
           "lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn lorem ipsam img simmg kmkmm dsnjnjn"

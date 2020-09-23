@@ -1,5 +1,5 @@
-import { auth, firestore, initializeApp } from "firebase";
-import { updateCollections } from "../redux/site/site.actions";
+import firebase from "firebase";
+// import { updateCollections } from "../redux/site/site.actions";
 
 const config = {
   apiKey: "AIzaSyCEu3WsvqugTOqBDfNmVR8sVp524ylAkhs",
@@ -12,17 +12,22 @@ const config = {
   measurementId: "G-2060N4EPY6"
 };
 
-initializeApp(config);
+firebase.initializeApp(config);
 
 // const addPageData = (collectionKey, objectsToAdd) => {
 //   const collectionRef = firestore.collection(collectionKey);
 //   console.log(collectionRef);
 // };
 
-export const fireStore = firestore();
-export const fireAuth = auth();
+// Gets reference to storage and creates in it a storageBucket reference
+const storageRef = firebase.storage().ref();
 
-fireStore.settings( { timestampsInSnapshots:true } );
+// Creates reference to 'cloud.jpg'
+const logoRef = storageRef.child("./images/logo.png");
+// ref.put(logoRef);
+
+export const fireStore = firebase.firestore();
+export const fireAuth = firebase.auth();
 
 // export const addCollectionsAndDocuments = async (
 //   collectionKey,

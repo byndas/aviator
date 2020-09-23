@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import "./navbar.styles.css";
 
 import Logo from "../images/logo.png";
-import youtube from "../images/youtube.svg";
-import instagramIcon from "../images/instagramIcon.svg";
-import facebookIcon from "../images/facebookIcon.svg";
+import youtube from "../images/svg/youtube.svg";
+import instagramIcon from "../images/svg/instagramIcon.svg";
+import facebookIcon from "../images/svg/facebookIcon.svg";
 import { LanguageContext } from "../context/LanguageContext";
 import { fireAuth } from "../firebase/Firebase.config";
 import translate from "./translate";

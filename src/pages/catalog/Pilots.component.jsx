@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
-import Pilot01 from "../../images/Pilot01.jpg";
-import Pilot02 from "../../images/Pilot02.jpg";
-import Pilot03 from "../../images/Pilot03.jpg";
+import pilot01 from "../../images/jpg/pilots/pilot01.jpg";
+import pilot02 from "../../images/jpg/pilots/pilot02.jpg";
+import pilot03 from "../../images/jpg/pilots/pilot03.jpg";
 import "./Catalog.styles.css";
 
 const translate = {
@@ -27,7 +27,7 @@ class Pilots extends Component {
         <h1 className="text-center font-italic heading">{Pilots}</h1>
         <div className="media">
           <img
-            src={Pilot01}
+            src={pilot01}
             className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
           />
@@ -45,7 +45,7 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={Pilot02}
+            src={pilot02}
             className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
           />
@@ -63,7 +63,7 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={Pilot03}
+            src={pilot03}
             className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
           />

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./footer.styles.css";
-import youtube from "../images/youtube.svg";
-import instagramIcon from "../images/instagramIcon.svg";
-import facebookIcon from "../images/facebookIcon.svg";
+import youtube from "../images/svg/youtube.svg";
+import instagramIcon from "../images/svg/instagramIcon.svg";
+import facebookIcon from "../images/svg/facebookIcon.svg";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import translate from "../navbar/translate";

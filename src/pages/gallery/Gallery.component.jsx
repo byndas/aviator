@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Poster from "../../images/jpg/starPoster.jpg";
 import GalleryGroup from "./GalleryGroup";
 import Footer from "../../footer/Footer.component";
 import "./Gallery.styles.css";
 import { backgroundColor } from "../catalog/Catalog.component";
 import firebase from "firebase";
-import "../../firebase/Firebase.config";
+import { getImage } from "../../firebase/firebase.config";
 import { connect } from "react-redux";
 
 class Gallery extends Component {
@@ -46,7 +45,12 @@ class Gallery extends Component {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active mt-5 mb-5  rounded">
-                <img src={Poster} className="gallery_img" alt="..." />
+                <img
+                  className="gallery_img"
+                  alt="..."
+                  id="starGallery"
+                  src={getImage("jpg/starPoster.jpg", "starGallery")}
+                />
                 <div className="carousel-caption d-none d-md-block"></div>
               </div>
               {galleryGroup}

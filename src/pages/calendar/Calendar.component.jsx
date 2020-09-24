@@ -1,13 +1,14 @@
+import "./Calendar.styles.css";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
+import { connect } from "react-redux";
 import CalendarGroup from "./CalendarGroup";
-import "./Calendar.styles.css";
+import { getImage } from "../../firebase/firebase.config";
 
 class Calendar extends Component {
   render() {
-    const { auth, calendar } = this.props;
+    const { auth } = this.props;
     const calendarGroup = this.props.siteData.map(cl => (
       <div className="col mt-5 px-md-4 ml-5">
         <CalendarGroup
@@ -24,7 +25,16 @@ class Calendar extends Component {
     ));
     return (
       <div style={backgroundColor}>
-        <div className="calendar_container">
+        <div
+          className="calendar_container"
+          id="landing05Calendar"
+          style={{
+            backgroundImage: `url(${getImage(
+              "jpg/landings/landing05.jpg",
+              "landing05Calendar"
+            )})`
+          }}
+        >
           <div className="row mx-md-n4">{calendarGroup}</div>
         </div>
         <Footer />
@@ -48,7 +58,7 @@ import { backgroundColor } from "../catalog/Catalog.component";
 import CalendarGroup from "./CalendarGroup";
 import "./Calendar.styles.css";
 import firebase from "firebase";
-import "../../firebase/Firebase.config";
+import "../../firebase/firebase.config";
 
 class Calendar extends Component {
   componentDidMount() {

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Plane from "../../images/jpg/propeller.jpg";
-import backgroundImage from "../../backgroundImage";
 import "./About.styles.css";
+import React, { Component } from "react";
 import Footer from "../../footer/Footer.component";
-import translate from "./translate";
 import { LanguageContext } from "../../context/LanguageContext";
+import backgroundImage from "../../backgroundImage";
+import translate from "./translate";
+import { getImage } from "../../firebase/firebase.config";
 
 class About extends Component {
   static contextType = LanguageContext;
@@ -13,7 +13,10 @@ class About extends Component {
     const { AboutUs, Abouttext } = translate[language];
     return (
       <div>
-        <div style={backgroundImage(Plane)}>
+        <div
+          id="plane"
+          style={backgroundImage(getImage("jpg/propeller.jpg", "plane"))}
+        >
           <div className="container text-center">
             <h1 className="display-3 heading-secondary mt-4">{AboutUs}</h1>
             <div className="jumbotron jumbotron-fluid shadow p-9 mb-2 bg-white mt-5  paragraph_background">

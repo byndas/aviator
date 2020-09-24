@@ -1,12 +1,11 @@
+import "./Contact.styles.css";
 import React from "react";
 import Footer from "../../footer/Footer.component";
-import facebook from "../../images/svg/facebookIcon.svg";
-import InstagramIcon from "../../images/svg/instagramIcon.svg";
-import "./Contact.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { backgroundColor } from "../catalog/Catalog.component";
+import { getImage } from "../../firebase/firebase.config";
 
 function Contact() {
   return (
@@ -17,9 +16,10 @@ function Contact() {
             <div className="col">
               <div className="media">
                 <img
-                  className="facebook_icon mt-3"
-                  src={facebook}
                   alt="facebookIcon"
+                  className="facebook_icon mt-3"
+                  id="facebookContact"
+                  src={getImage("svg/facebookIcon.svg", "facebookContact")}
                 />
                 <div className="media-body">
                   <p className="mt-3"> dkodkfo@dm.com</p>
@@ -31,9 +31,10 @@ function Contact() {
             <div className="col">
               <div className="media">
                 <img
-                  src={InstagramIcon}
-                  className="instagram_icon mt-3"
                   alt="instagramIcon"
+                  className="instagram_icon mt-3"
+                  id="instagramContact"
+                  src={getImage("svg/instagramIcon.svg", "instagramContact")}
                 />
                 <div className="media-body">
                   <p className="mt-3"> dkodkfo@instagram.com</p>

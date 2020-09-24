@@ -5,7 +5,7 @@ import { createStructuredSelector } from "reselect";
 import {
   fireAuth,
   addCollectionsAndDocuments
-} from "./firebase/Firebase.config";
+} from "./firebase/firebase.config";
 import firebase from "firebase";
 
 import "./App.styles.css";

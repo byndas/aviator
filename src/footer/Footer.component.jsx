@@ -1,12 +1,9 @@
-import React, { Component } from "react";
 import "./footer.styles.css";
-import youtube from "../images/svg/youtube.svg";
-import instagramIcon from "../images/svg/instagramIcon.svg";
-import facebookIcon from "../images/svg/facebookIcon.svg";
-import logo from "../images/logo.png";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import translate from "../navbar/translate";
 import { LanguageContext } from "../context/LanguageContext";
+import { getImage } from "../firebase/firebase.config";
+import translate from "../navbar/translate";
 
 class Footer extends Component {
   static contextType = LanguageContext;
@@ -23,6 +20,7 @@ class Footer extends Component {
       Contact,
       Abouttext
     } = translate[language];
+
     return (
       <div className="footer-dark">
         <footer>
@@ -86,20 +84,27 @@ class Footer extends Component {
                       height: "25px",
                       marginBottom: "6px"
                     }}
-                    src={logo}
+                    id="logoFooter"
+                    src={getImage("logo.png", "logoFooter")}
                   />
                 </p>
                 <p className="about">{Abouttext}</p>
               </div>
               <div className="col item d-flex justify-content-center">
                 <a className="nav-link" href="https://www.youtube.com/">
-                  <img className="youtube_icon" src={youtube} alt="youtube" />
+                  <img
+                    alt="youtube"
+                    className="youtube_icon"
+                    id="youtubeFooter"
+                    src={getImage("svg/youtube.svg", "youtubeFooter")}
+                  />
                 </a>
                 <a href="https://www.instagram.com/?hl=en" className="nav-link">
                   <img
-                    className="instagram_icon"
-                    src={instagramIcon}
                     alt="instagram"
+                    className="instagram_icon"
+                    id="instagramFooter"
+                    src={getImage("svg/instagramIcon.svg", "instagramFooter")}
                   />
                 </a>
                 <a
@@ -107,9 +112,10 @@ class Footer extends Component {
                   className="nav-link"
                 >
                   <img
-                    className="facebook_icon"
-                    src={facebookIcon}
                     alt="facebook"
+                    className="facebook_icon"
+                    id="facebookFooter"
+                    src={getImage("svg/facebookIcon.svg", "facebookFooter")}
                   />
                 </a>
               </div>

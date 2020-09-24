@@ -1,9 +1,7 @@
+import "./Catalog.styles.css";
 import React, { Component } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
-import pilot01 from "../../images/jpg/pilots/pilot01.jpg";
-import pilot02 from "../../images/jpg/pilots/pilot02.jpg";
-import pilot03 from "../../images/jpg/pilots/pilot03.jpg";
-import "./Catalog.styles.css";
+import { getImage } from "../../firebase/firebase.config";
 
 const translate = {
   Geo: {
@@ -27,9 +25,10 @@ class Pilots extends Component {
         <h1 className="text-center font-italic heading">{Pilots}</h1>
         <div className="media">
           <img
-            src={pilot01}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            id="pilot01"
+            src={getImage("jpg/pilots/pilot01.jpg", "pilot01")}
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -45,9 +44,10 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={pilot02}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            id="pilot02"
+            src={getImage("jpg/pilots/pilot01.jpg", "pilot02")}
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -63,9 +63,10 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={pilot03}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            id="pilot03"
+            src={getImage("jpg/pilots/pilot01.jpg", "pilot03")}
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>

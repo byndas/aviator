@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import Footer from "../../footer/Footer.component";
 import "./Projects.styles.css";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { LanguageContext } from "../../context/LanguageContext";
+import Footer from "../../footer/Footer.component";
 import ProjectGroup from "./ProjectGroup";
 import ProjectsForm from "./ProjectsForm";
 import firebase from "firebase";
-import "../../firebase/Firebase.config";
-import { connect } from "react-redux";
+import "../../firebase/firebase.config";
+import { getImage } from "../../firebase/firebase.config";
 
 const translate = {
   Geo: {
@@ -50,7 +51,16 @@ class Projects extends Component {
     // ));
     return (
       <div>
-        <div className="project_container">
+        <div
+          className="project_container"
+          id="landing03Project"
+          style={{
+            backgroundImage: `url(${getImage(
+              "jpg/landings/landing03.jpg",
+              "landing03Project"
+            )})`
+          }}
+        >
           <h1 className="project_title font-italic">{Projects}</h1>
           {auth && (
             <div className="container project_form">

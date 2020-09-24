@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import "./Home.styles.css";
+import React, { Component } from "react";
 // import video from "../images/video.webm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -7,6 +7,7 @@ import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { LanguageContext } from "../../context/LanguageContext";
 import UsefulLinks from "./UsefulLinks.component";
+import { getImage } from "../../firebase/firebase.config";
 
 const translate = {
   Geo: {
@@ -31,11 +32,56 @@ class Home extends Component {
     return (
       <div className="slideshow">
         <ul>
-          <li className="img-fluid"></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li
+            className="img-fluid"
+            id="home01"
+            style={{
+              backgroundImage: `url(${getImage(
+                "jpg/landings/landing01.jpg",
+                "home01"
+              )})`
+            }}
+          ></li>
+          <li
+            id="home02"
+            style={{
+              backgroundImage: `url(${getImage(
+                "jpg/landings/landing02.jpg",
+                "home02"
+              )})
+              animationDelay: 5s`
+            }}
+          ></li>
+          <li
+            id="home03"
+            style={{
+              backgroundImage: `url(${getImage(
+                "jpg/landings/landing03.jpg",
+                "home03"
+              )})
+              animationDelay: 10s`
+            }}
+          ></li>
+          <li
+            id="home04"
+            style={{
+              backgroundImage: `url(${getImage(
+                "jpg/landings/landing04.jpg",
+                "home04"
+              )})
+              animationDelay: 15s`
+            }}
+          ></li>
+          <li
+            id="home05"
+            style={{
+              backgroundImage: `url(${getImage(
+                "jpg/landings/landing05.jpg",
+                "home05"
+              )})
+              animationDelay: 20s`
+            }}
+          ></li>
         </ul>
         <div className="links">
           <div className="btn-group dropright runways">

@@ -1,15 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./navbar.styles.css";
-
-import Logo from "../images/logo.png";
-import youtube from "../images/svg/youtube.svg";
-import instagramIcon from "../images/svg/instagramIcon.svg";
-import facebookIcon from "../images/svg/facebookIcon.svg";
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { fireAuth } from "../firebase/firebase.config";
 import { LanguageContext } from "../context/LanguageContext";
-import { fireAuth } from "../firebase/Firebase.config";
 import translate from "./translate";
+import { getImage } from "../firebase/firebase.config";
 
 class Navbar extends React.Component {
   static contextType = LanguageContext;
@@ -37,7 +33,12 @@ class Navbar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark background">
           <Link className="navbar-brand" to="/">
-            <img alt="logo" className="logo" src={Logo} />
+            <img
+              alt="logo"
+              className="logo"
+              id="logoNav"
+              src={getImage("logo.png", "logoNav")}
+            />
           </Link>
           <a
             className="navbar-toggler"
@@ -108,7 +109,12 @@ class Navbar extends React.Component {
               <ul className="nav mr-auto">
                 <li className="nav-item social_icon_container">
                   <a className="nav-link" href="https://www.youtube.com/">
-                    <img className="youtube_icon" src={youtube} alt="youtube" />
+                    <img
+                      className="youtube_icon"
+                      alt="youtube"
+                      id="youtubeNav"
+                      src={getImage("svg/youtube.svg", "youtubeNav")}
+                    />
                   </a>
                 </li>
                 <li className="nav-item social_icon_container">
@@ -117,9 +123,10 @@ class Navbar extends React.Component {
                     className="nav-link"
                   >
                     <img
-                      className="instagram_icon"
-                      src={instagramIcon}
                       alt="instagram"
+                      className="instagram_icon"
+                      id="instagramNav"
+                      src={getImage("svg/instagramIcon.svg", "instagramNav")}
                     />
                   </a>
                 </li>
@@ -129,9 +136,10 @@ class Navbar extends React.Component {
                     className="nav-link"
                   >
                     <img
-                      className="facebook_icon"
-                      src={facebookIcon}
                       alt="facebook"
+                      className="facebook_icon"
+                      id="facebookNav"
+                      src={getImage("svg/facebookIcon.svg", "facebookNav")}
                     />
                   </a>
                 </li>

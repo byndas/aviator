@@ -1,6 +1,12 @@
 import "./Contact.styles.css";
 import React from "react";
 import Footer from "../../footer/Footer.component";
+<<<<<<< Updated upstream
+=======
+import facebook from "../../images/svg/facebookIcon.svg";
+import InstagramIcon from "../../images/svg/instagramIcon.svg";
+import "./Contact.styles.css";
+>>>>>>> Stashed changes
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";

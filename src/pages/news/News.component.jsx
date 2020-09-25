@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Footer from "../../footer/Footer.component";
-import { backgroundColor } from "../catalog/Catalog.component";
-import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
-import { LanguageContext } from "../../context/LanguageContext";
-import firebase from "firebase";
-import "../../firebase/Firebase.config";
-import NewsForm from "./NewsForm";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import Footer from "../../footer/Footer.component";
+import NewsGroup from "./NewsGroup.component";
+import NewsForm from "./NewsForm";
+import "../../firebase/Firebase.config";
+import firebase from "firebase";
+import { LanguageContext } from "../../context/LanguageContext";
+import { backgroundColor } from "../catalog/Catalog.component";
 
 const translate = {
   Geo: {
@@ -36,6 +36,7 @@ class News extends Component {
     const { news, auth, createNews, removeNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
+
     const newsList = this.props.siteData.map(nw => (
       <NewsGroup
         name={nw.name}
@@ -61,8 +62,6 @@ class News extends Component {
     );
   }
 }
-
-// export default News;
 
 const mapStateToProps = reduxStore => {
   return { siteData: reduxStore.siteData };

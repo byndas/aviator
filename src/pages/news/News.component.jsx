@@ -5,7 +5,7 @@ import NewsGroup from "./NewsGroup.component";
 import "./News.styles.css";
 import { LanguageContext } from "../../context/LanguageContext";
 import firebase from "firebase";
-import "../../firebase/firebase.config";
+import "../../firebase/Firebase.config";
 import NewsForm from "./NewsForm";
 import { connect } from "react-redux";
 

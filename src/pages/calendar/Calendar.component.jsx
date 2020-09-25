@@ -4,7 +4,6 @@ import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 import { connect } from "react-redux";
 import CalendarGroup from "./CalendarGroup";
-import { getImage } from "../../firebase/firebase.config";
 
 class Calendar extends Component {
   render() {
@@ -25,16 +24,7 @@ class Calendar extends Component {
     ));
     return (
       <div style={backgroundColor}>
-        <div
-          className="calendar_container"
-          id="landing05Calendar"
-          style={{
-            backgroundImage: `url(${getImage(
-              "jpg/landings/landing05.jpg",
-              "landing05Calendar"
-            )})`
-          }}
-        >
+        <div className="calendar_container">
           <div className="row mx-md-n4">{calendarGroup}</div>
         </div>
         <Footer />
@@ -58,7 +48,7 @@ import { backgroundColor } from "../catalog/Catalog.component";
 import CalendarGroup from "./CalendarGroup";
 import "./Calendar.styles.css";
 import firebase from "firebase";
-import "../../firebase/firebase.config";
+import "../../firebase/Firebase.config";
 
 class Calendar extends Component {
   componentDidMount() {

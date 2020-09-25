@@ -25,6 +25,26 @@
   animation: imageAnimation 25s linear infinite;
 }
 
+.slideshow li:nth-child(1) {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Flandings%2Flanding01.jpg?alt=media&token=9fd40807-875a-4778-b20e-99918dfe84ae");
+}
+.slideshow li:nth-child(2) {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Flandings%2Flanding02.jpg?alt=media&token=439b7352-94ac-4ee4-9435-f29d170b9ca5");
+  animation-delay: 5s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Flandings%2Flanding03.jpg?alt=media&token=2d53ae5e-18a8-486c-8b6b-9839077dbb41");
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Flandings%2Flanding04.jpg?alt=media&token=4c960c19-71eb-4c21-b47e-d3d5584ca04f");
+  animation-delay: 15s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Flandings%2Flanding05.jpg?alt=media&token=ca358fd1-5044-43d0-a4ab-9a725399d178");
+  animation-delay: 20s;
+}
+
 @keyframes imageAnimation {
   0% {
     opacity: 0;

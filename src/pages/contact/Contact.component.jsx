@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { getImage } from "../../firebase/firebase.config";
 
 function Contact() {
   return (
@@ -18,8 +17,9 @@ function Contact() {
                 <img
                   alt="facebookIcon"
                   className="facebook_icon mt-3"
-                  id="facebookContact"
-                  src={getImage("svg/facebookIcon.svg", "facebookContact")}
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FfacebookIcon.svg?alt=media&token=d4d52789-ab47-4b60-8e16-21a9140b6955"
+                  }
                 />
                 <div className="media-body">
                   <p className="mt-3"> dkodkfo@dm.com</p>
@@ -33,8 +33,9 @@ function Contact() {
                 <img
                   alt="instagramIcon"
                   className="instagram_icon mt-3"
-                  id="instagramContact"
-                  src={getImage("svg/instagramIcon.svg", "instagramContact")}
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FinstagramIcon.svg?alt=media&token=e0e1f356-e662-46b1-9f27-388d6d9e3dc6"
+                  }
                 />
                 <div className="media-body">
                   <p className="mt-3"> dkodkfo@instagram.com</p>

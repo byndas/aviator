@@ -1,5 +1,5 @@
 import React from "react";
-import { fireAuth } from "../../firebase/firebase.config";
+import { fireAuth } from "../../firebase/Firebase.config";
 import "./Login.styles.css";
 
 class Login extends React.Component {

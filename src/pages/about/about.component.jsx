@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-=======
-import React, { Component } from "react";
-import Plane from "../../images/jpg/propeller.jpg";
-import backgroundImage from "../../backgroundImage";
->>>>>>> Stashed changes
 import "./About.styles.css";
 import React, { Component } from "react";
 import Footer from "../../footer/Footer.component";

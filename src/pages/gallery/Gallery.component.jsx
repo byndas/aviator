@@ -48,7 +48,13 @@ class Gallery extends Component {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active mt-5 mb-5  rounded">
-                <img src={Poster} className="gallery_img" alt="..." />
+                <img
+                  className="gallery_img"
+                  alt="..."
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2FstarPoster.jpg?alt=media&token=44bc94cc-1ec8-4f69-a08b-d5bcaa0595fa"
+                  }
+                />
                 <div className="carousel-caption d-none d-md-block"></div>
               </div>
               {/* GALLERY DISPLAY HERE */}

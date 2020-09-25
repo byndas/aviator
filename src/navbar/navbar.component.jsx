@@ -1,14 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./navbar.styles.css";
-
-import Logo from "../images/logo.png";
-import youtube from "../images/svg/youtube.svg";
-import instagramIcon from "../images/svg/instagramIcon.svg";
-import facebookIcon from "../images/svg/facebookIcon.svg";
-import { LanguageContext } from "../context/LanguageContext";
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { fireAuth } from "../firebase/Firebase.config";
+import { LanguageContext } from "../context/LanguageContext";
 import translate from "./translate";
 
 class Navbar extends React.Component {
@@ -37,7 +32,13 @@ class Navbar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark background">
           <Link className="navbar-brand" to="/">
-            <img alt="logo" className="logo" src={Logo} />
+            <img
+              alt="logo"
+              className="logo"
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/logo.png?alt=media&token=72f9c185-377d-4877-96c5-59992eb77d08"
+              }
+            />
           </Link>
           <a
             className="navbar-toggler"
@@ -108,7 +109,13 @@ class Navbar extends React.Component {
               <ul className="nav mr-auto">
                 <li className="nav-item social_icon_container">
                   <a className="nav-link" href="https://www.youtube.com/">
-                    <img className="youtube_icon" src={youtube} alt="youtube" />
+                    <img
+                      className="youtube_icon"
+                      alt="youtube"
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2Fyoutube.svg?alt=media&token=b3d2225e-fd94-42b1-b406-6f3c4e13c758"
+                      }
+                    />
                   </a>
                 </li>
                 <li className="nav-item social_icon_container">
@@ -117,9 +124,11 @@ class Navbar extends React.Component {
                     className="nav-link"
                   >
                     <img
-                      className="instagram_icon"
-                      src={instagramIcon}
                       alt="instagram"
+                      className="instagram_icon"
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FinstagramIcon.svg?alt=media&token=e0e1f356-e662-46b1-9f27-388d6d9e3dc6"
+                      }
                     />
                   </a>
                 </li>
@@ -129,9 +138,11 @@ class Navbar extends React.Component {
                     className="nav-link"
                   >
                     <img
-                      className="facebook_icon"
-                      src={facebookIcon}
                       alt="facebook"
+                      className="facebook_icon"
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FfacebookIcon.svg?alt=media&token=d4d52789-ab47-4b60-8e16-21a9140b6955"
+                      }
                     />
                   </a>
                 </li>

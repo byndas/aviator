@@ -14,29 +14,25 @@ const config = {
 
 firebase.initializeApp(config);
 
+const storage = firebase.storage();
+const storageRef = storage.ref();
+
+export const fireAuth = firebase.auth();
+export const fireDB = firebase.firestore();
+
 // const addPageData = (collectionKey, objectsToAdd) => {
-//   const collectionRef = firestore.collection(collectionKey);
+//   const collectionRef = fireDB.collection(collectionKey);
 //   console.log(collectionRef);
 // };
-
-// Gets reference to storage and creates in it a storageBucket reference
-const storageRef = firebase.storage().ref();
-
-// Creates reference to 'cloud.jpg'
-const logoRef = storageRef.child("./images/logo.png");
-// ref.put(logoRef);
-
-export const fireStore = firebase.firestore();
-export const fireAuth = firebase.auth();
 
 // export const addCollectionsAndDocuments = async (
 //   collectionKey,
 //   objectsToAdd
 // ) => {
-//   const collectionRef = fireStore.collection(collectionKey);
+//   const collectionRef = fireDB.collection(collectionKey);
 //   console.log(collectionRef);
 
-//   const batch = fireStore.batch();
+//   const batch = fireDB.batch();
 //   objectsToAdd.forEach(obj => {
 //     const newDocRef = collectionRef.doc();
 //     console.log(newDocRef);

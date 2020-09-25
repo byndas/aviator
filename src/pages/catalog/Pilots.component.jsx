@@ -1,9 +1,6 @@
+import "./Catalog.styles.css";
 import React, { Component } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
-import pilot01 from "../../images/jpg/pilots/pilot01.jpg";
-import pilot02 from "../../images/jpg/pilots/pilot02.jpg";
-import pilot03 from "../../images/jpg/pilots/pilot03.jpg";
-import "./Catalog.styles.css";
 
 const translate = {
   Geo: {
@@ -27,9 +24,11 @@ class Pilots extends Component {
         <h1 className="text-center font-italic heading">{Pilots}</h1>
         <div className="media">
           <img
-            src={pilot01}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot01.jpg?alt=media&token=53e68878-c313-47fd-9dfb-81caeb8f4254"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -45,9 +44,11 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={pilot02}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot02.jpg?alt=media&token=47863e53-950b-490a-a106-379ec96b5b57"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -63,9 +64,11 @@ class Pilots extends Component {
         </div>
         <div className="media mt-4">
           <img
-            src={pilot03}
-            className="align-self-center mr-3 rounded-circle pilot_images"
             alt="..."
+            className="align-self-center mr-3 rounded-circle pilot_images"
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot03.jpg?alt=media&token=cd79b276-e2fe-4800-962b-0c42bb448b61"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>

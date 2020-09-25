@@ -1,13 +1,13 @@
+import "./Calendar.styles.css";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
+import { connect } from "react-redux";
 import CalendarGroup from "./CalendarGroup";
-import "./Calendar.styles.css";
 
 class Calendar extends Component {
   render() {
-    const { auth, calendar } = this.props;
+    const { auth } = this.props;
     const calendarGroup = this.props.siteData.map(cl => (
       <div className="col mt-5 px-md-4 ml-5">
         <CalendarGroup

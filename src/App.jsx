@@ -92,12 +92,9 @@ class App extends React.Component {
       news: filtered
     });
   }
-  createProject(name, subTitle, text) {
+  createProject(name, title, text) {
     this.setState({
-      projects: [
-        { name, subTitle, text, id: "project3" },
-        ...this.state.projects
-      ]
+      projects: [{ name, title, text, id: "project3" }, ...this.state.projects]
     });
   }
   removeProject(id) {
@@ -111,7 +108,8 @@ class App extends React.Component {
       searchInput: event.target.value
     });
   }
-  searchResultsPage() {}
+  // searchResultsPage() {}
+
   render() {
     const {
       auth,

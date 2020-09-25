@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import Footer from "../../footer/Footer.component";
 import "./Projects.styles.css";
-import { LanguageContext } from "../../context/LanguageContext";
-import ProjectGroup from "./ProjectGroup";
-import ProjectsForm from "./ProjectsForm";
-import firebase from "firebase";
-import "../../firebase/Firebase.config";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import ProjectsForm from "./ProjectsForm";
+import ProjectGroup from "./ProjectGroup";
+import Footer from "../../footer/Footer.component";
+import "../../firebase/Firebase.config";
+import firebase from "firebase";
+import { LanguageContext } from "../../context/LanguageContext";
 
 const translate = {
   Geo: {
@@ -31,23 +32,24 @@ class Projects extends Component {
   //     console.log(snapshot.val());
   //   });
   // }
+
   render() {
     const { projects, auth, createProject, removeProject } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
-    // const projectGroup = this.props.siteData.map(prj => (
-    //   <ProjectGroup
-    //     id={prj.id}
-    //     key={prj.id}
-    //     img={prj.img}
-    //     name={prj.name}
-    //     text={prj.text}
-    //     subTitle={prj.subTitle}
-    //     auth={auth}
-    //     removeProject={removeProject}
-    //   />
-    // ));
+    const projectList = this.props.siteData.map(prj => (
+      <ProjectGroup
+        id={prj.id}
+        key={prj.id}
+        img={prj.img}
+        name={prj.name}
+        text={prj.text}
+        subTitle={prj.subTitle}
+        auth={auth}
+        removeProject={removeProject}
+      />
+    ));
     return (
       <div>
         <div className="project_container">
@@ -78,7 +80,9 @@ class Projects extends Component {
               </div>
             </div>
           )}
-          {/* {projectGroup} */}
+          <br />
+          {/* PROJECTS DISPLAY HERE */}
+          {projectList}
         </div>
         <Footer />
       </div>
@@ -86,8 +90,7 @@ class Projects extends Component {
   }
 }
 
-// export default Projects;
-
+//CHANGE siteData.projects --> selectors! */}
 const mapStateToProps = reduxStore => {
   return { siteData: reduxStore.siteData };
 };

@@ -1,12 +1,13 @@
+import "./Gallery.styles.css";
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import "../../firebase/Firebase.config";
+import firebase from "firebase";
 import Poster from "../../images/jpg/starPoster.jpg";
 import GalleryGroup from "./GalleryGroup";
+import GalleryForm from "./GalleryForm";
 import Footer from "../../footer/Footer.component";
-import "./Gallery.styles.css";
 import { backgroundColor } from "../catalog/Catalog.component";
-import firebase from "firebase";
-import "../../firebase/Firebase.config";
-import { connect } from "react-redux";
 
 class Gallery extends Component {
   componentDidMount() {
@@ -18,7 +19,8 @@ class Gallery extends Component {
     });
   }
   render() {
-    const galleryGroup = this.props.siteData.map(glr => (
+    const { auth } = this.props;
+    const galleryList = this.props.siteData.map(glr => (
       <GalleryGroup
         img={glr.img}
         name={glr.name}
@@ -49,7 +51,8 @@ class Gallery extends Component {
                 <img src={Poster} className="gallery_img" alt="..." />
                 <div className="carousel-caption d-none d-md-block"></div>
               </div>
-              {galleryGroup}
+              {/* GALLERY DISPLAY HERE */}
+              {galleryList}
             </div>
             <a
               className="carousel-control-prev"
@@ -76,15 +79,15 @@ class Gallery extends Component {
               <span className="sr-only">Next</span>
             </a>
           </div>
+          {auth && <GalleryForm />}
+          <br />
         </div>
         <Footer />
       </div>
     );
   }
 }
-
-// export default Gallery;
-
+// CHANGE siteData.gallery --> selectors!
 const mapStateToProps = reduxStore => {
   return { siteData: reduxStore.siteData };
 };

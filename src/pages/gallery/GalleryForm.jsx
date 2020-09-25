@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import firebase from "firebase";
 // import UseNewsState from './NewsHooks/UseNewsState';
 
-class ProjectsForm extends Component {
+class GalleryForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", title: "", text: "" };
+    this.state = { text: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -17,39 +17,12 @@ class ProjectsForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const postObj = {
-      name: this.state.name,
-      title: this.state.title,
       text: this.state.text,
       src: "here goes uploaded img url"
     };
     firebase
       .database()
-      .ref("projects")
-      .push(postObj)
-      .then(res => {
-        const fbResp = JSON.parse(JSON.stringify(res)).split("/");
-        const postObjId = fbResp[fbResp.length - 1];
-        postObj.id = postObjId;
-        console.log("redux obj", postObj);
-        // this.props.addNewsObjectToRedux(postObj);
-      })
-      .catch(err => {
-        // in the case of failure saving to fb
-      });
-    // this.props.createNews(this.state.name, this.state.title, this.state.text)
-    // this.setState({ name : '', title: '', text: '' })
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-    const postObj = {
-      name: this.state.name,
-      title: this.state.title,
-      text: this.state.text,
-      src: "here goes uploaded img url"
-    };
-    firebase
-      .database()
-      .ref("projects")
+      .ref("gallery")
       .push(postObj)
       .then(res => {
         const fbResp = JSON.parse(JSON.stringify(res)).split("/");
@@ -65,36 +38,11 @@ class ProjectsForm extends Component {
     // this.setState({ name : '', title: '', text: '' })
   }
   render() {
-    const { name, title, text } = this.state;
-
+    const { text } = this.state;
     return (
-      // NAME, TITLE, TEXT, IMG
-      <div className="container">
+      // ONLY TEXT & IMAGE ADMIN INPUTS
+      <div style={{ width: "50%", marginBottom: "50px" }} className="container">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              value={name}
-              name="name"
-              onChange={this.handleChange}
-              type="text"
-              className="form-control"
-              id="name"
-              placeholder="name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              value={title}
-              name="title"
-              onChange={this.handleChange}
-              type="text"
-              className="form-control"
-              id="title"
-              placeholder="title"
-            />
-          </div>
           <div className="form-group">
             <label htmlFor="text">Text</label>
             <textarea
@@ -122,4 +70,4 @@ class ProjectsForm extends Component {
   }
 }
 
-export default ProjectsForm;
+export default GalleryForm;

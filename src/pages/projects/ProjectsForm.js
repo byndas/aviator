@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import firebase from "firebase";
 // import UseNewsState from './NewsHooks/UseNewsState';
 
 class ProjectsForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", title: "", text: "" };
+    this.state = { name: "", subTitle: "", text: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -16,59 +15,17 @@ class ProjectsForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const postObj = {
-      name: this.state.name,
-      title: this.state.title,
-      text: this.state.text,
-      src: "here goes uploaded img url"
-    };
-    firebase
-      .database()
-      .ref("projects")
-      .push(postObj)
-      .then(res => {
-        const fbResp = JSON.parse(JSON.stringify(res)).split("/");
-        const postObjId = fbResp[fbResp.length - 1];
-        postObj.id = postObjId;
-        console.log("redux obj", postObj);
-        // this.props.addNewsObjectToRedux(postObj);
-      })
-      .catch(err => {
-        // in the case of failure saving to fb
-      });
-    // this.props.createNews(this.state.name, this.state.title, this.state.text)
-    // this.setState({ name : '', title: '', text: '' })
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-    const postObj = {
-      name: this.state.name,
-      title: this.state.title,
-      text: this.state.text,
-      src: "here goes uploaded img url"
-    };
-    firebase
-      .database()
-      .ref("projects")
-      .push(postObj)
-      .then(res => {
-        const fbResp = JSON.parse(JSON.stringify(res)).split("/");
-        const postObjId = fbResp[fbResp.length - 1];
-        postObj.id = postObjId;
-        console.log("redux obj", postObj);
-        // this.props.addNewsObjectToRedux(postObj);
-      })
-      .catch(err => {
-        // in the case of failure saving to fb
-      });
-    // this.props.createNews(this.state.name, this.state.title, this.state.text)
-    // this.setState({ name : '', title: '', text: '' })
+    this.props.createProject(
+      this.state.name,
+      this.state.subTitle,
+      this.state.text
+    );
+    this.setState({ name: "", subTitle: "", text: "" });
   }
   render() {
-    const { name, title, text } = this.state;
+    const { name, subTitle, text } = this.state;
 
     return (
-      // NAME, TITLE, TEXT, IMG
       <div className="container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -86,12 +43,12 @@ class ProjectsForm extends Component {
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input
-              value={title}
-              name="title"
+              value={subTitle}
+              name="subTitle"
               onChange={this.handleChange}
               type="text"
               className="form-control"
-              id="title"
+              id="SubTitle"
               placeholder="title"
             />
           </div>

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import CatalogForm from "./CatalogForm";
-import airPlane from "./AirPlaneList";
+import Footer from "../../footer/Footer.component";
 import AirPlane from "./AirPlane.component";
 import Pilots from "./Pilots.component";
-import Footer from "../../footer/Footer.component";
+import airPlane from "./AirPlaneList";
 import firebase from "firebase";
 import "../../firebase/Firebase.config";
 
@@ -18,19 +17,18 @@ class Catalog extends Component {
     super(props);
     this.state = { airPlane: airPlane };
   }
-  // componentDidMount() {
-  //   const dbRef = firebase.database().ref("catalog");
+  componentDidMount() {
+    const dbRef = firebase.database().ref("catalog");
 
-  //   dbRef.on("value", snapshot => {
-  //     // save to Redux store ( not this.setState() )
-  //     console.log(snapshot.val());
-  //   });
-  // }
+    dbRef.on("value", snapshot => {
+      // save to Redux store ( not this.setState() )
+      console.log(snapshot.val());
+    });
+  }
   render() {
     const { auth } = this.props;
     return (
       <div style={backgroundColor}>
-        <CatalogForm />
         <AirPlane airPlane={airPlane} auth={auth} />
         <Pilots />
         <Footer />

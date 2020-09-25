@@ -2,7 +2,6 @@ import "./footer.styles.css";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
-import { getImage } from "../firebase/firebase.config";
 import translate from "../navbar/translate";
 
 class Footer extends Component {
@@ -84,8 +83,9 @@ class Footer extends Component {
                       height: "25px",
                       marginBottom: "6px"
                     }}
-                    id="logoFooter"
-                    src={getImage("logo.png", "logoFooter")}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/logo.png?alt=media&token=72f9c185-377d-4877-96c5-59992eb77d08"
+                    }
                   />
                 </p>
                 <p className="about">{Abouttext}</p>
@@ -95,16 +95,18 @@ class Footer extends Component {
                   <img
                     alt="youtube"
                     className="youtube_icon"
-                    id="youtubeFooter"
-                    src={getImage("svg/youtube.svg", "youtubeFooter")}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2Fyoutube.svg?alt=media&token=b3d2225e-fd94-42b1-b406-6f3c4e13c758"
+                    }
                   />
                 </a>
                 <a href="https://www.instagram.com/?hl=en" className="nav-link">
                   <img
                     alt="instagram"
                     className="instagram_icon"
-                    id="instagramFooter"
-                    src={getImage("svg/instagramIcon.svg", "instagramFooter")}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FinstagramIcon.svg?alt=media&token=e0e1f356-e662-46b1-9f27-388d6d9e3dc6"
+                    }
                   />
                 </a>
                 <a
@@ -114,8 +116,9 @@ class Footer extends Component {
                   <img
                     alt="facebook"
                     className="facebook_icon"
-                    id="facebookFooter"
-                    src={getImage("svg/facebookIcon.svg", "facebookFooter")}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/svg%2FfacebookIcon.svg?alt=media&token=d4d52789-ab47-4b60-8e16-21a9140b6955"
+                    }
                   />
                 </a>
               </div>

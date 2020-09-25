@@ -6,8 +6,7 @@ import Footer from "../../footer/Footer.component";
 import ProjectGroup from "./ProjectGroup";
 import ProjectsForm from "./ProjectsForm";
 import firebase from "firebase";
-import "../../firebase/firebase.config";
-import { getImage } from "../../firebase/firebase.config";
+import "../../firebase/Firebase.config";
 
 const translate = {
   Geo: {
@@ -51,16 +50,7 @@ class Projects extends Component {
     // ));
     return (
       <div>
-        <div
-          className="project_container"
-          id="landing03Project"
-          style={{
-            backgroundImage: `url(${getImage(
-              "jpg/landings/landing03.jpg",
-              "landing03Project"
-            )})`
-          }}
-        >
+        <div className="project_container">
           <h1 className="project_title font-italic">{Projects}</h1>
           {auth && (
             <div className="container project_form">

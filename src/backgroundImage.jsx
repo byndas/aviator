@@ -1,7 +1,7 @@
-const backgroundImage = image => ({
+const backgroundImage = imageUrl => ({
   width: "100vw",
   height: "100vh",
-  backgroundImage: `url(${image})`,
+  backgroundImage: `url(${imageUrl})`,
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center"

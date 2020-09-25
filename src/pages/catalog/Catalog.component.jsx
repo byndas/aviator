@@ -6,7 +6,7 @@ import AirPlane from "./AirPlane.component";
 import Pilots from "./Pilots.component";
 import airPlane from "./AirPlaneList";
 import firebase from "firebase";
-import "../../firebase/firebase.config";
+import "../../firebase/Firebase.config";
 
 export const backgroundColor = {
   backgroundImage: "linear-gradient(to right, #d8e2f9, #83abed)"

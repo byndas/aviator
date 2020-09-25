@@ -1,7 +1,6 @@
 import "./Catalog.styles.css";
 import React, { Component } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
-import { getImage } from "../../firebase/firebase.config";
 
 const translate = {
   Geo: {
@@ -27,8 +26,9 @@ class Pilots extends Component {
           <img
             alt="..."
             className="align-self-center mr-3 rounded-circle pilot_images"
-            id="pilot01"
-            src={getImage("jpg/pilots/pilot01.jpg", "pilot01")}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot01.jpg?alt=media&token=53e68878-c313-47fd-9dfb-81caeb8f4254"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -46,8 +46,9 @@ class Pilots extends Component {
           <img
             alt="..."
             className="align-self-center mr-3 rounded-circle pilot_images"
-            id="pilot02"
-            src={getImage("jpg/pilots/pilot01.jpg", "pilot02")}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot02.jpg?alt=media&token=47863e53-950b-490a-a106-379ec96b5b57"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>
@@ -65,8 +66,9 @@ class Pilots extends Component {
           <img
             alt="..."
             className="align-self-center mr-3 rounded-circle pilot_images"
-            id="pilot03"
-            src={getImage("jpg/pilots/pilot01.jpg", "pilot03")}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpilots%2Fpilot03.jpg?alt=media&token=cd79b276-e2fe-4800-962b-0c42bb448b61"
+            }
           />
           <div className="media-body">
             <h5 className="mt-5 font-italic">Media heading</h5>

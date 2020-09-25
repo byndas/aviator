@@ -4,7 +4,6 @@ import Footer from "../../footer/Footer.component";
 import "./Gallery.styles.css";
 import { backgroundColor } from "../catalog/Catalog.component";
 import firebase from "firebase";
-import { getImage } from "../../firebase/firebase.config";
 import { connect } from "react-redux";
 
 class Gallery extends Component {
@@ -48,8 +47,9 @@ class Gallery extends Component {
                 <img
                   className="gallery_img"
                   alt="..."
-                  id="starGallery"
-                  src={getImage("jpg/starPoster.jpg", "starGallery")}
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2FstarPoster.jpg?alt=media&token=44bc94cc-1ec8-4f69-a08b-d5bcaa0595fa"
+                  }
                 />
                 <div className="carousel-caption d-none d-md-block"></div>
               </div>

@@ -4,7 +4,6 @@ import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 import backgroundImage from "../../backgroundImage";
 import translate from "./translate";
-import { getImage } from "../../firebase/firebase.config";
 
 class About extends Component {
   static contextType = LanguageContext;
@@ -14,8 +13,9 @@ class About extends Component {
     return (
       <div>
         <div
-          id="plane"
-          style={backgroundImage(getImage("jpg/propeller.jpg", "plane"))}
+          style={backgroundImage(
+            "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/jpg%2Fpropeller.jpg?alt=media&token=4d8a96fb-1102-46d1-8525-612a86c7f707"
+          )}
         >
           <div className="container text-center">
             <h1 className="display-3 heading-secondary mt-4">{AboutUs}</h1>

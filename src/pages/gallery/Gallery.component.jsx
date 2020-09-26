@@ -10,24 +10,30 @@ import Footer from "../../footer/Footer.component";
 import { backgroundColor } from "../catalog/Catalog.component";
 
 class Gallery extends Component {
-  componentDidMount() {
-    const dbRef = firebase.database().ref("gallery");
+  // componentDidMount() {
+  //   const dbRef = firebase.database().ref("gallery");
 
-    dbRef.on("value", snapshot => {
-      // save to Redux store ( not this.setState() )
-      console.log(snapshot.val());
-    });
-  }
+  //   dbRef.on("value", snapshot => {
+  //     // save to Redux store ( not this.setState() )
+  //     console.log(snapshot.val());
+  //   });
+  // }
   render() {
     const { auth } = this.props;
-    const galleryList = this.props.siteData.map(glr => (
-      <GalleryGroup
-        img={glr.img}
-        name={glr.name}
-        text={glr.text}
-        key={glr.id}
-      />
-    ));
+
+    let galleryList;
+    console.log(this.props.siteData.gallery);
+    if (this.props.siteData.gallery !== null) {
+      const galleryArr = Object.values(this.props.siteData.gallery);
+      const galleryIds = Object.keys(this.props.siteData.gallery);
+
+      galleryList = galleryArr.map(glr => (
+        <GalleryGroup img={glr.img} text={glr.text} key={glr.id} />
+      ));
+    } else {
+      // add jsx loading html
+      galleryList = "LOADING...";
+    }
     return (
       <div style={backgroundColor}>
         <div className="container">

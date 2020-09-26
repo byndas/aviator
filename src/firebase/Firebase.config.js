@@ -20,11 +20,8 @@ firebase.initializeApp(config);
 // };
 
 // Gets reference to storage and creates in it a storageBucket reference
-const storageRef = firebase.storage().ref();
-
-// Creates reference to 'cloud.jpg'
-const logoRef = storageRef.child("./images/logo.png");
-// ref.put(logoRef);
+const storage = firebase.storage();
+const storageRef = storage.ref();
 
 export const fireStore = firebase.firestore();
 export const fireAuth = firebase.auth();

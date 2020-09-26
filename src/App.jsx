@@ -55,7 +55,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     /////////////////////////////////////////////
-    const dbRef = firebase.database().ref("calendar");
+    const dbRef = firebase.database().ref("base");
     dbRef.on("value", snapshot => {
       this.props.storeFirebaseData(snapshot.val());
     });

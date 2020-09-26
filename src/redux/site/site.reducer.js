@@ -1,9 +1,18 @@
 import { FIREBASE_DATA } from "./site.actions";
 
-export default (siteData = [], action) => {
+const initialState = {
+  news: null,
+  projects: null,
+  gallery: null,
+  catalog: null,
+  calendar: null,
+  directory: null
+};
+
+export default (siteData = initialState, action) => {
   switch (action.type) {
     case FIREBASE_DATA:
-      return siteData.concat(Object.values(action.payload));
+      return Object.assign({}, siteData, action.payload);
     default:
       return siteData;
   }

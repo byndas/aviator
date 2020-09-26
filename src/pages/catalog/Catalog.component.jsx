@@ -28,6 +28,7 @@ class Catalog extends Component {
   // }
   render() {
     const { auth } = this.props;
+
     return (
       <div style={backgroundColor}>
         <CatalogForm />
@@ -41,6 +42,8 @@ class Catalog extends Component {
 
 // const mapDispatchToProps = state => ({})
 
-// export default connect()(Catalog);
+const mapStateToProps = reduxStore => {
+  return { siteData: reduxStore.siteData };
+};
 
-export default Catalog;
+export default connect(mapStateToProps, null)(Catalog);

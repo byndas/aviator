@@ -34,22 +34,32 @@ class Projects extends Component {
   // }
 
   render() {
-    const { projects, auth, createProject, removeProject } = this.props;
+    const { auth, createProject, removeProject } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
-    const projectList = this.props.siteData.map(prj => (
-      <ProjectGroup
-        id={prj.id}
-        key={prj.id}
-        img={prj.img}
-        name={prj.name}
-        text={prj.text}
-        subTitle={prj.subTitle}
-        auth={auth}
-        removeProject={removeProject}
-      />
-    ));
+    let projectList;
+    console.log(this.props.siteData.projects);
+    if (this.props.siteData.projects !== null) {
+      const projectsArr = Object.values(this.props.siteData.projects);
+      const projectsIds = Object.keys(this.props.siteData.projects);
+
+      projectList = projectsArr.map(prj => (
+        <ProjectGroup
+          id={prj.id}
+          key={prj.id}
+          img={prj.img}
+          name={prj.name}
+          text={prj.text}
+          subTitle={prj.subTitle}
+          auth={auth}
+          removeProject={removeProject}
+        />
+      ));
+    } else {
+      // add jsx loading html
+      projectList = "LOADING...";
+    }
     return (
       <div>
         <div className="project_container">

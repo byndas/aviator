@@ -31,24 +31,33 @@ class News extends Component {
   //     console.log(snapshot.val());
   //   });
   // }
-
   render() {
-    const { news, auth, createNews, removeNews } = this.props;
+    const { auth, createNews, removeNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
-    const newsList = this.props.siteData.map(nw => (
-      <NewsGroup
-        name={nw.name}
-        title={nw.title}
-        text={nw.text}
-        img={nw.img}
-        key={nw.id}
-        id={nw.id}
-        auth={auth}
-        removeNews={removeNews}
-      />
-    ));
+    let newsList;
+    console.log(this.props.siteData.news);
+    if (this.props.siteData.news !== null) {
+      const newsArr = Object.values(this.props.siteData.news);
+      const newsIds = Object.keys(this.props.siteData.news);
+
+      newsList = newsArr.map((nw, i) => (
+        <NewsGroup
+          name={nw.name}
+          title={nw.title}
+          text={nw.text}
+          src={nw.src}
+          key={newsIds[i]}
+          id={newsIds[i]}
+          auth={auth}
+          removeNews={removeNews}
+        />
+      ));
+    } else {
+      // add jsx loading html
+      newsList = "LOADING...";
+    }
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>

@@ -47,10 +47,6 @@ class App extends React.Component {
       gallery: gallery
     };
     this.findProject = this.findProject.bind(this);
-    this.createNews = this.createNews.bind(this);
-    this.removeNews = this.removeNews.bind(this);
-    this.createProject = this.createProject.bind(this);
-    this.removeProject = this.removeProject.bind(this);
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
@@ -81,28 +77,8 @@ class App extends React.Component {
     return this.state.projects.find(prj => prj.id === id);
   }
 
-  createNews(name, title, text) {
-    this.setState({
-      news: [{ name, title, text, id: "news03" }, ...this.state.news]
-    });
-  }
-  removeNews(id) {
-    const filtered = this.state.news.filter(news => news.id !== id);
-    this.setState({
-      news: filtered
-    });
-  }
-  createProject(name, title, text) {
-    this.setState({
-      projects: [{ name, title, text, id: "project3" }, ...this.state.projects]
-    });
-  }
-  removeProject(id) {
-    const filtered = this.state.projects.filter(prj => prj.id !== id);
-    this.setState({
-      projects: filtered
-    });
-  }
+  // filtered = this.state.news.filter(news => news.id !== id);
+
   setSearchInput(event) {
     this.setState({
       searchInput: event.target.value
@@ -172,13 +148,7 @@ class App extends React.Component {
               exact
               path="/news"
               render={() => (
-                <News
-                  news={news}
-                  auth={auth}
-                  searchInput={searchInput}
-                  createNews={this.createNews}
-                  removeNews={this.removeNews}
-                />
+                <News news={news} auth={auth} searchInput={searchInput} />
               )}
             />
             <Route
@@ -189,8 +159,6 @@ class App extends React.Component {
                   projects={projects}
                   auth={auth}
                   searchInput={searchInput}
-                  createProject={this.createProject}
-                  removeProject={this.removeProject}
                 />
               )}
             />

@@ -4,7 +4,7 @@ import "./Projects.styles.css";
 
 class SingleProject extends Component {
   render() {
-    const { name, subTitle, text, img } = this.props.projects;
+    const { name, title, text, src } = this.props;
     return (
       <div className="project_container">
         <h1 className="project_title font-italic">{name}</h1>
@@ -13,10 +13,10 @@ class SingleProject extends Component {
             {name}
             <span className="ml-5">31.08.2020</span>
           </div>
-          <h5 class="card-title text-center">{subTitle}</h5>
+          <h5 class="card-title text-center">{title}</h5>
           <div class="card-body d-flex">
             <div class="col-md-4">
-              <img src={img} alt="..." class="img-thumbnail" />
+              <img src={src} alt="..." class="img-thumbnail" />
             </div>
             <div class="col-md-8">
               <p class="card-text">{text}</p>

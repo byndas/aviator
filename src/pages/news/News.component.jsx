@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
-import "../../firebase/Firebase.config";
 import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
@@ -32,7 +31,7 @@ class News extends Component {
   //   });
   // }
   render() {
-    const { auth, createNews, removeNews } = this.props;
+    const { auth } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
@@ -42,16 +41,14 @@ class News extends Component {
       const newsArr = Object.values(this.props.siteData.news);
       const newsIds = Object.keys(this.props.siteData.news);
 
-      newsList = newsArr.map((nw, i) => (
+      newsList = newsArr.map((nw, index) => (
         <NewsGroup
           name={nw.name}
           title={nw.title}
           text={nw.text}
           src={nw.src}
-          key={newsIds[i]}
-          id={newsIds[i]}
+          id={newsIds[index]}
           auth={auth}
-          removeNews={removeNews}
         />
       ));
     } else {
@@ -61,7 +58,7 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm createNews={createNews} />}
+        {auth && <NewsForm />}
         <div className="container">
           {newsList}
           <br />

@@ -13,14 +13,14 @@ class AirPlaneGroup extends Component {
     this.setState({ expanded: !this.state.expanded });
   }
   render() {
-    const { text, name, img, id, auth } = this.props;
+    const { text, name, src, title, id, auth } = this.props;
     const { expanded } = this.state;
     return (
       <div className="col mb-4">
         <div className="card shadow p-3 mb-5 rounded border-0 airplain_background">
-          <img src={img} className="card-img-top rounded" alt={name} />
+          <img src={src} className="card-img-top rounded" alt={name} />
           <div className="card-body">
-            <h5 className="card-title"></h5>
+            <h5 className="card-title">{title}</h5>
             <p
               className={
                 !expanded ? "fade text-truncate" : "card-text text-truncate"

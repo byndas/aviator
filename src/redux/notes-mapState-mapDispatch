@@ -1,14 +1,16 @@
 const mapStateToProps = state => ({
+    // calendarProp is the prop name passed into component
     // state is the root reducer 
     // calendar is a reducer in the root reducer
     // date is the key in the calender reducer
-    calendar: state.calendar.date
+    calendarProp: state.calendar.date
   });
     
   const mapDispatchToProps = dispatch => ({
+    // calendarProp is the prop name passed into component
     // setDate is the action creator function
     // dateObj is the action object payload value
-    calendar: dateObj => dispatch(setDate(dateObj))
+    calendarProp: dateObj => dispatch(setDate(dateObj))
   });
   
   export default connect(mapStateToProps, mapDispatchToProps)(App);

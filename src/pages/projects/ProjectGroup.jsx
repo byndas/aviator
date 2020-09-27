@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 class ProjectGroup extends Component {
   render() {
-    const { name, text, img, subTitle, id, auth, removeProject } = this.props;
+    const { name, text, src, title, id, auth } = this.props;
+    console.log(id);
     return (
       <div>
         <div className="card project_content_title">
@@ -17,17 +18,17 @@ class ProjectGroup extends Component {
               <div className="float-right">
                 <FontAwesomeIcon className="icons" icon={faEdit} />
                 <FontAwesomeIcon
-                  onClick={() => removeProject(id)}
+                  onClick={() => {}}
                   className="icons"
                   icon={faTrash}
                 />
               </div>
             )}
           </div>
-          <h5 className="card-title text-center">{subTitle}</h5>
+          <h5 className="card-title text-center">{title}</h5>
           <div className="card-body d-flex">
             <div className="col-md-3">
-              <img src={img} alt="..." className="img-thumbnail" />
+              <img src={src} alt="..." className="img-thumbnail" />
             </div>
             <div className="col-md-8">
               <p className="card-text text-truncate">{text}</p>

@@ -1,3 +1,4 @@
+import "./App.styles.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -8,9 +9,7 @@ import {
 } from "./firebase/Firebase.config";
 import firebase from "firebase";
 
-import "./App.styles.css";
 import Navbar from "./navbar/navbar.component";
-// import Navbar2 from "./navbar/navbar2.component";
 import Home from "./pages/home/home.component";
 import About from "./pages/about/about.component";
 import Calendar from "./pages/calendar/Calendar.component";
@@ -20,14 +19,9 @@ import Gallery from "./pages/gallery/Gallery.component";
 import Login from "./pages/login/Login.component";
 import News from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
-import projects from "./pages/projects/ProjectList";
-import news from "./pages/news/NewsList";
-import calendar from "./pages/calendar/CalendarList";
-import gallery from "./pages/gallery/GalleryList";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
 
-// import { setDate } from "./redux/calendar/calendar.actions";
 // import { logAdmin } from "./redux/admin/admin.actions";
 import { selectCollectionsForPreview } from "./redux/site/site.selectors";
 import { storeFirebaseData } from "./redux/site/site.actions";
@@ -40,22 +34,16 @@ class App extends React.Component {
     this.state = {
       auth: false,
       searchMode: false,
-      searchInput: "",
-      projects: projects,
-      news: news,
-      calendar: calendar,
-      gallery: gallery
+      searchInput: ""
     };
-    this.findProject = this.findProject.bind(this);
+    // this.findProject = this.findProject.bind(this);
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
-    /////////////////////////////////////////////
     const dbRef = firebase.database().ref("base");
     dbRef.on("value", snapshot => {
       this.props.storeFirebaseData(snapshot.val());
     });
-    /////////////////////////////////////////////
 
     // const { collectionsArray } = this.props;
 
@@ -73,28 +61,21 @@ class App extends React.Component {
     //   collectionsArray.map(({ title, items }) => ({ title, items }))
     // );
   }
-  findProject(id) {
-    return this.state.projects.find(prj => prj.id === id);
-  }
-
-  // filtered = this.state.news.filter(news => news.id !== id);
+  // findProject(id) {
+  //   return this.state.projects.find(prj => prj.id === id);
+  // }
 
   setSearchInput(event) {
     this.setState({
       searchInput: event.target.value
     });
   }
-  // searchResultsPage() {}
+  // searchResultsPage(page) {
+  // filtered = this.state.page.filter(pg => pg.id !== id);
+  // }
 
   render() {
-    const {
-      auth,
-      searchMode,
-      searchInput,
-      news,
-      projects,
-      calendar
-    } = this.state;
+    const { auth, searchMode, searchInput } = this.state;
     return (
       <div>
         <LanguageProvider>
@@ -120,13 +101,7 @@ class App extends React.Component {
             <Route
               exact
               path="/calendar"
-              render={() => (
-                <Calendar
-                  calendar={calendar}
-                  auth={auth}
-                  searchInput={searchInput}
-                />
-              )}
+              render={() => <Calendar auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact
@@ -136,38 +111,24 @@ class App extends React.Component {
             <Route
               exact
               path="/gallery"
-              render={() => (
-                <Gallery
-                  gallery={gallery}
-                  auth={auth}
-                  searchInput={searchInput}
-                />
-              )}
+              render={() => <Gallery auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact
               path="/news"
-              render={() => (
-                <News news={news} auth={auth} searchInput={searchInput} />
-              )}
+              render={() => <News auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact
               path="/projects"
-              render={() => (
-                <Projects
-                  projects={projects}
-                  auth={auth}
-                  searchInput={searchInput}
-                />
-              )}
+              render={() => <Projects auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact
               path="/projects/:id"
               render={props => (
                 <SingleProject
-                  projects={this.findProject(props.match.params.id)}
+                // projects={this.findProject(props.match.params.id)}
                 />
               )}
             />
@@ -180,25 +141,14 @@ class App extends React.Component {
 }
 
 // const mapDispatchToProps = dispatch => ({
-//   // logAdmin is the action creator function
-//   // adminObj is the action object payload
+//   // adminState is prop name passed into component
+//   // logAdmin is action creator function
+//   // adminObj is action object payload
 //   adminState: adminObj => dispatch(logAdmin(adminObj))
 // });
-// export default connect(null, mapDispatchToProps)(App);
 
-// export default App;
-
-/*
-const mapStateToProps = createStructuredSelector({
-  // currentUser: selectCurrentUser
-  collectionsArray: selectCollectionsForPreview
-});
-*/
-
-// const mapDispatchToProps = dispatch => ({
-//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// const mapStateToProps = createStructuredSelector({
+//   collectionsArray: selectCollectionsForPreview
 // });
-
-// export default connect(mapStateToProps)(App);
 
 export default connect(null, { storeFirebaseData })(App);

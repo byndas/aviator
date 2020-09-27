@@ -1,7 +1,6 @@
 import "./Catalog.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../../firebase/Firebase.config";
 import AirPlaneGroup from "./AirPlanegroup";
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -34,8 +33,7 @@ class AirPlane extends Component {
         <AirPlaneGroup
           name={air.name}
           text={air.text}
-          img={air.img}
-          key={air.id}
+          src={air.src}
           id={air.id}
           auth={auth}
         />

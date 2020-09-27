@@ -152,10 +152,11 @@ class ProjectsForm extends Component {
           <div className="form-group">
             <label htmlFor="img">image</label>
             <input
-              name="img"
-              type="file"
+              onChange={e => this.handleImageChange(e)}
               className="form-control-file"
               id="img"
+              type="file"
+              name="img"
             />
           </div>
           <input type="submit" className="btn btn-primary" />

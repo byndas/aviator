@@ -14,7 +14,7 @@ class GalleryForm extends Component {
       [e.target.name]: e.target.value
     });
   }
-  handleSubmit(e) {
+  handleImageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -101,10 +101,14 @@ class GalleryForm extends Component {
       .catch(error => {
         console.log("image was not uploaded to storage", error);
       });
+
+    // this.props.createNews(this.state.name, this.state.title, this.state.text)
+    // this.setState({ name : '', title: '', text: '' })
   }
 
   render() {
     const { text } = this.state;
+
     return (
       // ONLY TEXT & IMAGE ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
@@ -123,10 +127,11 @@ class GalleryForm extends Component {
           <div className="form-group">
             <label htmlFor="img">image</label>
             <input
-              name="img"
-              type="file"
+              onChange={e => this.handleImageChange(e)}
               className="form-control-file"
               id="img"
+              type="file"
+              name="img"
             />
           </div>
           <input type="submit" className="btn btn-primary" />

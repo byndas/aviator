@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import ProjectsForm from "./ProjectsForm";
 import ProjectGroup from "./ProjectGroup";
 import Footer from "../../footer/Footer.component";
-import "../../firebase/Firebase.config";
 import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -34,7 +33,7 @@ class Projects extends Component {
   // }
 
   render() {
-    const { auth, createProject, removeProject } = this.props;
+    const { auth } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
@@ -44,16 +43,14 @@ class Projects extends Component {
       const projectsArr = Object.values(this.props.siteData.projects);
       const projectsIds = Object.keys(this.props.siteData.projects);
 
-      projectList = projectsArr.map(prj => (
+      projectList = projectsArr.map((prj, index) => (
         <ProjectGroup
-          id={prj.id}
-          key={prj.id}
-          img={prj.img}
           name={prj.name}
           text={prj.text}
-          subTitle={prj.subTitle}
+          src={prj.src}
+          title={prj.title}
+          id={index}
           auth={auth}
-          removeProject={removeProject}
         />
       ));
     } else {
@@ -77,7 +74,7 @@ class Projects extends Component {
               <div className="modal fade" id="create" role="dialog">
                 <div className="modal-dialog modal-md">
                   <div className="modal-content">
-                    <ProjectsForm createProject={createProject} />
+                    <ProjectsForm />
                     <button
                       type="button"
                       className="btn btn-default"

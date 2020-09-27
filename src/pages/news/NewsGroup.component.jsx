@@ -5,7 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class NewsGroup extends Component {
   render() {
-    const { img, title, name, text, id, auth } = this.props;
+    const { src, title, name, text, id, auth } = this.props;
     return (
       <div className="card mb-5 project_content">
         <h5 className="card-header  text-center">{name}</h5>
@@ -15,12 +15,15 @@ class NewsGroup extends Component {
             <div className="float-right">
               <FontAwesomeIcon
                 type="button"
+                // needs an edit pop-up window containing the clicked post's title, text, name
+                // along with a submit button to update that firebase post data
                 onClick={() => {}}
                 className="icons"
                 icon={faEdit}
               />
               <FontAwesomeIcon
                 type="button"
+                // needs to fire a removePost function
                 onClick={() => {}}
                 className="icons"
                 icon={faTrash}
@@ -40,7 +43,7 @@ class NewsGroup extends Component {
           </button>
         </div>
         <div className="collapse" id={id}>
-          <img src={img} className="ml-4" alt="..." />
+          <img src={src} className="ml-4" alt="..." />
           <div className="card-body">{text}</div>
         </div>
       </div>

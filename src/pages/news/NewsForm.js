@@ -107,11 +107,12 @@ class NewsForm extends Component {
     // this.props.createNews(this.state.name, this.state.title, this.state.text)
     // this.setState({ name : '', title: '', text: '' })
   }
+
   render() {
     const { name, title, text } = this.state;
 
     return (
-      // NAME, TITLE, TEXT, IMG
+      // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -142,21 +143,21 @@ class NewsForm extends Component {
             <label htmlFor="text">Text</label>
             <textarea
               value={text}
+              name="text"
+              rows="3"
               onChange={this.handleChange}
               className="form-control"
               id="text"
-              rows="3"
-              name="text"
             ></textarea>
           </div>
           <div className="form-group">
             <label htmlFor="img">image</label>
             <input
               name="img"
+              onChange={e => this.handleImageChange(e)}
               type="file"
               className="form-control-file"
               id="img"
-              onChange={e => this.handleImageChange(e)}
             />
           </div>
           <input type="submit" className="btn btn-primary" />

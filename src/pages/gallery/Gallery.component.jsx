@@ -1,7 +1,6 @@
 import "./Gallery.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../../firebase/Firebase.config";
 import firebase from "firebase";
 import Poster from "../../images/jpg/starPoster.jpg";
 import GalleryGroup from "./GalleryGroup";
@@ -22,13 +21,14 @@ class Gallery extends Component {
     const { auth } = this.props;
 
     let galleryList;
-    console.log(this.props.siteData.gallery);
+    console.log(this.props.siteData);
     if (this.props.siteData.gallery !== null) {
       const galleryArr = Object.values(this.props.siteData.gallery);
       const galleryIds = Object.keys(this.props.siteData.gallery);
 
+      // galleryList = galleryArr.map(glr => console.log(glr));
       galleryList = galleryArr.map(glr => (
-        <GalleryGroup img={glr.img} text={glr.text} key={glr.id} />
+        <GalleryGroup src={glr.src} text={glr.text} />
       ));
     } else {
       // add jsx loading html

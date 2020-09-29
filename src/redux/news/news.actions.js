@@ -1,13 +1,20 @@
 import { newsActionTypes } from "./news.types";
 
-export const NEWS_DATA = "NEWS_DATA";
+export const REMOVE_NEWS = "REMOVE_NEWS";
 
-export const storeNews = data => {
+export const removeNewsPost = id => {
   return {
-    type: NEWS_DATA,
-    payload: data
+    type: REMOVE_NEWS,
+    payload: id
   };
 };
+
+// export const storeNews = data => {
+//   return {
+//     type: NEWS_DATA,
+//     payload: data
+//   };
+// };
 
 // export const setNews = newsObj => ({
 //   type: SET_NEWS_ITEM,

@@ -48,6 +48,7 @@ class NewsForm extends Component {
       );
     };
     const imgGuid = guid();
+
     const imagesRef = firebase
       .storage()
       .ref()
@@ -110,11 +111,12 @@ class NewsForm extends Component {
 
   render() {
     const { name, title, text } = this.state;
+    const form = document.getElementById("form");
 
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} id="form">
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -160,7 +162,14 @@ class NewsForm extends Component {
               id="img"
             />
           </div>
-          <input type="submit" className="btn btn-primary" />
+          <div id="flex">
+            <input type="submit" className="btn btn-primary" />
+            <input
+              type="reset"
+              className="btn btn-warning"
+              // onClick={this.form.reset()}
+            />
+          </div>
         </form>
       </div>
     );

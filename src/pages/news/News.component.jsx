@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
-import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
 
@@ -22,14 +21,6 @@ const translate = {
 
 class News extends Component {
   static contextType = LanguageContext;
-  // componentDidMount() {
-  //   const dbRef = firebase.database().ref("news");
-
-  //   dbRef.on("value", snapshot => {
-  //     // save to Redux store ( not this.setState() )
-  //     console.log(snapshot.val());
-  //   });
-  // }
   render() {
     const { auth } = this.props;
     const { language } = this.context;
@@ -41,19 +32,21 @@ class News extends Component {
       const newsArr = Object.values(this.props.siteData.news);
       const newsIds = Object.keys(this.props.siteData.news);
 
-      newsList = newsArr.map((nw, index) => (
-        <NewsGroup
-          name={nw.name}
-          title={nw.title}
-          text={nw.text}
-          src={nw.src}
-          id={newsIds[index]}
-          auth={auth}
-        />
-      ));
+      newsList = newsArr
+        .reverse()
+        .map((nw, index) => (
+          <NewsGroup
+            name={nw.name}
+            title={nw.title}
+            text={nw.text}
+            src={nw.src}
+            id={newsIds[index]}
+            auth={auth}
+          />
+        ));
     } else {
       // add jsx loading html
-      newsList = "LOADING...";
+      // newsList = "LOADING...";
     }
     return (
       <div style={backgroundColor}>

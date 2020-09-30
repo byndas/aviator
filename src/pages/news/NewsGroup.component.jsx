@@ -44,9 +44,14 @@ class NewsGroup extends Component {
     }
   }
   render() {
-    let toggler = true;
+    let toggler = false;
     const toggleMoreLess = () => {
-      toggler ? "See More..." : "See Less...";
+      toggler = !toggler;
+      if (toggler) {
+        return "See More...";
+      } else {
+        return "See Less...";
+      }
     };
     const { src, title, name, text, id, auth } = this.props;
     return (
@@ -84,8 +89,10 @@ class NewsGroup extends Component {
             data-target={`#${id}`}
             aria-expanded="false"
             aria-controls="collapseExample"
-            onClick={toggleMoreLess()}
-          ></button>
+            onClick={toggleMoreLess}
+          >
+            See More...
+          </button>
         </div>
         <div className="collapse" id={id}>
           <img src={src} className="ml-4" alt="..." />

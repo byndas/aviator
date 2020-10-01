@@ -12,6 +12,7 @@ const initialState = {
 export default (siteData = initialState, action) => {
   switch (action.type) {
     case FIREBASE_DATA:
+      console.log(action.payload);
       return Object.assign({}, siteData, action.payload);
     default:
       return siteData;

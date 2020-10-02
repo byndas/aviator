@@ -1,15 +1,21 @@
 import { catalogActionTypes } from "./catalog.types";
 
-const INITIAL_STATE = {
-  airplane: null
-};
-
-export const catalogReducer = (state = INITIAL_STATE, action) => {
+export const catalogReducer = (state = {}, action) => {
   switch (action.type) {
-    case catalogActionTypes.SET_AIRPLANE:
+    case catalogActionTypes.CREATE_AIRPLANE:
       return {
         ...state,
-        airplane: action.payload
+        id: action.payload
+      };
+    case catalogActionTypes.EDIT_AIRPLANE:
+      return {
+        ...state,
+        id: action.payload
+      };
+    case catalogActionTypes.DELETE_AIRPLANE:
+      return {
+        ...state,
+        id: action.payload
       };
     default:
       return state;

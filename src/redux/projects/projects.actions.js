@@ -1,21 +1,16 @@
 import { projectActionTypes } from "./projects.types";
 
-export const setProject = projectObj => ({
-  type: projectActionTypes.SET_PROJECT,
-  payload: projectObj
+export const createProject = data => ({
+  type: projectActionTypes.CREATE_PROJECT,
+  payload: data
 });
 
-// export const createProject = projectObj => ({
-//   type: CREATE_PROJECT,
-//   payload: projectObj
-// });
+export const editProject = data => ({
+  type: projectActionTypes.EDIT_PROJECT,
+  payload: data
+});
 
-// export const editProject = projectObj => ({
-//   type: EDIT_PROJECT,
-//   payload: projectObj
-// });
-
-// export const deleteProject = projectObj => ({
-//   type: DELETE_PROJECT,
-//   payload: projectObj
-// });
+export const deleteProject = data => ({
+  type: projectActionTypes.DELETE_PROJECT,
+  payload: data
+});

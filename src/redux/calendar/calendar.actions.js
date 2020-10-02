@@ -1,21 +1,16 @@
 import { calendarActionTypes } from "./calendar.types";
 
-export const setDate = dateObj => ({
-  type: calendarActionTypes.SET_DATE,
-  payload: dateObj
+export const createDate = data => ({
+  type: calendarActionTypes.CREATE_DATE,
+  payload: data
 });
 
-// export const createDate = dateObj => ({
-//   type: CREATE_DATE,
-//   payload: dateObj
-// });
+export const editDate = data => ({
+  type: calendarActionTypes.EDIT_DATE,
+  payload: data
+});
 
-// export const editDate = dateObj => ({
-//   type: EDIT_DATE,
-//   payload: dateObj
-// });
-
-// export const deleteDate = dateObj => ({
-//   type: DELETE_DATE,
-//   payload: dateObj
-// });
+export const deleteDate = data => ({
+  type: calendarActionTypes.DELETE_DATE,
+  payload: data
+});

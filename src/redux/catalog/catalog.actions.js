@@ -1,21 +1,16 @@
 import { catalogActionTypes } from "./catalog.types";
 
-export const setAirplane = airplaneObj => ({
-  type: catalogActionTypes.SET_AIRPLANE,
-  payload: airplaneObj
+export const createAirPlane = data => ({
+  type: catalogActionTypes.CREATE_AIRPLANE,
+  payload: data
 });
 
-// export const createProject = projectObj => ({
-//   type: CREATE_PROJECT,
-//   payload: projectObj
-// });
+export const editAirPlane = data => ({
+  type: catalogActionTypes.EDIT_AIRPLANE,
+  payload: data
+});
 
-// export const editProject = projectObj => ({
-//   type: EDIT_PROJECT,
-//   payload: projectObj
-// });
-
-// export const deleteProject = projectObj => ({
-//   type: DELETE_PROJECT,
-//   payload: projectObj
-// });
+export const deleteAirPlane = data => ({
+  type: catalogActionTypes.DELETE_AIRPLANE,
+  payload: data
+});

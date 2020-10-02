@@ -1,10 +1,6 @@
 import { newsActionTypes } from "./news.types";
 
-const INITIAL_STATE = {
-  id: null
-};
-
-export const newsReducer = (state = INITIAL_STATE, action) => {
+export const newsReducer = (state = {}, action) => {
   switch (action.type) {
     case newsActionTypes.CREATE_NEWS_ITEM:
       return {
@@ -12,7 +8,10 @@ export const newsReducer = (state = INITIAL_STATE, action) => {
         id: action.payload
       };
     case newsActionTypes.EDIT_NEWS_ITEM:
-      return { ...state };
+      return {
+        ...state,
+        id: action.payload
+      };
     // const index = state.news.find("id");
     // return {
     //   ...state,
@@ -24,7 +23,10 @@ export const newsReducer = (state = INITIAL_STATE, action) => {
       const index = state.news.find("id");
       state.news.splice(index, 1);
 
-      return { ...state };
+      return {
+        ...state,
+        id: action.payload
+      };
 
     default:
       return state;

@@ -1,14 +1,6 @@
 import { calendarActionTypes } from "./calendar.types";
 
-const INITIAL_STATE = {
-  // day: null,
-  // month: null,
-  // year: null,
-  // text: null
-  date: null
-};
-
-export const calendarReducer = (state = INITIAL_STATE, action) => {
+export const calendarReducer = (state = {}, action) => {
   switch (action.type) {
     case calendarActionTypes.SET_DATE:
       return {

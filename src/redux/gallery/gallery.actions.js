@@ -1,21 +1,16 @@
 import { galleryActionTypes } from "./gallery.types";
 
-export const setGallery = galleryObj => ({
-  type: galleryActionTypes.SET_GALLERY_ID,
-  payload: galleryObj
+export const createGallery = data => ({
+  type: galleryActionTypes.CREATE_GALLERY,
+  payload: data
 });
 
-// export const createGallery = galleryObj => ({
-//   type: CREATE_GALLERY,
-//   payload: galleryObj
-// });
+export const editGallery = data => ({
+  type: galleryActionTypes.EDIT_GALLERY,
+  payload: data
+});
 
-// export const editGallery = galleryObj => ({
-//   type: EDIT_GALLERY,
-//   payload: galleryObj
-// });
-
-// export const deleteGallery = galleryObj => ({
-//   type: DELETE_GALLERY,
-//   payload: galleryObj
-// });
+export const deleteGallery = data => ({
+  type: galleryActionTypes.DELETE_GALLERY,
+  payload: data
+});

@@ -7,7 +7,7 @@ class NewsForm extends Component {
     this.state = { name: "", title: "", text: "", imgFile: null };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
   handleChange(e) {
     this.setState({
@@ -104,14 +104,11 @@ class NewsForm extends Component {
       .catch(error => {
         console.log("image was not uploaded to storage", error);
       });
-
-    // this.props.createNews(this.state.name, this.state.title, this.state.text)
-    // this.setState({ name : '', title: '', text: '' })
   }
 
   render() {
     const { name, title, text } = this.state;
-    const form = document.getElementById("form");
+    // const form = document.getElementById("form");
 
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
@@ -122,7 +119,7 @@ class NewsForm extends Component {
             <input
               value={name}
               name="name"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="name"
@@ -134,7 +131,7 @@ class NewsForm extends Component {
             <input
               value={title}
               name="title"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="title"
@@ -147,7 +144,7 @@ class NewsForm extends Component {
               value={text}
               name="text"
               rows="3"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               className="form-control"
               id="text"
             ></textarea>
@@ -164,11 +161,7 @@ class NewsForm extends Component {
           </div>
           <div id="flex">
             <input type="submit" className="btn btn-primary" />
-            <input
-              type="reset"
-              className="btn btn-warning"
-              // onClick={this.form.reset()}
-            />
+            <input type="reset" className="btn btn-warning" />
           </div>
         </form>
       </div>

@@ -4,7 +4,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { connect } from "react-redux";
-import { removeNewsPost } from "../../redux/news/news.actions";
+import { deleteNews } from "../../redux/news/news.actions";
 
 class NewsGroup extends Component {
   removeFirebasePost(id) {
@@ -15,7 +15,7 @@ class NewsGroup extends Component {
       .remove()
       .then(() => {
         console.log("Remove succeeded.");
-        this.props.removeNewsPost(id);
+        this.props.deleteNews(id);
       })
       .catch(error => {
         console.log("Remove failed: " + error.message);
@@ -103,4 +103,5 @@ class NewsGroup extends Component {
   }
 }
 
-export default connect(null, { removeNewsPost })(NewsGroup);
+// export default NewsGroup;
+export default connect(null, { deleteNews })(NewsGroup);

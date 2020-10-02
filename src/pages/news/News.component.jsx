@@ -6,7 +6,7 @@ import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { removeNewsPost } from "../../redux/news/news.actions";
+import { deleteNews, createNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -20,18 +20,21 @@ const translate = {
   }
 };
 
-class News extends Component {
-  static contextType = LanguageContext;
+const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
+  // static contextType = LanguageContext;
   render() {
-    const { auth } = this.props;
-    const { language } = this.context;
-    const { News } = translate[language];
+    const { auth, reduxNews } = this.props;
+
+    // const { language } = this.context;
+    // const { News } = translate[language];
 
     let newsList;
-    console.log(this.props.siteData.news);
-    if (this.props.siteData.news !== null) {
-      const newsArr = Object.values(this.props.siteData.news);
-      const newsIds = Object.keys(this.props.siteData.news);
+    console.log(reduxNews, auth);
+
+    if ({ reduxNews } !== null) {
+      const newsArr = Object.values(reduxNews);
+      const newsIds = Object.keys(reduxNews);
+      console.log("11111", newsArr);
 
       newsList = newsArr
         .reverse()
@@ -52,7 +55,7 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm />}
+        {auth && <NewsForm createNews reduxNews />}
         <div className="container">
           {newsList}
           <br />
@@ -61,15 +64,24 @@ class News extends Component {
       </div>
     );
   }
-}
+});
 
-const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
-};
+const mapStateToProps = reduxStore => ({
+  reduxNews: reduxStore.news
+});
 
 const mapDispatchToProps = dispatch => ({
   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-  deleteNews: newsId => dispatch(removeNewsPost(newsId))
+  deleteNews: id => dispatch(deleteNews(id)),
+  createNews: data => dispatch(createNews(data))
 });
+
+// const mapDispatchToProps = {
+//   // createNews,
+//   // editNews,
+//   deleteNews
+// };
+
+// export default News;
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

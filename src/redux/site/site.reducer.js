@@ -6,16 +6,15 @@ const initialState = {
   gallery: null,
   catalog: null,
   calendar: null
-  // directory: null
 };
 
-export default (siteData = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case FIREBASE_DATA:
       console.log(action.payload);
-      return Object.assign({}, siteData, action.payload);
+      return Object.assign({}, state, action.payload);
     default:
-      return siteData;
+      return state;
   }
 };
 

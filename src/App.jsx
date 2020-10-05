@@ -14,13 +14,13 @@ import Catalog from "./pages/catalog/Catalog.component";
 import Contact from "./pages/contact/Contact.component";
 import Gallery from "./pages/gallery/Gallery.component";
 import Login from "./pages/login/Login.component";
-import News2 from "./pages/news/News.component";
+import News2 from "./pages/news/News2.component";
 import Projects from "./pages/projects/Projects.component";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
 
 // import { logAdmin } from "./redux/admin/admin.actions";
-import { storeFirebaseData } from "./redux/site/site.actions";
+// import { storeFirebaseData } from "./redux/site/site.actions";
 
 // 1nt3rnat10nal
 
@@ -36,10 +36,11 @@ class App extends React.Component {
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
-    const dbRef = firebase.database().ref("base");
-    dbRef.on("value", snapshot => {
-      this.props.storeFirebaseData(snapshot.val());
-    });
+    // const dbRef = firebase.database().ref("base");
+
+    // dbRef.on("value", snapshot => {
+    //   this.props.storeFirebaseData(snapshot.val());
+    // });
 
     fireAuth.onAuthStateChanged(user => {
       if (user) {
@@ -145,4 +146,6 @@ class App extends React.Component {
 //   collectionsArray: selectCollectionsForPreview
 // });
 
-export default connect(null, { storeFirebaseData })(App);
+// export default connect(null, { storeFirebaseData })(App);
+
+export default App;

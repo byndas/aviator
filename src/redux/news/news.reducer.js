@@ -1,7 +1,10 @@
 import { newsActionTypes } from "./news.types";
 
-export const newsReducer = (state = {}, action) => {
+export const newsReducer = (state = null, action) => {
   switch (action.type) {
+    case newsActionTypes.FIREBASE_NEWS:
+      console.log(action.payload);
+      return Object.assign({}, state, action.payload);
     case newsActionTypes.CREATE_NEWS:
 
       return {
@@ -10,13 +13,10 @@ export const newsReducer = (state = {}, action) => {
       };
     case newsActionTypes.DELETE_NEWS:
       console.log("ewoughregiuhergiuhreguh!~~~~~~~", state);
+      console.log(state.length);
 
-      if (state.length) {
-        const index = state.find("id");
-        state.splice(index, 1);
-      } else {
-        return state;
-      }
+      const index = state.find("id");
+      state.splice(index, 1);
 
 
     default:

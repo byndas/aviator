@@ -29,22 +29,21 @@ const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
     // const { language } = this.context;
     // const { News } = translate[language];
 
-    let newsList;
-    console.log(reduxNews, auth);
+    console.log(reduxNews);
 
-    if ({ reduxNews } !== null) {
+    let newsList;
+    if (reduxNews !== null) {
       const newsArr = Object.values(reduxNews);
       const newsIds = Object.keys(reduxNews);
-      console.log("11111", newsArr);
 
       newsList = newsArr
         .reverse()
-        .map((nw, index) => (
+        .map((item, index) => (
           <NewsGroup
-            name={nw.name}
-            title={nw.title}
-            text={nw.text}
-            src={nw.src}
+            name={item.name}
+            title={item.title}
+            text={item.text}
+            src={item.src}
             id={newsIds[index]}
             auth={auth}
           />
@@ -66,6 +65,7 @@ const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
     );
   }
 });
+
 
 const mapStateToProps = reduxStore => ({
   reduxNews: reduxStore.news

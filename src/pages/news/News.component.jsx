@@ -6,7 +6,7 @@ import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { removeNewsPost } from "../../redux/news/news.actions";
+import { deleteNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -69,7 +69,7 @@ const mapStateToProps = reduxStore => {
 
 const mapDispatchToProps = dispatch => ({
   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-  deleteNews: newsId => dispatch(removeNewsPost(newsId))
+  deleteNews: newsId => dispatch(deleteNews(newsId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

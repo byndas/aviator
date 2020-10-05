@@ -7,15 +7,15 @@ export const newsReducer = (state = {}, action) => {
         ...state,
         id: action.payload
       };
-
     case newsActionTypes.DELETE_NEWS:
       console.log("ewoughregiuhergiuhreguh!~~~~~~~", state);
 
-      if (state) {
-        const index = state.news.find("id");
-        state.news.splice(index, 1);
+      if (state.length) {
+        const index = state.find("id");
+        state.splice(index, 1);
+      } else {
+        return state;
       }
-      return state.news;
 
     default:
       return state;

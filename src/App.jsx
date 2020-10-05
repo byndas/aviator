@@ -2,11 +2,8 @@ import "./App.styles.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import {
-  fireAuth,
-  addCollectionsAndDocuments
-} from "./firebase/Firebase.config";
+// import { createStructuredSelector } from "reselect";
+import { fireAuth } from "./firebase/Firebase.config";
 import firebase from "firebase";
 
 import Navbar from "./navbar/navbar.component";
@@ -17,13 +14,12 @@ import Catalog from "./pages/catalog/Catalog.component";
 import Contact from "./pages/contact/Contact.component";
 import Gallery from "./pages/gallery/Gallery.component";
 import Login from "./pages/login/Login.component";
-import News from "./pages/news/News.component";
+import News2 from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
 
 // import { logAdmin } from "./redux/admin/admin.actions";
-import { selectCollectionsForPreview } from "./redux/site/site.selectors";
 import { storeFirebaseData } from "./redux/site/site.actions";
 
 // 1nt3rnat10nal
@@ -44,8 +40,6 @@ class App extends React.Component {
     dbRef.on("value", snapshot => {
       this.props.storeFirebaseData(snapshot.val());
     });
-
-    // const { collectionsArray } = this.props;
 
     fireAuth.onAuthStateChanged(user => {
       if (user) {
@@ -116,7 +110,7 @@ class App extends React.Component {
             <Route
               exact
               path="/news"
-              render={() => <News auth={auth} searchInput={searchInput} />}
+              render={() => <News2 auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact

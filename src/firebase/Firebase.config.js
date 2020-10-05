@@ -14,30 +14,9 @@ const config = {
 
 firebase.initializeApp(config);
 
-// const addPageData = (collectionKey, objectsToAdd) => {
-//   const collectionRef = firestore.collection(collectionKey);
-//   console.log(collectionRef);
-// };
-
 // Gets reference to storage and creates in it a storageBucket reference
-const storage = firebase.storage();
-const storageRef = storage.ref();
+// const storage = firebase.storage();
+// export const storageRef = storage.ref();
 
-export const fireStore = firebase.firestore();
 export const fireAuth = firebase.auth();
-
-// export const addCollectionsAndDocuments = async (
-//   collectionKey,
-//   objectsToAdd
-// ) => {
-//   const collectionRef = fireStore.collection(collectionKey);
-//   console.log(collectionRef);
-
-//   const batch = fireStore.batch();
-//   objectsToAdd.forEach(obj => {
-//     const newDocRef = collectionRef.doc();
-//     console.log(newDocRef);
-//     batch.set(newDocRef, obj);
-//   });
-//   return await batch.commit();
-// };
+// export const fireStore = firebase.firestore();

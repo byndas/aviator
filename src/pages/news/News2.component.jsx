@@ -6,8 +6,9 @@ import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { deleteNews } from "../../redux/news/news.actions";
+import { deleteNews, stateNews } from "../../redux/news/news.actions";
 import { selectNews } from "../../redux/news/news.selectors";
+import firebase from "firebase";
 
 const translate = {
   Geo: {
@@ -23,20 +24,33 @@ const translate = {
 
 class News2 extends Component {
   static contextType = LanguageContext;
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    const dbRef = firebase
+      .database()
+      .ref("base")
+      .child("news");
+
+    dbRef.on("value", snapshot => {
+      this.props.stateNews(snapshot.val());
+    });
+  }
   render() {
     const { auth, reduxNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
-    console.log(this.props.siteData.news);
+    console.log(reduxNews);
 
     let newsList;
 
     // if Redux news is not empty
-    if (reduxNews.length) {
+    if (reduxNews) {
       // if (this.props.siteData.news !== null) {
-      const newsIds = Object.keys(this.props.reduxNews);
-      const newsArr = Object.values(this.props.reduxNews);
+      const newsIds = Object.keys(reduxNews);
+      const newsArr = Object.values(reduxNews);
 
       newsList = newsArr
         .reverse()
@@ -68,17 +82,13 @@ class News2 extends Component {
   }
 }
 
-// const mapStateToProps = reduxStore => {
-//   return { siteData: reduxStore.siteData };
-// };
+const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
-const mapStateToProps = reduxStore => {
-  return { reduxNews: selectNews(reduxStore) };
-};
+// const mapDispatchToProps = dispatch => ({
+//   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
+//   deleteNews: newsId => dispatch(deleteNews(newsId))
+// });
 
-const mapDispatchToProps = dispatch => ({
-  // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-  deleteNews: newsId => dispatch(deleteNews(newsId))
-});
+// export default connect(mapStateToProps, mapDispatchToProps)(News2);
 
-export default connect(mapStateToProps, mapDispatchToProps)(News2);
+export default connect(mapStateToProps, { stateNews })(News2);

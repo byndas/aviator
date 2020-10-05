@@ -5,26 +5,12 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { connect } from "react-redux";
 import { deleteNews } from "../../redux/news/news.actions";
+import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
 
 class NewsGroup extends Component {
-  removeFirebasePost(id) {
-    firebase
-      .database()
-      .ref("base/news")
-      .child(id)
-      .remove()
-      .then(() => {
-        console.log("Remove succeeded.");
-        this.props.deleteNews(id);
-      })
-      .catch(error => {
-        console.log("Remove failed: " + error.message);
-      });
-  }
+  handleEdit() {}
   handleDelete(id, src) {
-    if (!src) {
-      this.removeFirebasePost(id);
-    } else {
+    if (src) {
       const afterTwoF = src.split("%2F")[1];
       const imgGuid = afterTwoF.split("?")[0];
       firebase
@@ -35,12 +21,14 @@ class NewsGroup extends Component {
         .then(() => {
           // img deleted successfully
           console.log("successfully deleted img");
-          this.removeFirebasePost(id);
+          deleteFirebasePost(id, "news", deleteNews(id));
         })
         .catch(error => {
           // Uh-oh, an error occurred!
           console.log("failed to delete img");
         });
+    } else {
+      deleteFirebasePost(id, "news", deleteNews(id));
     }
   }
   render() {
@@ -48,12 +36,12 @@ class NewsGroup extends Component {
     const toggleMoreLess = () => {
       toggler = !toggler;
       if (toggler) {
-        return "See More...";
+        return "Show More...";
       } else {
-        return "See Less...";
+        return "Show Less...";
       }
     };
-    const { src, title, name, text, id, auth } = this.props;
+    const { id, src, title, name, text, auth } = this.props;
     return (
       <div className="card mb-5 project_content">
         <h5 className="card-header  text-center">{name}</h5>
@@ -65,13 +53,14 @@ class NewsGroup extends Component {
                 type="button"
                 // needs an edit pop-up window containing the clicked post's title, text, name
                 // along with a submit button to update that firebase post data
-                onClick={() => {}}
+                onClick={() => {
+                  this.handleEdit(...this.props);
+                }}
                 className="icons"
                 icon={faEdit}
               />
               <FontAwesomeIcon
                 type="button"
-                // needs to fire a removePost function
                 onClick={() => {
                   this.handleDelete(id, src);
                 }}

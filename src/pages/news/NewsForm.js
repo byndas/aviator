@@ -53,11 +53,14 @@ class NewsForm extends Component {
       .storage()
       .ref()
       .child("images/" + imgGuid);
+
     const uploadTask = imagesRef.put(this.state.imgFile);
+
     uploadTask.on("state_changed", snapshot => {
       let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log(progress);
     });
+
     uploadTask
       .then(snapshot => {
         const imgPath = snapshot.metadata.fullPath.split("/")[1];
@@ -96,18 +99,15 @@ class NewsForm extends Component {
                 // img deleted successfully
                 console.log("successfully deleted img");
               })
-              .catch(error => {
-                // Uh-oh, an error occurred!
-                console.log("failed to delete img");
-              });
+              .catch()(error => {
+              // Uh-oh, an error occurred!
+              console.log("failed to delete img", error.message);
+            });
           });
       })
       .catch(error => {
-        console.log("image was not uploaded to storage", error);
+        console.log("image was not uploaded to storage", error.message);
       });
-
-    // this.props.createNews(this.state.name, this.state.title, this.state.text)
-    // this.setState({ name : '', title: '', text: '' })
   }
 
   render() {

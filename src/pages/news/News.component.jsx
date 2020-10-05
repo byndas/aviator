@@ -23,24 +23,25 @@ const translate = {
 class News extends Component {
   static contextType = LanguageContext;
   render() {
-    const { auth } = this.props;
+    const { auth, reduxNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
+    console.log(reduxNews);
+
     let newsList;
-    console.log(this.props.siteData.news);
-    if (this.props.siteData.news !== null) {
-      const newsArr = Object.values(this.props.siteData.news);
-      const newsIds = Object.keys(this.props.siteData.news);
+    if (reduxNews !== null) {
+      const newsArr = Object.values(reduxNews);
+      const newsIds = Object.keys(reduxNews);
 
       newsList = newsArr
         .reverse()
-        .map((nw, index) => (
+        .map((item, index) => (
           <NewsGroup
-            name={nw.name}
-            title={nw.title}
-            text={nw.text}
-            src={nw.src}
+            name={item.name}
+            title={item.title}
+            text={item.text}
+            src={item.src}
             id={newsIds[index]}
             auth={auth}
           />
@@ -64,7 +65,7 @@ class News extends Component {
 }
 
 const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
+  return { reduxNews: reduxStore.siteData.news };
 };
 
 const mapDispatchToProps = dispatch => ({

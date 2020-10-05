@@ -6,6 +6,7 @@ export const newsReducer = (state = null, action) => {
       console.log(action.payload);
       return Object.assign({}, state, action.payload);
     case newsActionTypes.CREATE_NEWS:
+
       return {
         ...state,
         id: action.payload
@@ -16,6 +17,7 @@ export const newsReducer = (state = null, action) => {
 
       const index = state.find("id");
       state.splice(index, 1);
+
 
     default:
       return state;

@@ -92,4 +92,5 @@ class NewsGroup extends Component {
   }
 }
 
+
 export default connect(null, { deleteNews })(NewsGroup);

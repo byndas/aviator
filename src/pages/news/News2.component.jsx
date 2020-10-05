@@ -42,13 +42,10 @@ class News2 extends Component {
     const { language } = this.context;
     const { News } = translate[language];
 
-    console.log(reduxNews);
-
     let newsList;
 
     // if Redux news is not empty
-    if (reduxNews) {
-      // if (this.props.siteData.news !== null) {
+    if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
 
@@ -56,12 +53,13 @@ class News2 extends Component {
         .reverse()
         .map((item, index) => (
           <NewsGroup
+            auth={auth}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
             id={newsIds[index]}
-            auth={auth}
+            key={index}
           />
         ));
     } else {

@@ -6,8 +6,8 @@ import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-
-import { deleteNews, createNews } from "../../redux/news/news.actions";
+import { deleteNews } from "../../redux/news/news.actions";
+import { selectNews } from "../../redux/news/news.selectors";
 
 const translate = {
   Geo: {
@@ -21,30 +21,31 @@ const translate = {
   }
 };
 
-const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
-  // static contextType = LanguageContext;
+class News2 extends Component {
+  static contextType = LanguageContext;
   render() {
     const { auth, reduxNews } = this.props;
+    const { language } = this.context;
+    const { News } = translate[language];
 
-    // const { language } = this.context;
-    // const { News } = translate[language];
+    console.log(this.props.siteData.news);
 
     let newsList;
-    console.log(reduxNews, auth);
 
-    if ({ reduxNews } !== null) {
-      const newsArr = Object.values(reduxNews);
-      const newsIds = Object.keys(reduxNews);
-      console.log("11111", newsArr);
+    // if Redux news is not empty
+    if (reduxNews.length) {
+      // if (this.props.siteData.news !== null) {
+      const newsIds = Object.keys(this.props.reduxNews);
+      const newsArr = Object.values(this.props.reduxNews);
 
       newsList = newsArr
         .reverse()
-        .map((nw, index) => (
+        .map((item, index) => (
           <NewsGroup
-            name={nw.name}
-            title={nw.title}
-            text={nw.text}
-            src={nw.src}
+            name={item.name}
+            title={item.title}
+            text={item.text}
+            src={item.src}
             id={newsIds[index]}
             auth={auth}
           />
@@ -56,7 +57,7 @@ const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm createNews reduxNews />}
+        {auth && <NewsForm />}
         <div className="container">
           {newsList}
           <br />
@@ -65,25 +66,19 @@ const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
       </div>
     );
   }
-});
+}
 
-const mapStateToProps = reduxStore => ({
-  reduxNews: reduxStore.news
-});
+// const mapStateToProps = reduxStore => {
+//   return { siteData: reduxStore.siteData };
+// };
+
+const mapStateToProps = reduxStore => {
+  return { reduxNews: selectNews(reduxStore) };
+};
 
 const mapDispatchToProps = dispatch => ({
   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-
-  deleteNews: id => dispatch(deleteNews(id)),
-  createNews: data => dispatch(createNews(data))
+  deleteNews: newsId => dispatch(deleteNews(newsId))
 });
 
-// const mapDispatchToProps = {
-//   // createNews,
-//   // editNews,
-//   deleteNews
-// };
-
-// export default News;
-
-export default connect(mapStateToProps, mapDispatchToProps)(News);
+export default connect(mapStateToProps, mapDispatchToProps)(News2);

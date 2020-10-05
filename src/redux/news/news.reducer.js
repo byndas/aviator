@@ -1,30 +1,23 @@
 import { newsActionTypes } from "./news.types";
 
-const INITIAL_STATE = {
-  id: null
-};
-
-export const newsReducer = (state = INITIAL_STATE, action) => {
+export const newsReducer = (state = {}, action) => {
   switch (action.type) {
-    case newsActionTypes.CREATE_NEWS_ITEM:
+    case newsActionTypes.CREATE_NEWS:
+
       return {
         ...state,
         id: action.payload
       };
-    case newsActionTypes.EDIT_NEWS_ITEM:
-      return { ...state };
-    // const index = state.news.find("id");
-    // return {
-    //   ...state,
-    //   id: action.payload
-    // };
     case newsActionTypes.DELETE_NEWS:
-      console.log("00000000", state.news);
+      console.log("ewoughregiuhergiuhreguh!~~~~~~~", state);
 
-      const index = state.news.find("id");
-      state.news.splice(index, 1);
+      if (state.length) {
+        const index = state.find("id");
+        state.splice(index, 1);
+      } else {
+        return state;
+      }
 
-      return { ...state };
 
     default:
       return state;

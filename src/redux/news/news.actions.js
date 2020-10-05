@@ -10,9 +10,7 @@ export const editNews = data => ({
   payload: data
 });
 
-export const deleteNews = id => {
-  return {
-    type: newsActionTypes.DELETE_NEWS,
-    payload: id
-  };
-};
+export const deleteNews = id => ({
+  type: newsActionTypes.DELETE_NEWS,
+  payload: id
+});

@@ -71,6 +71,7 @@ class NewsForm extends Component {
           text: this.state.text,
           src: storageUrl
         };
+
         firebase
           .database()
           .ref("base/news")

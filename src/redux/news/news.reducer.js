@@ -3,6 +3,7 @@ import { newsActionTypes } from "./news.types";
 export const newsReducer = (state = {}, action) => {
   switch (action.type) {
     case newsActionTypes.CREATE_NEWS:
+
       return {
         ...state,
         id: action.payload
@@ -16,6 +17,7 @@ export const newsReducer = (state = {}, action) => {
       } else {
         return state;
       }
+
 
     default:
       return state;

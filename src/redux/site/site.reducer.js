@@ -5,8 +5,8 @@ const initialState = {
   projects: null,
   gallery: null,
   catalog: null,
-  calendar: null,
-  directory: null
+  calendar: null
+  // directory: null
 };
 
 export default (siteData = initialState, action) => {

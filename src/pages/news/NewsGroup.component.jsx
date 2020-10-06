@@ -20,23 +20,26 @@ class NewsGroup extends Component {
   }
   handleEdit() {}
   handleDelete(id, src) {
-    console.log("44444444", src);
-    const afterTwoF = src.split("%2F")[1];
-    const imgGuid = afterTwoF.split("?")[0];
-    firebase
-      .storage()
-      .ref()
-      .child("images/" + imgGuid)
-      .delete()
-      .then(() => {
-        // img deleted successfully
-        console.log("successfully deleted img");
-        deleteFirebasePost(id, "news", deleteNews(id));
-      })
-      .catch(error => {
-        // Uh-oh, an error occurred!
-        console.log("failed to delete img");
-      });
+    console.log("deleted post ID: ", id);
+    if (src) {
+      console.log("deleted post SRC: ", src);
+      const afterTwoF = src.split("%2F")[1];
+      const imgGuid = afterTwoF.split("?")[0];
+      firebase
+        .storage()
+        .ref()
+        .child("images/" + imgGuid)
+        .delete()
+        .then(() => {
+          // img deleted successfully
+          console.log("successfully deleted img");
+        })
+        .catch(error => {
+          // Uh-oh, an error occurred!
+          console.log("failed to delete img", error.message);
+        });
+    }
+    deleteFirebasePost(id, "news", deleteNews(id));
   }
   toggleShowMore() {
     if (this.state.showMore) {
@@ -64,13 +67,17 @@ class NewsGroup extends Component {
                 type="button"
                 // needs an edit pop-up window containing the clicked post's title, text, name
                 // along with a submit button to update that firebase post data
-                onClick={this.handleEdit}
+                onClick={() => {
+                  this.handleEdit();
+                }}
                 className="icons"
                 icon={faEdit}
               />
               <FontAwesomeIcon
                 type="button"
-                onClick={this.handleDelete(id, src)}
+                onClick={() => {
+                  this.handleDelete(id, src);
+                }}
                 className="icons"
                 icon={faTrash}
               />

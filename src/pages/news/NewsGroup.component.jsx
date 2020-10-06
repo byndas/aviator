@@ -10,26 +10,23 @@ import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
 class NewsGroup extends Component {
   handleEdit() {}
   handleDelete(id, src) {
-    if (src) {
-      const afterTwoF = src.split("%2F")[1];
-      const imgGuid = afterTwoF.split("?")[0];
-      firebase
-        .storage()
-        .ref()
-        .child("images/" + imgGuid)
-        .delete()
-        .then(() => {
-          // img deleted successfully
-          console.log("successfully deleted img");
-          deleteFirebasePost(id, "news", deleteNews(id));
-        })
-        .catch(error => {
-          // Uh-oh, an error occurred!
-          console.log("failed to delete img");
-        });
-    } else {
-      deleteFirebasePost(id, "news", deleteNews(id));
-    }
+    console.log("44444444", src);
+    const afterTwoF = src.split("%2F")[1];
+    const imgGuid = afterTwoF.split("?")[0];
+    firebase
+      .storage()
+      .ref()
+      .child("images/" + imgGuid)
+      .delete()
+      .then(() => {
+        // img deleted successfully
+        console.log("successfully deleted img");
+      })
+      .catch(error => {
+        // Uh-oh, an error occurred!
+        console.log("failed to delete img");
+      });
+    deleteFirebasePost(id, "news", deleteNews(id));
   }
   render() {
     let toggler = false;
@@ -80,7 +77,7 @@ class NewsGroup extends Component {
             aria-controls="collapseExample"
             onClick={toggleMoreLess}
           >
-            See More...
+            Show More...
           </button>
         </div>
         <div className="collapse" id={id}>
@@ -91,5 +88,6 @@ class NewsGroup extends Component {
     );
   }
 }
+// const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
 export default connect(null, { deleteNews })(NewsGroup);

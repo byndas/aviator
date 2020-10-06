@@ -8,6 +8,16 @@ import { deleteNews } from "../../redux/news/news.actions";
 import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
 
 class NewsGroup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMore: true,
+      btnText: "Show More"
+    };
+    this.toggleShowMore = this.toggleShowMore.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
   handleEdit() {}
   handleDelete(id, src) {
     console.log("44444444", src);
@@ -21,23 +31,27 @@ class NewsGroup extends Component {
       .then(() => {
         // img deleted successfully
         console.log("successfully deleted img");
+        deleteFirebasePost(id, "news", deleteNews(id));
       })
       .catch(error => {
         // Uh-oh, an error occurred!
         console.log("failed to delete img");
       });
-    deleteFirebasePost(id, "news", deleteNews(id));
+  }
+  toggleShowMore() {
+    if (this.state.showMore) {
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show Less"
+      }));
+    } else {
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show More"
+      }));
+    }
   }
   render() {
-    let toggler = false;
-    const toggleMoreLess = () => {
-      toggler = !toggler;
-      if (toggler) {
-        return "Show More...";
-      } else {
-        return "Show Less...";
-      }
-    };
     const { id, src, title, name, text, auth } = this.props;
     return (
       <div className="card mb-5 project_content">
@@ -75,9 +89,11 @@ class NewsGroup extends Component {
             data-target={`#${id}`}
             aria-expanded="false"
             aria-controls="collapseExample"
-            onClick={toggleMoreLess}
+            onClick={() => {
+              this.toggleShowMore();
+            }}
           >
-            Show More...
+            {this.state.btnText}
           </button>
         </div>
         <div className="collapse" id={id}>

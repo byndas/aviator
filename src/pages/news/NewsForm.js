@@ -1,13 +1,24 @@
 import React, { Component } from "react";
 import firebase from "firebase";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 class NewsForm extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "", title: "", text: "", imgFile: null };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.clearState = this.clearState.bind(this);
+  }
+  clearState() {
+    this.setState({
+      name: "",
+      title: "",
+      text: "",
+      imgFile: null
+    });
   }
   handleChange(e) {
     this.setState({
@@ -80,11 +91,14 @@ class NewsForm extends Component {
           .ref("base/news")
           .push(postObj)
           .then(res => {
+            console.log("RESPONSE: ", res);
             // const fbResp = JSON.parse(JSON.stringify(res)).split("/");
             // const postObjId = fbResp[fbResp.length - 1];
             // postObj.id = postObjId;
             // console.log("redux obj", postObj);
             // this.props.addNewsObjectToRedux(postObj);
+
+            document.getElementById("clearBtn").click();
           })
           .catch(err => {
             // in the case of failure saving to db
@@ -112,7 +126,6 @@ class NewsForm extends Component {
 
   render() {
     const { name, title, text } = this.state;
-    const form = document.getElementById("form");
 
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
@@ -166,9 +179,10 @@ class NewsForm extends Component {
           <div id="flex">
             <input type="submit" className="btn btn-primary" />
             <input
+              id="clearBtn"
               type="reset"
               className="btn btn-warning"
-              // onClick={this.form.reset()}
+              onClick={this.clearState}
             />
           </div>
         </form>

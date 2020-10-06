@@ -11,12 +11,11 @@ export const newsReducer = (state = null, action) => {
         id: action.payload
       };
     case newsActionTypes.DELETE_NEWS:
-      console.log("ewoughregiuhergiuhreguh!~~~~~~~", state);
-      console.log(state.length);
-
-      const index = state.find("id");
-      state.splice(index, 1);
-
+      console.log("STATE.LENGTH: ", state.length);
+      if (state.length) {
+        const index = state.find("id");
+        state.splice(index, 1);
+      }
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-export function deleteFirebasePost(id, path, action) {
+export const deleteFirebasePost = (id, path, action) => {
   firebase
     .database()
     .ref(`base/${path}`)
@@ -13,4 +13,4 @@ export function deleteFirebasePost(id, path, action) {
     .catch(error => {
       console.log("Remove failed: " + error.message);
     });
-}
+};

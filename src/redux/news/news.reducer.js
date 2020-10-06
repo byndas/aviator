@@ -6,6 +6,7 @@ export const newsReducer = (state = null, action) => {
       console.log("reduxNews payload:", action.payload);
       return Object.assign({}, state, action.payload);
     case newsActionTypes.CREATE_NEWS:
+
       return {
         ...state,
         id: action.payload

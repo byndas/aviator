@@ -64,17 +64,13 @@ class NewsGroup extends Component {
                 type="button"
                 // needs an edit pop-up window containing the clicked post's title, text, name
                 // along with a submit button to update that firebase post data
-                onClick={() => {
-                  this.handleEdit(...this.props);
-                }}
+                onClick={this.handleEdit}
                 className="icons"
                 icon={faEdit}
               />
               <FontAwesomeIcon
                 type="button"
-                onClick={() => {
-                  this.handleDelete(id, src);
-                }}
+                onClick={this.handleDelete(id, src)}
                 className="icons"
                 icon={faTrash}
               />
@@ -89,9 +85,7 @@ class NewsGroup extends Component {
             data-target={`#${id}`}
             aria-expanded="false"
             aria-controls="collapseExample"
-            onClick={() => {
-              this.toggleShowMore();
-            }}
+            onClick={this.toggleShowMore}
           >
             {this.state.btnText}
           </button>

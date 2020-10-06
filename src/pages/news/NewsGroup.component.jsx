@@ -8,39 +8,50 @@ import { deleteNews } from "../../redux/news/news.actions";
 import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
 
 class NewsGroup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMore: true,
+      btnText: "Show More"
+    };
+    this.toggleShowMore = this.toggleShowMore.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
   handleEdit() {}
   handleDelete(id, src) {
-    if (src) {
-      const afterTwoF = src.split("%2F")[1];
-      const imgGuid = afterTwoF.split("?")[0];
-      firebase
-        .storage()
-        .ref()
-        .child("images/" + imgGuid)
-        .delete()
-        .then(() => {
-          // img deleted successfully
-          console.log("successfully deleted img");
-          deleteFirebasePost(id, "news", deleteNews(id));
-        })
-        .catch(error => {
-          // Uh-oh, an error occurred!
-          console.log("failed to delete img");
-        });
+    console.log("44444444", src);
+    const afterTwoF = src.split("%2F")[1];
+    const imgGuid = afterTwoF.split("?")[0];
+    firebase
+      .storage()
+      .ref()
+      .child("images/" + imgGuid)
+      .delete()
+      .then(() => {
+        // img deleted successfully
+        console.log("successfully deleted img");
+        deleteFirebasePost(id, "news", deleteNews(id));
+      })
+      .catch(error => {
+        // Uh-oh, an error occurred!
+        console.log("failed to delete img");
+      });
+  }
+  toggleShowMore() {
+    if (this.state.showMore) {
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show Less"
+      }));
     } else {
-      deleteFirebasePost(id, "news", deleteNews(id));
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show More"
+      }));
     }
   }
   render() {
-    let toggler = false;
-    const toggleMoreLess = () => {
-      toggler = !toggler;
-      if (toggler) {
-        return "Show More...";
-      } else {
-        return "Show Less...";
-      }
-    };
     const { id, src, title, name, text, auth } = this.props;
     return (
       <div className="card mb-5 project_content">
@@ -53,17 +64,13 @@ class NewsGroup extends Component {
                 type="button"
                 // needs an edit pop-up window containing the clicked post's title, text, name
                 // along with a submit button to update that firebase post data
-                onClick={() => {
-                  this.handleEdit(...this.props);
-                }}
+                onClick={this.handleEdit}
                 className="icons"
                 icon={faEdit}
               />
               <FontAwesomeIcon
                 type="button"
-                onClick={() => {
-                  this.handleDelete(id, src);
-                }}
+                onClick={this.handleDelete(id, src)}
                 className="icons"
                 icon={faTrash}
               />
@@ -78,9 +85,9 @@ class NewsGroup extends Component {
             data-target={`#${id}`}
             aria-expanded="false"
             aria-controls="collapseExample"
-            onClick={toggleMoreLess}
+            onClick={this.toggleShowMore}
           >
-            See More...
+            {this.state.btnText}
           </button>
         </div>
         <div className="collapse" id={id}>
@@ -91,6 +98,7 @@ class NewsGroup extends Component {
     );
   }
 }
+// const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
 
 export default connect(null, { deleteNews })(NewsGroup);

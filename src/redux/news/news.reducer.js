@@ -3,7 +3,7 @@ import { newsActionTypes } from "./news.types";
 export const newsReducer = (state = null, action) => {
   switch (action.type) {
     case newsActionTypes.FIREBASE_NEWS:
-      console.log(action.payload);
+      console.log("reduxNews payload:", action.payload);
       return Object.assign({}, state, action.payload);
     case newsActionTypes.CREATE_NEWS:
 

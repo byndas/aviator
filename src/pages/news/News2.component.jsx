@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import Footer from "../../footer/Footer.component";
 import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
+import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { deleteNews, stateNews } from "../../redux/news/news.actions";
-import { selectNews } from "../../redux/news/news.selectors";
-import firebase from "firebase";
+import { stateNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -24,9 +23,7 @@ const translate = {
 
 class News2 extends Component {
   static contextType = LanguageContext;
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     const dbRef = firebase
       .database()
@@ -42,13 +39,10 @@ class News2 extends Component {
     const { language } = this.context;
     const { News } = translate[language];
 
-    console.log(reduxNews);
-
     let newsList;
 
     // if Redux news is not empty
-    if (reduxNews) {
-      // if (this.props.siteData.news !== null) {
+    if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
 
@@ -56,12 +50,13 @@ class News2 extends Component {
         .reverse()
         .map((item, index) => (
           <NewsGroup
+            auth={auth}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
             id={newsIds[index]}
-            auth={auth}
+            key={index}
           />
         ));
     } else {
@@ -88,7 +83,5 @@ const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 //   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
 //   deleteNews: newsId => dispatch(deleteNews(newsId))
 // });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(News2);
 
 export default connect(mapStateToProps, { stateNews })(News2);

@@ -1,30 +1,22 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import firebase from "firebase";
+import { connect } from "react-redux";
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import { deleteNews } from "../../redux/news/news.actions";
 
 class NewsForm extends Component {
   constructor(props) {
     super(props);
+    // state controls form inputs
     this.state = { name: "", title: "", text: "", imgFile: null };
 
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updatePostInput = this.updatePostInput.bind(this);
   }
-  componentDidMount() {
-    const dbRef = firebase
-      .database()
-      .ref("base")
-      .child("news");
 
-    dbRef.on("value", snapshot => {
-      console.log("snapshot.val(): ", snapshot.val());
-      deleteNews(snapshot.val());
-    });
-  }
   clearState() {
     this.setState({
       name: "",
@@ -33,6 +25,10 @@ class NewsForm extends Component {
       imgFile: null
     });
   }
+  updatePostInput(postObj) {
+    this.setState(postObj);
+  }
+  // updatePostInput(this.props.reduxNews())
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -210,11 +206,4 @@ class NewsForm extends Component {
 
 const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
-const mapDispatchToProps = dispatch => ({
-  // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-  deleteNews: newsId => dispatch(deleteNews(newsId))
-});
-
-// export default NewsForm;
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsForm);
+export default connect(mapStateToProps)(NewsForm);

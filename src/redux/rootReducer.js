@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import siteReducer from "./site/site.reducer";
+// import siteReducer from "./site/site.reducer";
 // import { adminReducer } from "./admin/admin.reducer";
 // import { calendarReducer } from "./calendar/calendar.reducer";
 // import { catalogReducer } from "./catalog/catalog.reducer";
@@ -8,8 +8,8 @@ import { newsReducer } from "./news/news.reducer";
 // import { projectsReducer } from "./projects/projects.reducer";
 
 export default combineReducers({
-  news: newsReducer,
-  siteData: siteReducer
+  news: newsReducer
+  // siteData: siteReducer
   // admin: adminReducer,
   // calendar: calendarReducer,
   // catalog: catalogReducer,

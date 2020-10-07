@@ -7,7 +7,7 @@ import Footer from "../../footer/Footer.component";
 import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { createNews } from "../../redux/news/news.actions";
+import { stateNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -25,15 +25,16 @@ class News2 extends Component {
   static contextType = LanguageContext;
 
   componentDidMount() {
-    const newsFireRef = firebase
+    firebase
       .database()
       .ref("base")
-      .child("news");
-
-    newsFireRef.on("value", snapshot => {
-      createNews(snapshot.val());
-      console.log("snapshot val(): ", snapshot.val());
-    });
+      .child("news")
+      .on("value", snapshot => {
+        // news page render dispatches snapshot of firebase.news to redux
+        // listens to firebase news for changes, then updates redux store
+        this.props.stateNews(snapshot.val());
+        console.log("snapshot val(): ", snapshot.val());
+      });
   }
   render() {
     const { auth, reduxNews } = this.props;
@@ -42,13 +43,13 @@ class News2 extends Component {
 
     let newsList;
 
-    // if Redux news is not empty
     if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
-
+      // collects all news items in redux store
       newsList = newsArr
-        .reverse()
+        // reverse misaligns firebase & redux objects
+        // .reverse()
         .map((item, index) => (
           <NewsGroup
             auth={auth}
@@ -56,8 +57,8 @@ class News2 extends Component {
             title={item.title}
             text={item.text}
             src={item.src}
-            id={newsIds[index]}
             key={index}
+            id={newsIds[index]}
           />
         ));
     } else {
@@ -80,4 +81,4 @@ class News2 extends Component {
 
 const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
-export default connect(mapStateToProps, { createNews })(News2);
+export default connect(mapStateToProps, { stateNews })(News2);

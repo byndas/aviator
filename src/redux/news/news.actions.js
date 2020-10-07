@@ -1,9 +1,9 @@
 import { newsActionTypes } from "./news.types";
 
-export const stateNews = data => ({
-  type: newsActionTypes.FIREBASE_NEWS,
-  payload: data
-});
+// export const stateNews = data => ({
+//   type: newsActionTypes.FIREBASE_NEWS,
+//   payload: data
+// });
 
 export const createNews = data => ({
   type: newsActionTypes.CREATE_NEWS,

@@ -56,9 +56,9 @@ class App extends React.Component {
     //   collectionsArray.map(({ title, items }) => ({ title, items }))
     // );
   }
-  // findProject(id) {
-  //   return this.state.projects.find(prj => prj.id === id);
-  // }
+  findProject(id) {
+    return this.state.projects.find(prj => prj.id === id);
+  }
 
   setSearchInput(event) {
     this.setState({
@@ -123,7 +123,7 @@ class App extends React.Component {
               path="/projects/:id"
               render={props => (
                 <SingleProject
-                // projects={this.findProject(props.match.params.id)}
+                  projects={this.findProject(props.match.params.id)}
                 />
               )}
             />

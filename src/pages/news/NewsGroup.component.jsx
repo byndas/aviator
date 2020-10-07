@@ -107,5 +107,6 @@ class NewsGroup extends Component {
 }
 // const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
+// export default connect(mapStateToProps, { deleteNews })(NewsGroup);
 
-export default connect(null, { deleteNews })(NewsGroup);
+export default NewsGroup;

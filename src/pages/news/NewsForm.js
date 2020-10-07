@@ -1,16 +1,29 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import firebase from "firebase";
 import { icon } from "@fortawesome/fontawesome-svg-core";
+import { deleteNews } from "../../redux/news/news.actions";
 
 class NewsForm extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "", title: "", text: "", imgFile: null };
 
+    this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
-    this.clearState = this.clearState.bind(this);
+  }
+  componentDidMount() {
+    const dbRef = firebase
+      .database()
+      .ref("base")
+      .child("news");
+
+    dbRef.on("value", snapshot => {
+      console.log("snapshot.val(): ", snapshot.val());
+      deleteNews(snapshot.val());
+    });
   }
   clearState() {
     this.setState({
@@ -65,20 +78,23 @@ class NewsForm extends Component {
       .ref()
       .child("images/" + imgGuid);
 
-    const uploadTask = imagesRef.put(this.state.imgFile);
+    const uploadPost = imagesRef.put(this.state.imgFile);
 
-    uploadTask.on("state_changed", snapshot => {
+    // upload progress bar
+    uploadPost.on("state_changed", snapshot => {
       let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log(progress);
     });
-
-    uploadTask
+    //
+    uploadPost
       .then(snapshot => {
         const imgPath = snapshot.metadata.fullPath.split("/")[1];
+
         const storageUrl =
           "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/images%2F" +
           imgPath +
           "?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816";
+
         const postObj = {
           name: this.state.name,
           title: this.state.title,
@@ -86,9 +102,9 @@ class NewsForm extends Component {
           src: storageUrl
         };
 
-        firebase
-          .database()
-          .ref("base/news")
+        const newsRef = firebase.database().ref("base/news");
+
+        newsRef
           .push(postObj)
           .then(res => {
             console.log("RESPONSE: ", res);
@@ -98,23 +114,24 @@ class NewsForm extends Component {
             // console.log("redux obj", postObj);
             // this.props.addNewsObjectToRedux(postObj);
 
+            // clears form after submission complete
             document.getElementById("clearBtn").click();
           })
           .catch(err => {
-            // in the case of failure saving to db
+            // db fails to save post
             console.log("img was uploaded but post failed", err);
-            // logic delete uploaded img, clear img from storage.
+            // clears image from storage
             firebase
               .storage()
               .ref()
               .child("images/" + imgGuid)
-              .delete()
+              .remove()
               .then(() => {
-                // img deleted successfully
+                // image was deleted
                 console.log("successfully deleted img");
               })
               .catch()(error => {
-              // Uh-oh, an error occurred!
+              // image not deleted
               console.log("failed to delete img", error.message);
             });
           });
@@ -191,4 +208,13 @@ class NewsForm extends Component {
   }
 }
 
-export default NewsForm;
+const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
+
+const mapDispatchToProps = dispatch => ({
+  // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
+  deleteNews: newsId => dispatch(deleteNews(newsId))
+});
+
+// export default NewsForm;
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsForm);

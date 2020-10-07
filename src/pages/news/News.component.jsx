@@ -6,7 +6,8 @@ import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { deleteNews } from "../../redux/news/news.actions";
+
+import { deleteNews, createNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -20,12 +21,13 @@ const translate = {
   }
 };
 
-class News extends Component {
-  static contextType = LanguageContext;
+const News = ({ reduxNews, deleteNews, createNews, auth }) => ({
+  // static contextType = LanguageContext;
   render() {
     const { auth, reduxNews } = this.props;
-    const { language } = this.context;
-    const { News } = translate[language];
+
+    // const { language } = this.context;
+    // const { News } = translate[language];
 
     console.log(reduxNews);
 
@@ -53,7 +55,7 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm />}
+        {auth && <NewsForm createNews reduxNews />}
         <div className="container">
           {newsList}
           <br />
@@ -62,15 +64,26 @@ class News extends Component {
       </div>
     );
   }
-}
+});
 
-const mapStateToProps = reduxStore => {
-  return { reduxNews: reduxStore.siteData.news };
-};
+
+const mapStateToProps = reduxStore => ({
+  reduxNews: reduxStore.news
+});
 
 const mapDispatchToProps = dispatch => ({
   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-  deleteNews: newsId => dispatch(deleteNews(newsId))
+
+  deleteNews: id => dispatch(deleteNews(id)),
+  createNews: data => dispatch(createNews(data))
 });
+
+// const mapDispatchToProps = {
+//   // createNews,
+//   // editNews,
+//   deleteNews
+// };
+
+// export default News;
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

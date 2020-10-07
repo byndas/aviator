@@ -149,7 +149,7 @@ class NewsForm extends Component {
             <input
               value={name}
               name="name"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="name"
@@ -161,7 +161,7 @@ class NewsForm extends Component {
             <input
               value={title}
               name="title"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="title"
@@ -174,7 +174,7 @@ class NewsForm extends Component {
               value={text}
               name="text"
               rows="3"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               className="form-control"
               id="text"
             ></textarea>

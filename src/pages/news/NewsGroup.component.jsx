@@ -18,7 +18,24 @@ class NewsGroup extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
-  handleEdit() {}
+  // componentDidMount() {
+  //   firebase
+  //     .database()
+  //     .ref("base")
+  //     .child("news")
+  //     .on("value", snapshot => {
+  //       // newsGroup render dispatches snapshot of deleted post to redux
+  //       this.props.deleteNews(snapshot.val());
+  //       console.log("snapshot val(): ", snapshot.val());
+  //     });
+  // }
+  handleEdit(id, src, title, name, text) {
+    // scrolls up to NewsForm
+    window.scrollTo(0, 0);
+    // populates NewsForm with data (including ID) of post to update
+
+    // SUBMIT onClick: clears NewsForm (including ID attribute)?
+  }
   handleDelete(id, src) {
     console.log("deleted post ID: ", id);
     if (src) {
@@ -65,10 +82,8 @@ class NewsGroup extends Component {
             <div className="float-right">
               <FontAwesomeIcon
                 type="button"
-                // needs an edit pop-up window containing the clicked post's title, text, name
-                // along with a submit button to update that firebase post data
                 onClick={() => {
-                  this.handleEdit();
+                  this.handleEdit(id, src, title, name, text);
                 }}
                 className="icons"
                 icon={faEdit}
@@ -105,8 +120,12 @@ class NewsGroup extends Component {
     );
   }
 }
+
 // const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
-// export default connect(mapStateToProps, { deleteNews })(NewsGroup);
+// const mapDispatchToProps = dispatch => ({
+//   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
+//   deleteNews: newsId => dispatch(deleteNews(newsId))
+// });
 
-export default NewsGroup;
+export default connect(null, { deleteNews })(NewsGroup);

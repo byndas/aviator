@@ -1,13 +1,13 @@
 import "./News.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Footer from "../../footer/Footer.component";
 import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
+import Footer from "../../footer/Footer.component";
 import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { stateNews } from "../../redux/news/news.actions";
+import { createNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -25,13 +25,14 @@ class News2 extends Component {
   static contextType = LanguageContext;
 
   componentDidMount() {
-    const dbRef = firebase
+    const newsFireRef = firebase
       .database()
       .ref("base")
       .child("news");
 
-    dbRef.on("value", snapshot => {
-      this.props.stateNews(snapshot.val());
+    newsFireRef.on("value", snapshot => {
+      createNews(snapshot.val());
+      console.log("snapshot val(): ", snapshot.val());
     });
   }
   render() {
@@ -79,9 +80,4 @@ class News2 extends Component {
 
 const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
 
-// const mapDispatchToProps = dispatch => ({
-//   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-//   deleteNews: newsId => dispatch(deleteNews(newsId))
-// });
-
-export default connect(mapStateToProps, { stateNews })(News2);
+export default connect(mapStateToProps, { createNews })(News2);

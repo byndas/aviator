@@ -1,16 +1,29 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import firebase from "firebase";
 import { icon } from "@fortawesome/fontawesome-svg-core";
+import { deleteNews } from "../../redux/news/news.actions";
 
 class NewsForm extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "", title: "", text: "", imgFile: null };
 
+    this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
-    this.clearState = this.clearState.bind(this);
+  }
+  componentDidMount() {
+    const dbRef = firebase
+      .database()
+      .ref("base")
+      .child("news");
+
+    dbRef.on("value", snapshot => {
+      console.log("snapshot.val(): ", snapshot.val());
+      deleteNews(snapshot.val());
+    });
   }
   clearState() {
     this.setState({
@@ -108,7 +121,7 @@ class NewsForm extends Component {
               .storage()
               .ref()
               .child("images/" + imgGuid)
-              .delete()
+              .remove()
               .then(() => {
                 // img deleted successfully
                 console.log("successfully deleted img");
@@ -191,4 +204,13 @@ class NewsForm extends Component {
   }
 }
 
-export default NewsForm;
+const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
+
+const mapDispatchToProps = dispatch => ({
+  // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
+  deleteNews: newsId => dispatch(deleteNews(newsId))
+});
+
+// export default NewsForm;
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsForm);

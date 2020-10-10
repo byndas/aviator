@@ -1,6 +1,7 @@
 import firebase from "firebase";
 
-export const deleteFirebasePost = (id, path, action) => {
+export const deleteFirebasePost = (id, path, dispatchAction) => {
+  console.log("dispatchAction: ", dispatchAction);
   firebase
     .database()
     .ref(`base/${path}`)
@@ -8,7 +9,8 @@ export const deleteFirebasePost = (id, path, action) => {
     .remove()
     .then(() => {
       console.log("Remove succeeded.");
-      action(id);
+      // DISPATCHES ACTION TO REMOVE POST FROM REDUX
+      dispatchAction(id);
     })
     .catch(error => {
       console.log("Remove failed: " + error.message);

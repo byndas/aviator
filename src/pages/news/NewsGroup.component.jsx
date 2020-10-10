@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
-import { connect } from "react-redux";
-import { deleteNews } from "../../redux/news/news.actions";
 import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
 
 class NewsGroup extends Component {
@@ -18,30 +16,27 @@ class NewsGroup extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
-  // componentDidMount() {
-  //   firebase
-  //     .database()
-  //     .ref("base")
-  //     .child("news")
-  //     .on("value", snapshot => {
-  //       // newsGroup render dispatches snapshot of deleted post to redux
-  //       this.props.deleteNews(snapshot.val());
-  //       console.log("snapshot val(): ", snapshot.val());
-  //     });
-  // }
+
   handleEdit(id, src, title, name, text) {
     // scrolls up to NewsForm
     window.scrollTo(0, 0);
     // populates NewsForm with data (including ID) of post to update
-
-    // SUBMIT onClick: clears NewsForm (including ID attribute)?
+    this.props.editPostInputs({
+      id: id,
+      src: src,
+      name: name,
+      title: title,
+      text: text
+    });
   }
   handleDelete(id, src) {
-    console.log("deleted post ID: ", id);
+    // console.log("deleted post ID: ", id);
     if (src) {
-      console.log("deleted post SRC: ", src);
+      // console.log("deleted post SRC: ", src);
       const afterTwoF = src.split("%2F")[1];
       const imgGuid = afterTwoF.split("?")[0];
+
+      // DELETES IMAGE FROM FIREBASE STORAGE
       firebase
         .storage()
         .ref()
@@ -56,7 +51,9 @@ class NewsGroup extends Component {
           console.log("failed to delete img", error.message);
         });
     }
-    deleteFirebasePost(id, "news", deleteNews(id));
+    // DELETES POST FROM FIREBASE DB
+    console.log("PROPS:", this.props);
+    deleteFirebasePost(id, "news", this.props.deleteNews);
   }
   toggleShowMore() {
     if (this.state.showMore) {
@@ -121,11 +118,4 @@ class NewsGroup extends Component {
   }
 }
 
-// const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
-
-// const mapDispatchToProps = dispatch => ({
-//   // propName: actionObjPayload => dispatch(actionCreator(actionObjPayload))
-//   deleteNews: newsId => dispatch(deleteNews(newsId))
-// });
-
-export default connect(null, { deleteNews })(NewsGroup);
+export default NewsGroup;

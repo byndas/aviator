@@ -14,7 +14,7 @@ import Catalog from "./pages/catalog/Catalog.component";
 import Contact from "./pages/contact/Contact.component";
 import Gallery from "./pages/gallery/Gallery.component";
 import Login from "./pages/login/Login.component";
-import News2 from "./pages/news/News2.component";
+import News from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
 import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -36,12 +36,6 @@ class App extends React.Component {
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
-    // const dbRef = firebase.database().ref("base");
-
-    // dbRef.on("value", snapshot => {
-    //   this.props.storeFirebaseData(snapshot.val());
-    // });
-
     fireAuth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ auth: true });
@@ -50,16 +44,10 @@ class App extends React.Component {
       }
       console.log("adminMode = " + this.state.auth);
     });
-
-    // addCollectionsAndDocuments(
-    //   "collections",
-    //   collectionsArray.map(({ title, items }) => ({ title, items }))
-    // );
   }
   findProject(id) {
     return this.state.projects.find(prj => prj.id === id);
   }
-
   setSearchInput(event) {
     this.setState({
       searchInput: event.target.value
@@ -111,7 +99,7 @@ class App extends React.Component {
             <Route
               exact
               path="/news"
-              render={() => <News2 auth={auth} searchInput={searchInput} />}
+              render={() => <News auth={auth} searchInput={searchInput} />}
             />
             <Route
               exact

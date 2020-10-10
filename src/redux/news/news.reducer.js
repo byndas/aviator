@@ -1,32 +1,21 @@
 import { newsActionTypes } from "./news.types";
 
 export const newsReducer = (state = null, action) => {
-  if (state !== null) {
-    console.log("action.payload: ", action.payload);
-  }
   switch (action.type) {
     case newsActionTypes.FIREBASE_NEWS:
       return Object.assign({}, state, action.payload);
 
     case newsActionTypes.DELETE_NEWS:
-      console.log(
-        "delete post index: ",
-        action
-        // state.findIndex(obj => obj[0] === action[0])
-      );
-      // state.splice(
-      //   state.findIndex(obj => obj[0] === action[0]),
-      //   1
-      // );
-      return state;
+      const deleteID = action.id;
+      delete state[deleteID];
+      return Object.assign({}, state);
 
     case newsActionTypes.EDIT_NEWS:
-      state.splice(
-        state.findIndex(obj => obj[0] === action[0]),
-        1,
-        action.payload
-      );
-      return state;
+      const updateID = action.id;
+      const updatePost = action.payload;
+      // UPDATES POST ID'S OBJECT
+      state[updateID] = state[updatePost];
+      return Object.assign({}, state);
 
     default:
       return state;

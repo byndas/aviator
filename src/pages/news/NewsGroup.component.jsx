@@ -12,21 +12,23 @@ class NewsGroup extends Component {
       showMore: true,
       btnText: "Show More"
     };
-    this.toggleShowMore = this.toggleShowMore.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.toggleShowMore = this.toggleShowMore.bind(this);
   }
 
   handleEdit(id, src, title, name, text) {
     // scrolls up to NewsForm
     window.scrollTo(0, 0);
-    // populates NewsForm with data (including ID) of post to update
-    this.props.editPostInputs({
+
+    // populates reduxEditPost with clicked-post's data
+    // for displaying in NewForm inputs
+    this.props.editPost({
       id: id,
-      src: src,
       name: name,
       title: title,
-      text: text
+      text: text,
+      src: src
     });
   }
   handleDelete(id, src) {

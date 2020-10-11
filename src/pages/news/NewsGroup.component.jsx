@@ -21,10 +21,10 @@ class NewsGroup extends Component {
     // scrolls up to NewsForm
     window.scrollTo(0, 0);
 
-    // populates reduxEditPost with clicked-post's data
-    // for displaying in NewForm inputs
+    // populates reduxEditPost with clicked-post's data to edit
+    // for displaying in NewsForm inputs
     this.props.editPost({
-      id: id,
+      id: id, // distinguishes edit post from new post
       name: name,
       title: title,
       text: text,
@@ -32,14 +32,11 @@ class NewsGroup extends Component {
     });
   }
   handleDelete(id, src) {
-    // console.log("deleted post ID: ", id);
     if (src) {
-      // console.log("deleted post SRC: ", src);
       const afterTwoF = src.split("%2F")[1];
       const imgGuid = afterTwoF.split("?")[0];
 
-      // DELETES IMAGE FROM FIREBASE STORAGE
-      firebase
+      firebase // DELETES IMAGE FROM FIREBASE STORAGE
         .storage()
         .ref()
         .child("images/" + imgGuid)

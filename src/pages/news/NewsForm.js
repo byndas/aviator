@@ -7,15 +7,31 @@ class NewsForm extends Component {
     super(props);
     // state controls form inputs
     this.state = this.props.reduxEditPost;
+    console.log("NewsForm STATE", this.state);
 
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("reduxEditPost:", this.props.reduxEditPost);
+    const editObj = nextProps.reduxEditPost;
+    console.log("editObj:", editObj);
+    if (editObj !== null) {
+      this.setState({
+        name: editObj.name,
+        title: editObj.title,
+        text: editObj.text,
+        src: editObj.src,
+        id: editObj.id
+      });
+    }
+  }
 
   clearState() {
     this.props.editPost({
+      id: null,
       name: "",
       title: "",
       text: "",
@@ -39,6 +55,7 @@ class NewsForm extends Component {
     reader.readAsDataURL(file);
   }
   handleSubmit(e) {
+    // If ID, submit EDIT post, else submit new post
     e.preventDefault();
 
     console.log("STATE", this.state);

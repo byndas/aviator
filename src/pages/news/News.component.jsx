@@ -52,13 +52,13 @@ class News extends Component {
 
     let newsList;
 
-    console.log("reduxNews:", this.props.reduxNews);
-    console.log("reduxEditPost:", this.props.reduxEditPost);
+    console.log("reduxNews:", reduxNews);
+    console.log("reduxEditPost:", reduxEditPost);
 
     if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
-      console.log("newsIds & newsARr:", newsIds, newsArr);
+      // console.log("newsIds & newsARr:", newsIds, newsArr);
       // collects all news items in redux store
       newsList = newsArr
         // reverse mis-aligns firebase & redux objects
@@ -80,16 +80,14 @@ class News extends Component {
       // add jsx loading html
       // newsList = "LOADING...";
     }
+    // console.log("4444reduxEditPost", this.props.reduxEditPost);
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
         {auth && (
           <NewsForm
-            // editPostInputs={this.editPostInputs}
-            // editObj={this.state}
             editPost={editPost}
             editNews={editNews}
-            reduxNews={reduxNews}
             reduxEditPost={reduxEditPost}
           />
         )}

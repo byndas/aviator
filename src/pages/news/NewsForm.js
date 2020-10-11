@@ -7,46 +7,38 @@ class NewsForm extends Component {
     super(props);
     // state controls form inputs
     this.state = { name: "", title: "", text: "", src: null };
-    // this.state = {
-    //   name: this.props.editObj.name,
-    //   title: this.props.editObj.title,
-    //   text: this.props.editObj.text,
-    //   src: this.props.editObj.src,
-    //   id: this.props.editObj.id
-    // };
+
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.updatePostInputs = this.updatePostInputs.bind(this);
   }
-  // componentDidUpdate() {
-  // if (this.props.editObj) {
-  //   console.log("EDIT OBJ POPULATED", this.props.editObj);
-  //   // this.updatePostInputs();
-  //   const { editObj } = this.props;
-  //   // WHERE TO PUT THIS?
-  //   this.setState({
-  //     name: editObj.name,
-  //     title: editObj.title,
-  //     text: editObj.text,
-  //     src: editObj.src,
-  //     id: editObj.id
-  //   });
-  //   console.log("NewsForm STATE", this.state);
-  // }
-  // }
+
+  componentWillReceiveProps(nextProps) {
+    const editObj = nextProps.editObj;
+    console.log("edit Obj", editObj);
+    if (editObj !== null) {
+      this.setState({
+        name: editObj.name,
+        title: editObj.title,
+        text: editObj.text,
+        src: editObj.src,
+        id: editObj.id
+      });
+    }
+  }
   clearState() {
     this.setState({
-      //   name: "",
-      //   title: "",
-      //   text: "",
-      //   src: null
-      name: this.props.editObj.name,
-      title: this.props.editObj.title,
-      text: this.props.editObj.text,
-      src: this.props.editObj.src,
-      id: this.props.editObj.id
+      name: "",
+      title: "",
+      text: "",
+      src: null
+      // name: this.props.editObj.name,
+      // title: this.props.editObj.title,
+      // text: this.props.editObj.text,
+      // src: this.props.editObj.src,
+      // id: this.props.editObj.id
     });
   }
   handleChange(e) {
@@ -208,33 +200,10 @@ class NewsForm extends Component {
         });
     }
   }
-  // updatePostInputs(editObj) {
-  //   const { editObj } = this.props;
-  //   const newEditObj = editObj;
-
-  //   this.setState(state => {
-  //     if (state.editObj === newEditObj) {
-  //       return null;
-  //     } else {
-  //       return { editObj };
-  //     }
-  //   });
-
-  // // WHERE TO PUT THIS?
-  // this.setState({
-  //   name: editObj.name,
-  //   title: editObj.title,
-  //   text: editObj.text,
-  //   src: editObj.src,
-  //   id: editObj.id
-  // });
-  //   console.log("NEWS FORM STATE", this.state);
-  // }
 
   render() {
     const { name, title, text } = this.state;
     return (
-      // editObj ? editObj.name :
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
         <form onSubmit={this.handleSubmit} id="form">

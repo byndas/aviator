@@ -1,10 +1,10 @@
 import "./App.styles.css";
 import React from "react";
-import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
-// import { createStructuredSelector } from "reselect";
-import { fireAuth } from "./firebase/Firebase.config";
+import { connect } from "react-redux";
 import firebase from "firebase";
+import { fireAuth } from "./firebase/Firebase.config";
+// import { createStructuredSelector } from "reselect";
 
 import Navbar from "./navbar/navbar.component";
 import Home from "./pages/home/home.component";
@@ -20,7 +20,6 @@ import SingleProject from "./pages/projects/SingleProject";
 import { LanguageProvider } from "./context/LanguageContext";
 
 // import { logAdmin } from "./redux/admin/admin.actions";
-// import { storeFirebaseData } from "./redux/site/site.actions";
 
 // 1nt3rnat10nal
 
@@ -122,18 +121,5 @@ class App extends React.Component {
     );
   }
 }
-
-// const mapDispatchToProps = dispatch => ({
-//   // adminState is prop name passed into component
-//   // logAdmin is action creator function
-//   // adminObj is action object payload
-//   adminState: adminObj => dispatch(logAdmin(adminObj))
-// });
-
-// const mapStateToProps = createStructuredSelector({
-//   collectionsArray: selectCollectionsForPreview
-// });
-
-// export default connect(null, { storeFirebaseData })(App);
 
 export default App;

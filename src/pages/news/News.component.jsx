@@ -25,7 +25,7 @@ const translate = {
   }
 };
 
-class News2 extends Component {
+class News extends Component {
   constructor(props) {
     super(props);
     // state controls form inputs
@@ -34,7 +34,7 @@ class News2 extends Component {
   }
   editPostInputs(postObj) {
     this.setState(postObj);
-    console.log("setSTATE", this.state);
+    console.log("Parent News STATE after setSTATE", this.state);
   }
 
   static contextType = LanguageContext;
@@ -45,7 +45,6 @@ class News2 extends Component {
       .ref("base")
       .child("news")
       .on("value", snapshot => {
-        // news page render dispatches snapshot of firebase.news to redux
         // listens to firebase news for changes, then updates redux store
         this.props.displayNews(snapshot.val());
         console.log("snapshot val(): ", snapshot.val());
@@ -54,7 +53,7 @@ class News2 extends Component {
   render() {
     console.log("NEWS.COMPONENT.STATE", this.state);
 
-    const { auth, reduxNews, deleteNews, editNews } = this.props;
+    const { auth, displayNews, reduxNews, deleteNews, editNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
@@ -87,14 +86,7 @@ class News2 extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && (
-          <NewsForm
-            editPostInputs={this.editPostInputs}
-            editObj={this.state}
-            reduxNews={reduxNews}
-            editNews={editNews}
-          />
-        )}
+        {auth && <NewsForm editObj={this.state} editNews={editNews} />}
         <div className="container">
           {newsList}
           <br />
@@ -111,4 +103,4 @@ export default connect(mapStateToProps, {
   displayNews,
   deleteNews,
   editNews
-})(News2);
+})(News);

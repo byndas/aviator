@@ -15,6 +15,7 @@ class NewsForm extends Component {
       id: null
     };
 
+
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
@@ -43,6 +44,8 @@ class NewsForm extends Component {
       src: null,
       id: null
     });
+    console.log("reduxEditPost", this.props.reduxEditPost);
+    console.log("NewsForm STATE", this.state);
   }
   handleChange(e) {
     this.setState({
@@ -261,6 +264,7 @@ class NewsForm extends Component {
 
   render() {
     const { name, title, text } = this.state;
+
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
@@ -270,7 +274,7 @@ class NewsForm extends Component {
             <input
               value={name}
               name="name"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="name"
@@ -282,7 +286,7 @@ class NewsForm extends Component {
             <input
               value={title}
               name="title"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               type="text"
               className="form-control"
               id="title"
@@ -295,7 +299,7 @@ class NewsForm extends Component {
               value={text}
               name="text"
               rows="3"
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
               className="form-control"
               id="text"
             ></textarea>

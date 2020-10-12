@@ -17,6 +17,7 @@ export const newsReducer = (state = INITIAL_STATE, action) => {
       const updatePost = action.payload;
       // UPDATES POST ID'S OBJECT
       state[updateID] = state[updatePost];
+      console.log("REDUX news STATE", state);
       return Object.assign({}, state);
 
     case newsActionTypes.EDIT_POST:

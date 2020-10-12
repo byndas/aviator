@@ -30,6 +30,12 @@ class News extends Component {
   constructor(props) {
     super(props);
   }
+  
+  editPostInputs(postObj) {
+    this.setState(postObj);
+    console.log("Parent News STATE after setSTATE", this.state);
+  }
+  
   static contextType = LanguageContext;
 
   componentDidMount() {
@@ -38,7 +44,6 @@ class News extends Component {
       .ref("base")
       .child("news")
       .on("value", snapshot => {
-        // news page render dispatches snapshot of firebase.news to redux
         // listens to firebase news for changes, then updates redux store
         this.props.displayNews(snapshot.val());
 
@@ -46,7 +51,9 @@ class News extends Component {
       });
   }
   render() {
-    const { auth, reduxNews, deleteNews, editNews, reduxEditPost } = this.props;
+    console.log("NEWS.COMPONENT.STATE", this.state);
+
+    const { auth, reduxNews, deleteNews, editNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
@@ -83,16 +90,13 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
+
         {auth && (
           <NewsForm
-            // editPostInputs={this.editPostInputs}
-            // editObj={this.state}
-            editPost={editPost}
-            editNews={editNews}
-            reduxNews={reduxNews}
-            reduxEditPost={reduxEditPost}
+            editObj={this.state} editNews={editNews}
           />
         )}
+
         <div className="container">
           {newsList}
           <br />
@@ -111,6 +115,5 @@ const mapStateToProps = reduxStore => ({
 export default connect(mapStateToProps, {
   displayNews,
   deleteNews,
-  editNews,
-  editPost
+  editNews
 })(News);

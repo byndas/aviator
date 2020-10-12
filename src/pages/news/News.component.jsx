@@ -7,6 +7,7 @@ import Footer from "../../footer/Footer.component";
 import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
+import { editPost } from "../../redux/editPost/editPost.actions";
 import {
   displayNews,
   deleteNews,
@@ -25,18 +26,10 @@ const translate = {
   }
 };
 
-class News2 extends Component {
+class News extends Component {
   constructor(props) {
     super(props);
-    // state controls form inputs
-    this.state = null;
-    this.editPostInputs = this.editPostInputs.bind(this);
   }
-  editPostInputs(postObj) {
-    this.setState(postObj);
-    console.log("setSTATE", this.state);
-  }
-
   static contextType = LanguageContext;
 
   componentDidMount() {
@@ -48,36 +41,39 @@ class News2 extends Component {
         // news page render dispatches snapshot of firebase.news to redux
         // listens to firebase news for changes, then updates redux store
         this.props.displayNews(snapshot.val());
+
         console.log("snapshot val(): ", snapshot.val());
       });
   }
   render() {
-    console.log("NEWS.COMPONENT.STATE", this.state);
-
-    const { auth, reduxNews, deleteNews, editNews } = this.props;
+    const { auth, reduxNews, deleteNews, editNews, reduxEditPost } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
     let newsList;
 
+    console.log("reduxNews:", this.props.reduxNews);
+    console.log("reduxEditPost:", this.props.reduxEditPost);
+
     if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
+      console.log("newsIds & newsARr:", newsIds, newsArr);
       // collects all news items in redux store
       newsList = newsArr
-        // reverse misaligns firebase & redux objects
+        // reverse mis-aligns firebase & redux objects
         // .reverse()
         .map((item, index) => (
           <NewsGroup
-            auth={auth}
-            deleteNews={deleteNews}
-            editPostInputs={this.editPostInputs}
+            id={newsIds[index]}
+            key={index}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
-            key={index}
-            id={newsIds[index]}
+            deleteNews={deleteNews}
+            editPost={editPost}
+            auth={auth}
           />
         ));
     } else {
@@ -89,10 +85,12 @@ class News2 extends Component {
         <h1 className="text-center font-italic heading">{News}</h1>
         {auth && (
           <NewsForm
-            editPostInputs={this.editPostInputs}
-            editObj={this.state}
-            reduxNews={reduxNews}
+            // editPostInputs={this.editPostInputs}
+            // editObj={this.state}
+            editPost={editPost}
             editNews={editNews}
+            reduxNews={reduxNews}
+            reduxEditPost={reduxEditPost}
           />
         )}
         <div className="container">
@@ -105,10 +103,14 @@ class News2 extends Component {
   }
 }
 
-const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
+const mapStateToProps = reduxStore => ({
+  reduxNews: reduxStore.news,
+  reduxEditPost: reduxStore.editPost
+});
 
 export default connect(mapStateToProps, {
   displayNews,
   deleteNews,
-  editNews
-})(News2);
+  editNews,
+  editPost
+})(News);

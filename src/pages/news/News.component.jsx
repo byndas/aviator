@@ -40,7 +40,7 @@ class News extends Component {
   static contextType = LanguageContext;
 
   componentDidMount() {
-    getFireDbPage("news", firebaseNews);
+    getFireDbPage("news", this.props.firebaseNews);
   }
   render() {
     const { auth, reduxNews, deleteNews, editNews } = this.props;

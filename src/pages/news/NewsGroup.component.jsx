@@ -40,12 +40,8 @@ class NewsGroup extends Component {
   handleDelete(id, src) {
     console.log("POST FIRE DB ID TO DELETE: ", id);
     if (src) {
-      console.log("POST IMAGE SRC TO DELETE: ", src);
-      const afterTwoF = src.split("%2F")[1];
-      const imgId = afterTwoF.split("?")[0];
-
       // DELETES IMAGE FROM FIREBASE STORAGE
-      deleteImageFireStorage(imgId);
+      deleteImageFireStorage(src);
     }
     // DELETES POST FROM FIREBASE DB
     removePostFireDB("news", id, this.props.deleteNews);

@@ -57,12 +57,11 @@ class NewsForm extends Component {
     reader.readAsDataURL(file);
   }
   handleSubmit(e) {
-    console.log("NewsForm STATE", this.state);
-
     e.preventDefault();
 
     // copy of state object for putting into Firebase DB & Storage
     let postObj = this.state;
+    console.log("OBJ TO SUBMIT", postObj);
     // Firebase DB creates own id for postObj
     //-----------------------------------------------------------
     //-----------------------------------------------------------

@@ -1,6 +1,6 @@
 import { newsActionTypes } from "./news.types";
 
-export const displayNews = data => ({
+export const firebaseNews = data => ({
   type: newsActionTypes.FIREBASE_NEWS,
   payload: data
 });

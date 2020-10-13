@@ -14,9 +14,9 @@ class NewsGroup extends Component {
       showMore: true,
       btnText: "Show More"
     };
-    this.toggleShowMore = this.toggleShowMore.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.toggleShowMore = this.toggleShowMore.bind(this);
   }
 
   handleEdit(id, src, title, name, text) {

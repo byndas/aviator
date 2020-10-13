@@ -7,6 +7,7 @@ import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
 import { getFireDbPage } from "../../firebase/Firebase.config";
+
 import {
   firebaseNews,
   deleteNews,
@@ -33,10 +34,11 @@ class News extends Component {
 
     this.editPostInputs = this.editPostInputs.bind(this);
   }
+  
   editPostInputs(postObj) {
     this.setState(postObj);
   }
-
+  
   static contextType = LanguageContext;
 
   componentDidMount() {
@@ -49,31 +51,41 @@ class News extends Component {
 
     let newsList;
 
+    console.log("reduxNews:", this.props.reduxNews);
+    console.log("reduxEditPost:", this.props.reduxEditPost);
+
     if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
+      console.log("newsIds & newsARr:", newsIds, newsArr);
       // collects all news items in redux store
       newsList = newsArr
-        // reverse misaligns firebase & redux objects
+        // reverse mis-aligns firebase & redux objects
         // .reverse()
         .map((item, index) => (
           <NewsGroup
-            auth={auth}
-            deleteNews={deleteNews}
-            editPostInputs={this.editPostInputs}
+            id={newsIds[index]}
+            key={index}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
-            key={index}
-            id={newsIds[index]}
+            deleteNews={deleteNews}
+            editPost={editPost}
+            auth={auth}
           />
         ));
     }
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm editObj={this.state} editNews={editNews} />}
+
+        {auth && (
+          <NewsForm
+            editObj={this.state} editNews={editNews}
+          />
+        )}
+
         <div className="container">
           {newsList}
           <br />
@@ -84,7 +96,10 @@ class News extends Component {
   }
 }
 
-const mapStateToProps = reduxStore => ({ reduxNews: reduxStore.news });
+const mapStateToProps = reduxStore => ({
+  reduxNews: reduxStore.news,
+  reduxEditPost: reduxStore.editPost
+});
 
 export default connect(mapStateToProps, {
   firebaseNews,

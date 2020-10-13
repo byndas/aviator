@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import NewsGroup from "./NewsGroup.component";
 import NewsForm from "./NewsForm";
 import Footer from "../../footer/Footer.component";
-import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { editPost } from "../../redux/editPost/editPost.actions";
+import { getFireDbPage } from "../../firebase/Firebase.config";
+
 import {
-  displayNews,
+  firebaseNews,
   deleteNews,
   editNews
 } from "../../redux/news/news.actions";
@@ -29,30 +29,22 @@ const translate = {
 class News extends Component {
   constructor(props) {
     super(props);
+    // state controls form inputs
+    this.state = null;
+
+    this.editPostInputs = this.editPostInputs.bind(this);
   }
   
   editPostInputs(postObj) {
     this.setState(postObj);
-    console.log("Parent News STATE after setSTATE", this.state);
   }
   
   static contextType = LanguageContext;
 
   componentDidMount() {
-    firebase
-      .database()
-      .ref("base")
-      .child("news")
-      .on("value", snapshot => {
-        // listens to firebase news for changes, then updates redux store
-        this.props.displayNews(snapshot.val());
-
-        console.log("snapshot val(): ", snapshot.val());
-      });
+    getFireDbPage("news", firebaseNews);
   }
   render() {
-    console.log("NEWS.COMPONENT.STATE", this.state);
-
     const { auth, reduxNews, deleteNews, editNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
@@ -83,9 +75,6 @@ class News extends Component {
             auth={auth}
           />
         ));
-    } else {
-      // add jsx loading html
-      // newsList = "LOADING...";
     }
     return (
       <div style={backgroundColor}>
@@ -113,7 +102,7 @@ const mapStateToProps = reduxStore => ({
 });
 
 export default connect(mapStateToProps, {
-  displayNews,
+  firebaseNews,
   deleteNews,
   editNews
 })(News);

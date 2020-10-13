@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import firebase from "firebase";
-import { deleteFirebasePost } from "../../functions/deleteFirebasePost";
+import {
+  deleteImageFireStorage,
+  removePostFireDB
+} from "../../firebase/Firebase.config";
 
 class NewsGroup extends Component {
   constructor(props) {
@@ -20,42 +22,33 @@ class NewsGroup extends Component {
   handleEdit(id, src, title, name, text) {
     // scrolls up to NewsForm
     window.scrollTo(0, 0);
-
-    // populates reduxEditPost with clicked-post's data
-    // for displaying in NewForm inputs
-    this.props.editPost({
+    // populates sibling NewsForm.jsx state (via parent component)
+    // with data (including ID) of post that admin chooses to update
+    this.props.editPostInputs({
       id: id,
+      prevSrc: src,
+      src: null,
       name: name,
       title: title,
-      text: text,
-      src: src
+      text: text
+      // this merges with NewsForm's emptyState (not over-riding):
+      // { id: null, src: null, name: "", title: "", text: "" }
+      // if emptyState lacks a KEY,
+      // then looking for it later yeilds UNDEFINED (not NULL)
     });
   }
   handleDelete(id, src) {
-    // console.log("deleted post ID: ", id);
+    console.log("POST FIRE DB ID TO DELETE: ", id);
     if (src) {
-      // console.log("deleted post SRC: ", src);
+      console.log("POST IMAGE SRC TO DELETE: ", src);
       const afterTwoF = src.split("%2F")[1];
-      const imgGuid = afterTwoF.split("?")[0];
+      const imgId = afterTwoF.split("?")[0];
 
       // DELETES IMAGE FROM FIREBASE STORAGE
-      firebase
-        .storage()
-        .ref()
-        .child("images/" + imgGuid)
-        .delete()
-        .then(() => {
-          // img deleted successfully
-          console.log("successfully deleted img");
-        })
-        .catch(error => {
-          // Uh-oh, an error occurred!
-          console.log("failed to delete img", error.message);
-        });
+      deleteImageFireStorage(imgId);
     }
     // DELETES POST FROM FIREBASE DB
-    console.log("PROPS:", this.props);
-    deleteFirebasePost(id, "news", this.props.deleteNews);
+    removePostFireDB("news", id, this.props.deleteNews);
   }
   toggleShowMore() {
     if (this.state.showMore) {

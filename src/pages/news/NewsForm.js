@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   pushOrSetPostFireDB,
   putImageFireStorage,
@@ -6,21 +6,12 @@ import {
 } from "../../firebase/Firebase.config";
 // import { icon } from "@fortawesome/fontawesome-svg-core";
 
-class NewsForm extends Component {
+class NewsForm extends PureComponent {
   constructor(props) {
     super(props);
 
-    const emptyState = {
-      id: null,
-      prevSrc: null,
-      src: null,
-      name: "",
-      title: "",
-      text: ""
-    };
-
     // state controls form inputs
-    this.state = emptyState;
+    this.state = this.emptyState;
 
 
     this.clearState = this.clearState.bind(this);
@@ -29,19 +20,37 @@ class NewsForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  emptyState = {
+    id: null,
+    prevSrc: null,
+    src: null,
+    name: "",
+    title: "",
+    text: ""
+  };
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log("nextProps.editObj", nextProps.editObj);
+  //   console.log("prevState", prevState);
+
+  //   if (nextProps.editObj !== prevState) {
+  //     return nextProps.editObj;
+  //   } else return null;
+  // }
+
   componentWillReceiveProps(nextProps) {
-    const objToEdit = nextProps.editObj;
-    console.log("edit Obj", objToEdit);
-    if (objToEdit !== null) {
-      // objToEdit has prevSrc but no src
-      this.setState(objToEdit);
+    console.log("EDIT OBJ", nextProps.editObj);
+
+    if (nextProps.editObj !== null) {
+      this.setState(nextProps.editObj);
       // merges objToEdit into current state
       console.log("NewsForm STATE", this.state);
     }
   }
+
   clearState() {
-    console.log("this.emptyState", this.emptyState);
     this.setState(this.emptyState);
+    console.log("NewsForm STATE", this.state);
   }
   handleChange(e) {
     this.setState({
@@ -58,22 +67,21 @@ class NewsForm extends Component {
     reader.readAsDataURL(file);
   }
   handleSubmit(e) {
-    console.log("NewsForm STATE", this.state);
-
     e.preventDefault();
 
-    // copy of state object for putting into Firebase DB & Storage
+    // copy of state to put into Firebase DB & Storage
     let postObj = this.state;
+    console.log("OBJ TO SUBMIT", postObj);
     // Firebase DB creates own id for postObj
     //-----------------------------------------------------------
     //-----------------------------------------------------------
     // if updating a post
-    if (postObj.id) {
+    if (postObj.id == true) {
       // if post submits new image, puts into Fire Storage
-      if (postObj.src) {
+      if (postObj.src == true) {
         console.log("UPDATING IMAGE", postObj.src);
         // if post has previous image, deletes it
-        if (postObj.prevSrc) {
+        if (postObj.prevSrc == true) {
           console.log("DELETING PREVIOUS IMAGE", postObj.prevSrc);
           deleteImageFireStorage(postObj.prevSrc);
           this.setState({ prevSrc: null });
@@ -81,11 +89,11 @@ class NewsForm extends Component {
         console.log("PUTTING IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj);
       }
-      pushOrSetPostFireDB(`news/${postObj.id}`, postObj, "set");
+      pushOrSetPostFireDB("news", postObj, "set");
     } else {
       // since creating (not updating) a post
       // if post submits image, puts into fire storage
-      if (postObj.src) {
+      if (postObj.src == true) {
         console.log("PUTTING NEW POST'S IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj.src);
       }

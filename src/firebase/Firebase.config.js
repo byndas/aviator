@@ -13,15 +13,21 @@ const config = {
 
 firebase.initializeApp(config);
 
-const storageRef = firebase.storage().ref();
+const storageRef = imageId => firebase.storage().ref(`images/${imageId}`);
 
 const fireDbRef = firebase.database().ref("base");
 
-export const deleteImageFireStorage = src => {
-  const afterTwoF = src.split("%2F")[1];
-  const imgId = afterTwoF.split("?")[0];
+export const deleteImageFireStorage = srcOrFile => {
+  let imgId;
 
-  const deleteImage = storageRef.child("images/" + imgId).delete();
+  if (typeof srcOrFile === "string") {
+    const afterTwoF = srcOrFile.split("%2F")[1];
+    imgId = afterTwoF.split("?")[0];
+  } else {
+    imgId = this.state.imgFile;
+  }
+
+  const deleteImage = storageRef(imgId).delete();
 
   deleteImage
     .then(() => {
@@ -49,18 +55,19 @@ export const removePostFireDB = (pageName, id, dispatchAction) => {
     });
 };
 
-export const pushOrSetPostFireDB = (path, postObj, methodName) => {
+export const pushOrSetPostFireDB = (pageName, postObj, methodName) => {
   console.log("UPDATING POST IN FIRE DB");
 
   let pushOrSet;
+  const postFireDbRef = fireDbRef.child(pageName + "/" + postObj.id);
 
   methodName === "push"
-    ? (pushOrSet = fireDbRef.child(path).push(postObj))
-    : (pushOrSet = fireDbRef.child(path).set(postObj));
+    ? (pushOrSet = postFireDbRef.push(postObj))
+    : (pushOrSet = postFireDbRef.set(postObj));
 
   pushOrSet
-    .then(response => {
-      console.log("POST UPDATED IN FIRE DB", response);
+    .then(() => {
+      console.log("POST UPDATED IN FIRE DB");
 
       this.props.editNews(postObj);
       console.log("POST UPDATED IN REDUX");
@@ -105,9 +112,10 @@ export const putImageFireStorage = postObj => {
 
   const imageId = randomImageId();
 
-  const storageNode = storageRef.child("images/" + imageId);
+  console.log("33333 postObj.SRC", postObj.src);
+  // BUG: postObj.src IS UNDEFINED
 
-  const putImage = storageNode.put(postObj.src);
+  const putImage = storageRef(imageId).put(postObj.src);
 
   putImage.on("state_changed", snapshot => {
     // logs image's upload % status
@@ -121,13 +129,12 @@ export const putImageFireStorage = postObj => {
       const imagePath = snapshot.metadata.fullPath.split("/")[1];
       console.log("IMAGE PATH:", imagePath);
 
-      // assigns image's Firebase Storage link to postObj.src
-      postObj.src =
+      const storageUrl =
         "https://firebasestorage.googleapis.com/v0/b/aviator-db.appspot.com/o/images%2F" +
         imagePath +
         "?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816";
-
-      console.log("33333 postObj.SRC", postObj.src);
+      // assigns image's Firebase Storage link to postObj.src
+      postObj.src = storageUrl;
     })
     .catch(error => {
       console.log("IMAGE STORAGE FAILED", error.message);
@@ -137,7 +144,7 @@ export const putImageFireStorage = postObj => {
 export const getFireDbPage = (pageName, dispatchAction) => {
   // LISTENER: UPDATES REDUX when Firebase NEWS changes
 
-  fireDbRef.child(pageName).on("value", snapshot => {
+  fireDbRef(pageName).on("value", snapshot => {
     console.log("FIREBASE NEWS SNAPSHOT:", snapshot.val());
     dispatchAction(snapshot.val());
   });

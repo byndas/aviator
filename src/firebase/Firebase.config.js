@@ -50,7 +50,7 @@ export const putImageFireStorage = post => {
 
   const imageId = randomImageId();
 
-  console.log("000 postObj.imgFile", post.imgFile);
+  console.log("imgFile", post.imgFile);
 
   // WORKS!
   const putImage = storageRef(imageId).put(post.imgFile);
@@ -75,6 +75,7 @@ export const putImageFireStorage = post => {
 
       // assigns image's Firebase Storage link to post.src
       post.src = storageUrl; // WORKS!
+      post.imgFile = null;
       console.log("post", post);
     })
     .catch(error => {
@@ -135,20 +136,37 @@ export const pushOrSetPostFireDB = (
   methodName,
   dispatchAction
 ) => {
+  console.log("POST OBJ", postObj);
+  // DOES POST OBJ HAVE AN ID?
+  // IF YES, THEN EDITNEWS
+  // ELSE, SKIP THAT IN THEN STATEMENT
+  let postId = null;
   let pushOrSet = null;
+
   const postFireDbRef = fireDbRef.child(pageName);
+
+  if (postObj.id !== null) {
+    postId = postObj.id;
+    postObj.id = null;
+  }
+
+  console.log("POST OBJ", postObj);
 
   if (methodName === "push") {
     pushOrSet = postFireDbRef.push(postObj);
     console.log("POST CREATED IN FIRE DB");
   } else {
-    pushOrSet = postFireDbRef.child(postObj.id).set(postObj);
+    pushOrSet = postFireDbRef.child(postId).set(postObj);
     console.log("POST UPDATED IN FIRE DB");
   }
+
   pushOrSet
     .then(() => {
-      dispatchAction(postObj);
-      console.log("editNews(postObj) REDUX ACTION");
+      // only update REDUX if
+      if (postId !== null) {
+        dispatchAction(postObj, postId);
+        console.log("EDIT NEWS ACTION UPDATED REDUX");
+      }
 
       document.getElementById("clearBtn").click();
       console.log("STATE & FORM CLEARED");

@@ -25,10 +25,10 @@ class NewsForm extends PureComponent {
     name: "", // edit might populate
     title: "", // edit might populate
     text: "", // edit might populate
-    prevSrc: null, // edit might populate
+    src: null, //
 
-    imgFile: null, // "choose file" button populates on submit
-    src: null //
+    prevSrc: null, // edit might populate
+    imgFile: null // "choose file" button populates on submit
   };
 
   componentWillReceiveProps(nextProps) {
@@ -91,22 +91,21 @@ class NewsForm extends PureComponent {
         }
         console.log("PUTTING IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj);
+        console.log(postObj.src);
       }
 
       console.log("UPDATING THIS NEW POST INTO FIRE DB", postObj);
       pushOrSetPostFireDB("news", postObj, "update", this.props.editNews);
     } else {
       // since creating (not updating) a post
-      // if post submits image, puts into fire storage
-      console.log("333 postObj.imgFile", postObj.imgFile);
+      // if post submits image file, puts into fire storage
+      console.log("imgFile", postObj.imgFile);
       if (postObj.imgFile !== null) {
-        console.log(
-          "PUTTING NEW POST'S IMAGE INTO FIRE STORAGE:",
-          postObj.imgFile
-        );
+        console.log("PUTTING NEW POST IMAGE INTO FIRE STORAGE:");
         putImageFireStorage(postObj);
+        console.log(postObj.src);
       }
-      console.log("PUSHING THIS NEW POST INTO FIRE DB", postObj);
+      console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
       pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
     }
   }

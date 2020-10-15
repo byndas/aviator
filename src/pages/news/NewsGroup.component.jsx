@@ -27,8 +27,8 @@ class NewsGroup extends Component {
 
     const objectForEditing = {
       id: id,
-      title: title,
       name: name,
+      title: title,
       text: text
     };
     // only include prevSrc if src has value

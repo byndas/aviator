@@ -58,21 +58,19 @@ class News extends Component {
       newsList = newsArr
         // reverse misaligns firebase & redux objects
         // .reverse()
-        .map((item, index) => {
-          return (
-            <NewsGroup
-              auth={auth}
-              deleteNews={deleteNews}
-              editPostInputs={this.editPostInputs}
-              name={item.name}
-              title={item.title}
-              text={item.text}
-              src={item.src}
-              key={index}
-              id={newsIds[index]}
-            />
-          );
-        });
+        .map((item, index) => (
+          <NewsGroup
+            auth={auth}
+            deleteNews={deleteNews}
+            editPostInputs={this.editPostInputs}
+            name={item.name}
+            title={item.title}
+            text={item.text}
+            src={item.src}
+            key={index}
+            id={newsIds[index]}
+          />
+        ));
     }
     return (
       <div style={backgroundColor}>

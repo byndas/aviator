@@ -21,21 +21,13 @@ class NewsForm extends PureComponent {
 
   emptyState = {
     id: null,
+    imgFile: null,
     prevSrc: null,
     src: null,
     name: "",
     title: "",
     text: ""
   };
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log("nextProps.editObj", nextProps.editObj);
-  //   console.log("prevState", prevState);
-
-  //   if (nextProps.editObj !== prevState) {
-  //     return nextProps.editObj;
-  //   } else return null;
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
@@ -61,7 +53,7 @@ class NewsForm extends PureComponent {
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      this.setState({ src: file });
+      this.setState({ imgFile: file });
     };
     reader.readAsDataURL(file);
   }
@@ -72,15 +64,20 @@ class NewsForm extends PureComponent {
     let postObj = this.state;
     console.log("OBJ TO SUBMIT", postObj);
     // Firebase DB creates own id for postObj
+    // Firebase Storage does not create an image id
     //-----------------------------------------------------------
     //-----------------------------------------------------------
+
     // if updating a post
-    if (postObj.id == true) {
-      // if post submits new image, puts into Fire Storage
-      if (postObj.src == true) {
-        console.log("UPDATING IMAGE", postObj.src);
+    console.log("postObj.id", postObj.id);
+    if (postObj.hasOwnProperty(postObj.id)) {
+      // if post submits new image file, puts it into Fire Storage
+      console.log("postObj.imgFile", postObj.imgFile);
+      if (postObj.hasOwnProperty(postObj.imgFile)) {
+        console.log("UPDATING IMAGE", postObj.imgFile);
         // if post has previous image, deletes it
-        if (postObj.prevSrc == true) {
+        console.log("postObj.prevSrc", postObj.prevSrc);
+        if (postObj.hasOwnProperty(postObj.prevSrc)) {
           console.log("DELETING PREVIOUS IMAGE", postObj.prevSrc);
           deleteImageFireStorage(postObj.prevSrc);
           this.setState({ prevSrc: null });
@@ -88,19 +85,21 @@ class NewsForm extends PureComponent {
         console.log("PUTTING IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj);
       }
-      pushOrSetPostFireDB("news", postObj, "set");
+      // breaks here with update
+      // FAILED TO UPDATE POST IN FIRE DB
+      // Cannot read property 'name' of undefined
+      pushOrSetPostFireDB("news", postObj, "update", this.props.editNews);
     } else {
       // since creating (not updating) a post
       // if post submits image, puts into fire storage
-      if (postObj.src == true) {
+      if (postObj.hasOwnProperty(postObj.src)) {
         console.log("PUTTING NEW POST'S IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj.src);
       }
       console.log("PUSHING NEW POST INTO FIRE DB", postObj.id);
-      pushOrSetPostFireDB("news", postObj, "push");
+      pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
     }
   }
-
   render() {
     const { name, title, text } = this.state;
     return (

@@ -5,10 +5,11 @@ import { combineReducers } from "redux";
 // import { catalogReducer } from "./catalog/catalog.reducer";
 // import { galleryReducer } from "./gallery/gallery.reducer";
 import { newsReducer } from "./news/news.reducer";
-// import { projectsReducer } from "./projects/projects.reducer";
+import { editPostReducer } from "./editPost/editPost.reducer";
 
 export default combineReducers({
-  news: newsReducer
+  news: newsReducer,
+  editPost: editPostReducer
   // siteData: siteReducer
   // admin: adminReducer,
   // calendar: calendarReducer,

@@ -21,36 +21,29 @@ class NewsForm extends PureComponent {
   }
 
   emptyState = {
-    id: null,
-    prevSrc: null,
-    src: null,
-    name: "",
-    title: "",
-    text: ""
+    id: null, // edit populates
+
+    name: "", // edit might populate
+    title: "", // edit might populate
+    text: "", // edit might populate
+    prevSrc: null, // edit might populate
+
+    imgFile: null, // "choose file" button populates on submit
+    src: null //
   };
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log("nextProps.editObj", nextProps.editObj);
-  //   console.log("prevState", prevState);
-
-  //   if (nextProps.editObj !== prevState) {
-  //     return nextProps.editObj;
-  //   } else return null;
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
 
     if (nextProps.editObj !== null) {
-      this.setState(nextProps.editObj);
       // merges objToEdit into current state
-      console.log("NewsForm STATE", this.state);
+      // enables admin input form to edit post data
+      this.setState(nextProps.editObj);
     }
   }
 
   clearState() {
     this.setState(this.emptyState);
-    console.log("NewsForm STATE", this.state);
   }
   handleChange(e) {
     this.setState({
@@ -59,49 +52,65 @@ class NewsForm extends PureComponent {
   }
   handleImageChange(e) {
     e.preventDefault();
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    reader.onloadend = () => {
-      this.setState({ src: file });
-    };
-    reader.readAsDataURL(file);
+
+    console.log("imgFile", this.state.imgFile);
+    if (this.state.imgFile === null) {
+      let reader = new FileReader();
+      let file = e.target.files[0];
+      reader.onloadend = () => {
+        this.setState({ imgFile: file });
+      };
+      reader.readAsDataURL(file);
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
+    // does nothing if state empty
+    if (this.state === this.emptyState) return;
 
     // copy of state to put into Firebase DB & Storage
     let postObj = this.state;
-    console.log("OBJ TO SUBMIT", postObj);
+    console.log("POST OBJ / NewsForm STATE", postObj);
+
     // Firebase DB creates own id for postObj
+    // Firebase Storage does not create an image id
     //-----------------------------------------------------------
     //-----------------------------------------------------------
+
     // if updating a post
-    if (postObj.id == true) {
-      // if post submits new image, puts into Fire Storage
-      if (postObj.src == true) {
-        console.log("UPDATING IMAGE", postObj.src);
+    console.log("postObj.id", postObj.id);
+    if (postObj.id !== null) {
+      // if post submits new image file, puts it into Fire Storage
+      if (postObj.imgFile !== null) {
+        console.log("UPDATING IMAGE", postObj.imgFile);
         // if post has previous image, deletes it
-        if (postObj.prevSrc == true) {
+        console.log("prevSrc", postObj.prevSrc);
+        if (postObj.prevSrc !== null) {
           console.log("DELETING PREVIOUS IMAGE", postObj.prevSrc);
           deleteImageFireStorage(postObj.prevSrc);
-          this.setState({ prevSrc: null });
+          this.setState({ prevSrc: null }); // clearState() will do this
         }
         console.log("PUTTING IMAGE INTO FIRE STORAGE:", postObj.src);
         putImageFireStorage(postObj);
       }
-      pushOrSetPostFireDB("news", postObj, "set");
+
+      console.log("UPDATING THIS NEW POST INTO FIRE DB", postObj);
+      pushOrSetPostFireDB("news", postObj, "update", this.props.editNews);
     } else {
       // since creating (not updating) a post
       // if post submits image, puts into fire storage
-      if (postObj.src == true) {
-        console.log("PUTTING NEW POST'S IMAGE INTO FIRE STORAGE:", postObj.src);
-        putImageFireStorage(postObj.src);
+      console.log("333 postObj.imgFile", postObj.imgFile);
+      if (postObj.imgFile !== null) {
+        console.log(
+          "PUTTING NEW POST'S IMAGE INTO FIRE STORAGE:",
+          postObj.imgFile
+        );
+        putImageFireStorage(postObj);
       }
-      console.log("PUSHING NEW POST INTO FIRE DB", postObj.id);
-      pushOrSetPostFireDB("news", postObj, "push");
+      console.log("PUSHING THIS NEW POST INTO FIRE DB", postObj);
+      pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
     }
   }
-
   render() {
     const { name, title, text } = this.state;
 

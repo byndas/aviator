@@ -24,22 +24,26 @@ class NewsGroup extends Component {
     window.scrollTo(0, 0);
     // populates sibling NewsForm.jsx state (via parent component)
     // with data (including ID) of post that admin chooses to update
-    this.props.editPostInputs({
+
+    const objectForEditing = {
       id: id,
-      prevSrc: src,
-      src: null,
-      name: name,
       title: title,
+      name: name,
       text: text
-      // this merges with NewsForm's emptyState (not over-riding):
-      // { id: null, src: null, name: "", title: "", text: "" }
-      // if emptyState lacks a KEY,
-      // then looking for it later yeilds UNDEFINED (not NULL)
-    });
+    };
+    // only include prevSrc if src has value
+    console.log("NewsGroup src", typeof src !== "undefined");
+    if (typeof src !== "undefined") {
+      objectForEditing.prevSrc = src;
+    }
+
+    console.log("NewsGroup objectForEditing", objectForEditing);
+
+    this.props.editPostInputs(objectForEditing);
   }
   handleDelete(id, src) {
     console.log("POST FIRE DB ID TO DELETE: ", id);
-    if (src) {
+    if (typeof src !== "undefined") {
       // DELETES IMAGE FROM FIREBASE STORAGE
       deleteImageFireStorage(src);
     }

@@ -24,22 +24,22 @@ class NewsGroup extends Component {
     window.scrollTo(0, 0);
     // populates sibling NewsForm.jsx state (via parent component)
     // with data (including ID) of post that admin chooses to update
-    console.log('typeof src === "undefined"', typeof src === "undefined");
 
     const objectForEditing = {
       id: id,
-      name: name,
       title: title,
+      name: name,
       text: text
     };
-
+    // only include prevSrc if src has value
+    console.log("NewsGroup src", typeof src !== "undefined");
     if (typeof src !== "undefined") {
       objectForEditing.prevSrc = src;
     }
 
-    this.props.editPostInputs(objectForEditing);
+    console.log("NewsGroup objectForEditing", objectForEditing);
 
-    console.log("objectForEditing", objectForEditing);
+    this.props.editPostInputs(objectForEditing);
   }
   handleDelete(id, src) {
     console.log("POST FIRE DB ID TO DELETE: ", id);

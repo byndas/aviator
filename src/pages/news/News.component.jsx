@@ -35,6 +35,7 @@ class News extends Component {
   }
   editPostInputs(postObj) {
     this.setState(postObj);
+    console.log("News.component STATE", this.state);
   }
 
   static contextType = LanguageContext;
@@ -53,11 +54,11 @@ class News extends Component {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);
       // collects all news items in redux store
+      console.log("newsArr", newsArr);
       newsList = newsArr
         // reverse misaligns firebase & redux objects
         // .reverse()
         .map((item, index) => {
-          console.log("item", item);
           return (
             <NewsGroup
               auth={auth}

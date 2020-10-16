@@ -11,7 +11,17 @@ class NewsForm extends PureComponent {
     super(props);
 
     // state controls form inputs
-    this.state = this.emptyState;
+    this.state = {
+      id: null, // edit populates
+
+      name: "", // edit might populate
+      title: "", // edit might populate
+      text: "", // edit might populate
+      src: null, // might populate
+
+      prevSrc: null, // edit might populate
+      imgFile: null // "choose file" button populates on submit
+    };
 
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -34,10 +44,22 @@ class NewsForm extends PureComponent {
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
 
-    if (nextProps.editObj !== null) {
-      // merges objToEdit into current state
-      // enables admin input form to edit post data
-      this.setState(nextProps.editObj);
+    const npObj = nextProps.editObj;
+    
+    if (npObj !== null) {
+      if (
+        npObj.id !== this.state.id ||
+        npObj.name !== this.state.name ||
+        npObj.title !== this.state.title ||
+        npObj.text !== this.state.text ||
+        npObj.src !== this.state.src ||
+        npObj.prevSrc !== this.state.prevSrc ||
+        npObj.imgFile !== this.state.imgFile
+      ) {
+        // merges objToEdit into current state
+        // enables admin input form to edit post data
+        this.setState(nextProps.editObj);
+      }
     }
   }
 
@@ -70,7 +92,7 @@ class NewsForm extends PureComponent {
     if (this.state === this.emptyState) return;
 
     // copy of state to put into Firebase DB & Storage
-    let postObj = this.state;
+    const postObj = this.state;
     console.log("POST OBJ / NewsForm STATE", postObj);
 
     // Firebase DB creates own id for postObj
@@ -106,10 +128,11 @@ class NewsForm extends PureComponent {
         console.log("PUTTING NEW POST IMAGE INTO FIRE STORAGE:");
         putImageFireStorage(postObj);
         console.log(postObj.src);
+      } else {
+        console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
+        // postObj.src is correct here
+        pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
       }
-      console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
-      // postObj.src is correct here
-      pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
     }
   }
   render() {

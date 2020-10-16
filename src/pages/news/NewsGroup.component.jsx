@@ -45,6 +45,7 @@ class NewsGroup extends Component {
     console.log("POST FIRE DB ID TO DELETE: ", id);
     if (typeof src !== "undefined") {
       // DELETES IMAGE FROM FIREBASE STORAGE
+      console.log("ENTERING deleteImageFireStorage(src)!");
       deleteImageFireStorage(src);
     }
     // DELETES POST FROM FIREBASE DB

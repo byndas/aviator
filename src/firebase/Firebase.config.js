@@ -17,14 +17,18 @@ export const fireAuth = firebase.auth();
 
 const fireDbRef = firebase.database().ref("base");
 
-const storageRef = imageId => firebase.storage().ref(`images/${imageId}`);
+const storageRef = imageId =>
+  firebase
+    .storage()
+    .ref()
+    .child("images/" + imageId);
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
 // WORKS!
 // adding a new image only populates imageFile
-export const putImageFireStorage = post => {
+export const putImageFireStorage = (post, dispatchAction) => {
   const randomNumber = () => {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
@@ -76,7 +80,10 @@ export const putImageFireStorage = post => {
       // assigns image's Firebase Storage link to post.src
       post.src = storageUrl; // WORKS!
       // post.imgFile = null;
-      console.log("post", post);
+
+      console.log("PUSHING NEW POST OBJ INTO FIRE DB", post);
+      // postObj.src is correct here
+      pushOrSetPostFireDB("news", post, "push", dispatchAction);
     })
     .catch(error => {
       console.log("IMAGE STORAGE FAILED", error.message);
@@ -87,12 +94,10 @@ export const putImageFireStorage = post => {
 //------------------------------------------------------
 //------------------------------------------------------
 export const deleteImageFireStorage = src => {
-  // NO FILE IS SENT HERE
   console.log("src", src);
 
   const afterTwoF = src.split("%2F")[1];
   const imageId = afterTwoF.split("?")[0];
-  // }
 
   const deleteImage = storageRef(imageId).delete();
 
@@ -117,6 +122,7 @@ export const removePostFireDB = (pageName, id, dispatchAction) => {
       console.log("REMOVED POST FROM FIRE DB");
 
       // DISPATCHES ACTION TO REMOVE POST FROM REDUX
+      // CAUSING PAGE TO REFRESH NEWS COMPONENT
       dispatchAction(id);
 
       console.log("REMOVED POST FROM REDUX");
@@ -175,7 +181,7 @@ export const pushOrSetPostFireDB = (
     .catch(err => {
       // Firebase DB fails to save post
       console.log("FAILED TO UPDATE POST IN FIRE DB", err.message);
-      console.log("IMAGE SRC", postObj.src);
+      console.log("IMAGE SRC", postObj.src); // NULL
 
       if (postObj.src !== null) {
         // removes post image from Fire Storage

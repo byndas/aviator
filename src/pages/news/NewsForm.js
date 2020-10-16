@@ -25,7 +25,7 @@ class NewsForm extends PureComponent {
     name: "", // edit might populate
     title: "", // edit might populate
     text: "", // edit might populate
-    src: null, //
+    src: null, // might populate
 
     prevSrc: null, // edit might populate
     imgFile: null // "choose file" button populates on submit
@@ -58,7 +58,9 @@ class NewsForm extends PureComponent {
       let file = e.target.files[0];
       reader.onloadend = () => {
         this.setState({ imgFile: file });
+        console.log("11111", this.state);
       };
+      // for using this file data in img src
       reader.readAsDataURL(file);
     }
   }
@@ -106,6 +108,7 @@ class NewsForm extends PureComponent {
         console.log(postObj.src);
       }
       console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
+      // postObj.src is correct here
       pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
     }
   }

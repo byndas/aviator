@@ -75,7 +75,7 @@ export const putImageFireStorage = post => {
 
       // assigns image's Firebase Storage link to post.src
       post.src = storageUrl; // WORKS!
-      post.imgFile = null;
+      // post.imgFile = null;
       console.log("post", post);
     })
     .catch(error => {
@@ -129,7 +129,7 @@ export const removePostFireDB = (pageName, id, dispatchAction) => {
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
-// BUG!
+// BUG!  postObj
 export const pushOrSetPostFireDB = (
   pageName,
   postObj,
@@ -137,13 +137,12 @@ export const pushOrSetPostFireDB = (
   dispatchAction
 ) => {
   console.log("POST OBJ", postObj);
-  // DOES POST OBJ HAVE AN ID?
-  // IF YES, THEN EDITNEWS
-  // ELSE, SKIP THAT IN THEN STATEMENT
+  // postObj.src is correct here
+
   let postId = null;
   let pushOrSet = null;
 
-  const postFireDbRef = fireDbRef.child(pageName);
+  const pageFireDbRef = fireDbRef.child(pageName);
 
   if (postObj.id !== null) {
     postId = postObj.id;
@@ -151,21 +150,23 @@ export const pushOrSetPostFireDB = (
   }
 
   console.log("POST OBJ", postObj);
+  // postObj.src is correct here
 
   if (methodName === "push") {
-    pushOrSet = postFireDbRef.push(postObj);
-    console.log("POST CREATED IN FIRE DB");
+    pushOrSet = pageFireDbRef.push(postObj);
+    console.log("POST CREATED IN FIRE DB", postObj);
   } else {
-    pushOrSet = postFireDbRef.child(postId).set(postObj);
-    console.log("POST UPDATED IN FIRE DB");
+    pushOrSet = pageFireDbRef.child(postId).set(postObj);
+    console.log("POST UPDATED IN FIRE DB", postObj);
   }
 
   pushOrSet
     .then(() => {
-      // only update REDUX if
+      console.log("777 POST OBJ", postObj);
+      // only updates REDUX if post has an id (is an update)
       if (postId !== null) {
         dispatchAction(postObj, postId);
-        console.log("EDIT NEWS ACTION UPDATED REDUX");
+        console.log("EDIT NEWS ACTION UPDATED REDUX", postObj);
       }
 
       document.getElementById("clearBtn").click();

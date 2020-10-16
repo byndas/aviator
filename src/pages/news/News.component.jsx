@@ -66,15 +66,15 @@ class News extends Component {
         // .reverse()
         .map((item, index) => (
           <NewsGroup
-            id={newsIds[index]}
-            key={index}
+            auth={auth}
+            deleteNews={deleteNews}
+            editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
-            deleteNews={deleteNews}
-            editPost={editPost}
-            auth={auth}
+            key={index}
+            id={newsIds[index]}
           />
         ));
     }

@@ -27,8 +27,8 @@ class NewsGroup extends Component {
 
     const objectForEditing = {
       id: id,
-      title: title,
       name: name,
+      title: title,
       text: text
     };
     // only include prevSrc if src has value
@@ -45,6 +45,7 @@ class NewsGroup extends Component {
     console.log("POST FIRE DB ID TO DELETE: ", id);
     if (typeof src !== "undefined") {
       // DELETES IMAGE FROM FIREBASE STORAGE
+      console.log("ENTERING deleteImageFireStorage(src)!");
       deleteImageFireStorage(src);
     }
     // DELETES POST FROM FIREBASE DB

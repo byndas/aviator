@@ -19,14 +19,14 @@ class NewsForm extends PureComponent {
       text: "", // edit might populate
       src: null, // might populate
 
-      prevSrc: null, // edit might populate
+      // prevSrc: null, // edit might populate
       imgFile: null // "choose file" button populates on submit
     };
 
 
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
+    this.newImage = this.newImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -45,21 +45,21 @@ class NewsForm extends PureComponent {
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
 
-    const npObj = nextProps.editObj;
-    
-    if (npObj !== null) {
+    const nextPropsEditObject = nextProps.editObj;
+
+    if (nextPropsEditObject !== null) {
       if (
-        npObj.id !== this.state.id ||
-        npObj.name !== this.state.name ||
-        npObj.title !== this.state.title ||
-        npObj.text !== this.state.text ||
-        npObj.src !== this.state.src ||
-        npObj.prevSrc !== this.state.prevSrc ||
-        npObj.imgFile !== this.state.imgFile
+        nextPropsEditObject.id !== this.state.id ||
+        nextPropsEditObject.name !== this.state.name ||
+        nextPropsEditObject.title !== this.state.title ||
+        nextPropsEditObject.text !== this.state.text ||
+        nextPropsEditObject.src !== this.state.src ||
+        nextPropsEditObject.prevSrc !== this.state.prevSrc ||
+        nextPropsEditObject.imgFile !== this.state.imgFile
       ) {
         // merges objToEdit into current state
         // enables admin input form to edit post data
-        this.setState(nextProps.editObj);
+        this.setState(nextPropsEditObject);
       }
     }
   }
@@ -72,20 +72,17 @@ class NewsForm extends PureComponent {
       [e.target.name]: e.target.value
     });
   }
-  handleImageChange(e) {
+  newImage(e) {
     e.preventDefault();
 
-    console.log("imgFile", this.state.imgFile);
-    if (this.state.imgFile === null) {
-      let reader = new FileReader();
-      let file = e.target.files[0];
-      reader.onloadend = () => {
-        this.setState({ imgFile: file });
-        console.log("11111", this.state);
-      };
-      // for using this file data in img src
-      reader.readAsDataURL(file);
-    }
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    console.log("NEW IMAGE", file);
+
+    reader.onloadend = () => {
+      this.setState({ imgFile: file });
+    };
+    reader.readAsDataURL(file);
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -94,45 +91,57 @@ class NewsForm extends PureComponent {
 
     // copy of state to put into Firebase DB & Storage
     const postObj = this.state;
+
     console.log("POST OBJ / NewsForm STATE", postObj);
+
+    if (postObj.prevSrc !== null) {
+      postObj.src = postObj.prevSrc;
+    }
 
     // Firebase DB creates own id for postObj
     // Firebase Storage does not create an image id
     //-----------------------------------------------------------
     //-----------------------------------------------------------
 
-    // if updating a post
+    // IF UPDATING A POST
     console.log("postObj.id", postObj.id);
     if (postObj.id !== null) {
-      // if post submits new image file, puts it into Fire Storage
+      // IF NEW IMAGE, PUTS IMAGE FILE INTO FIRE STORAGE
       if (postObj.imgFile !== null) {
         console.log("UPDATING IMAGE", postObj.imgFile);
-        // if post has previous image, deletes it
-        console.log("prevSrc", postObj.prevSrc);
-        if (postObj.prevSrc !== null) {
-          console.log("DELETING PREVIOUS IMAGE", postObj.prevSrc);
-          deleteImageFireStorage(postObj.prevSrc);
-          this.setState({ prevSrc: null }); // clearState() will do this
+        // UPDATING POST WITH NEW IMAGE: IF PREVIOUS IMAGE, DELETES IT
+        if (postObj.src !== null) {
+          postObj.prevSrc = postObj.src;
+          console.log(
+            "DELETING PREVIOUS IMAGE FROM FIRE STORAGE",
+            postObj.prevSrc
+          );
+          deleteImageFireStorage(postObj, true, this.props.editNews);
+        } else {
+          console.log(
+            "PUTTING NEW IMAGE INTO FIRE STORAGE (NO PREV IMAGE)",
+            postObj.src
+          );
+          putImageFireStorage(postObj, this.props.editNews);
+          console.log(postObj.src);
         }
-        console.log("PUTTING IMAGE INTO FIRE STORAGE:", postObj.src);
-        putImageFireStorage(postObj);
-        console.log(postObj.src);
+      } else {
+        console.log("UPDATING THIS NEW POST INTO FIRE DB", postObj);
+        pushOrSetPostFireDB("news", postObj, this.props.editNews);
       }
-
-      console.log("UPDATING THIS NEW POST INTO FIRE DB", postObj);
-      pushOrSetPostFireDB("news", postObj, "update", this.props.editNews);
     } else {
       // since creating (not updating) a post
       // if post submits image file, puts into fire storage
       console.log("imgFile", postObj.imgFile);
       if (postObj.imgFile !== null) {
+        // NEW POST, NEW IMAGE:
+
         console.log("PUTTING NEW POST IMAGE INTO FIRE STORAGE:");
-        putImageFireStorage(postObj);
+        putImageFireStorage(postObj, this.props.editNews);
         console.log(postObj.src);
       } else {
         console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
-        // postObj.src is correct here
-        pushOrSetPostFireDB("news", postObj, "push", this.props.editNews);
+        pushOrSetPostFireDB("news", postObj, this.props.editNews);
       }
     }
   }
@@ -182,7 +191,7 @@ class NewsForm extends PureComponent {
             <label htmlFor="img">image</label>
             <input
               name="img"
-              onChange={this.handleImageChange}
+              onChange={this.newImage}
               type="file"
               className="form-control-file"
               id="img"

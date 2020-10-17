@@ -23,32 +23,33 @@ class NewsGroup extends Component {
     // scrolls up to NewsForm
     window.scrollTo(0, 0);
     // populates sibling NewsForm.jsx state (via parent component)
-    // with data (including ID) of post that admin chooses to update
+    // with data (including ID) of admin update post
 
-    const objectForEditing = {
+    const editObj = {
       id: id,
       name: name,
       title: title,
       text: text
     };
-    // only include prevSrc if src has value
-    console.log("NewsGroup src", typeof src !== "undefined");
-    if (typeof src !== "undefined") {
-      objectForEditing.prevSrc = src;
+
+    if (src !== null) {
+      editObj.src = src;
     }
 
-    console.log("NewsGroup objectForEditing", objectForEditing);
+    console.log("NewsGroup editObj", editObj);
 
-    this.props.editPostInputs(objectForEditing);
+    this.props.editPostInputs(editObj);
   }
   handleDelete(id, src) {
     console.log("POST FIRE DB ID TO DELETE: ", id);
-    if (typeof src !== "undefined") {
+
+    if (src !== null) {
+      console.log("DELETING IMAGE FROM FIRE STORAGE");
       // DELETES IMAGE FROM FIREBASE STORAGE
-      console.log("ENTERING deleteImageFireStorage(src)!");
-      deleteImageFireStorage(src);
+      deleteImageFireStorage(src, false);
     }
-    // DELETES POST FROM FIREBASE DB
+    console.log("REMOVING IMAGE FROM FIRE DB");
+    // REMOVES POST FROM FIREBASE DB
     removePostFireDB("news", id, this.props.deleteNews);
   }
   toggleShowMore() {
@@ -65,7 +66,7 @@ class NewsGroup extends Component {
     }
   }
   render() {
-    const { id, src, title, name, text, auth } = this.props;
+    const { id, src, title, name, text, imgFile, auth } = this.props;
     return (
       <div className="card mb-5 project_content">
         <h5 className="card-header  text-center">{name}</h5>
@@ -76,7 +77,7 @@ class NewsGroup extends Component {
               <FontAwesomeIcon
                 type="button"
                 onClick={() => {
-                  this.handleEdit(id, src, title, name, text);
+                  this.handleEdit(id, src, title, name, text, imgFile);
                 }}
                 className="icons"
                 icon={faEdit}

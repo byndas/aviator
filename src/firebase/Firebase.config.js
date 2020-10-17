@@ -36,6 +36,7 @@ export const deleteImageFireStorage = (
   let afterTwoF;
 
   if (updatingPrevImage) {
+    // BUG: postObj.prevSrc IS UNDEFINED
     afterTwoF = postObj.prevSrc.split("%2F")[1];
   } else {
     afterTwoF = postObj.src.split("%2F")[1];
@@ -138,9 +139,9 @@ export const putImageFireStorage = (postObj, dispatchAction) => {
 
       postObj.src = fireStorageUrl; // WORKS!
 
-      if (postObj.hasOwnProperty("prevSrc")) {
-        delete postObj.prevSrc;
-      }
+      // if (postObj.hasOwnProperty("prevSrc")) {
+      //   delete postObj.prevSrc;
+      // }
 
       console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
       pushOrSetPostFireDB("news", postObj, dispatchAction);
@@ -166,13 +167,12 @@ export const pushOrSetPostFireDB = (pageName, postObj, dispatchAction) => {
 
   // IF EDITING A POST
   if (postObj.id !== null) {
+    postId = postObj.id;
     delete postObj.id;
     pushOrSet = pageFireDbRef.child(postId).set(postObj);
     console.log("UPDATED POST IN FIRE DB", postObj);
   } else {
     // SINCE CREATING A POST
-    postId = postObj.id;
-    delete postObj.id;
     pushOrSet = pageFireDbRef.push(postObj);
     console.log("CREATED POST IN FIRE DB", postObj);
   }

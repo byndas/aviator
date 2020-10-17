@@ -5,6 +5,7 @@ import { combineReducers } from "redux";
 // import { catalogReducer } from "./catalog/catalog.reducer";
 // import { galleryReducer } from "./gallery/gallery.reducer";
 import { newsReducer } from "./news/news.reducer";
+
 // import { projectsReducer } from "./projects/projects.reducer";
 
 export default combineReducers({

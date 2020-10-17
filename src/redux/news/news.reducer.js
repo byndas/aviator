@@ -15,7 +15,7 @@ export const newsReducer = (state = null, action) => {
 
       const updateID = action.id;
       const updatePost = action.payload;
-      // UPDATES POST ID'S DATA OBJECT
+      // UPDATES POST ID DATA OBJECT
       state[updateID] = state[updatePost];
       console.log("REDUX news STATE", state);
       return Object.assign({}, state);

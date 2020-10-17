@@ -86,18 +86,59 @@ class NewsForm extends PureComponent {
   }
   handleSubmit(e) {
     e.preventDefault();
-    // does nothing if state empty
+    // ABORTS IF STATE EMPTY
     if (this.state === this.emptyState) return;
 
     // copy of state to put into Firebase DB & Storage
     const postObj = this.state;
-
     console.log("POST OBJ / NewsForm STATE", postObj);
 
-    if (postObj.prevSrc !== null) {
-      postObj.src = postObj.prevSrc;
-    }
+    /*  AT THIS POINT: EVERYTHING WORKS!
 
+    CREATE POST OBJ:
+      id: null
+      imgFile: File {name: "enoCollection.jpg", …}
+      src: "https://...f89a0de3-8e0c-d52a-8f87-7bec1f1c4521?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816"
+      name: "b"
+      text: "b"
+      title: "b"
+
+    EDIT POST OBJ:
+      id: "-MJqwOwyorwnaZWGH_jD",   
+      imgFile: File {name: "covid-19GE.png", …}
+      name: "bA"
+      prevSrc: "https://...f89a0de3-8e0c-d52a-8f87-7bec1f1c4521?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816"
+      src: "https://...c040894f-cd99-8a9e-fdba-0caee3002380?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816"
+      text: "bA"
+      title: "Ab"
+
+      WHAT HAPPENS NEXT:
+        X*X DB UPDATES POST ID BUT FAILS SOMEHOW
+        *** STORAGE THEN DELETES NEW IMAGE
+        XXX EDIT NEWS FAILS, UPDATES REDUX ID WITH UNDEFINED DATA
+
+
+      WHAT AUGHT TO HAPPEN: BB
+        ADD SRC TO STORAGE (DO FIRST?)
+        REMOVE PREVSRC FROM STORAGE
+
+        DELETE POSTOBJ.PREVSRC
+        DELETE POSTOBJ.IMGFILE
+        (OR SET TO NULL?)
+        
+        SET DB.POSTOBJ.ID TO POSTOBJ
+        EDITNEWS(POSTOBJ, POSTOBJ.ID)
+
+
+
+    */
+
+    // if (postObj.prevSrc !== null) {
+    //   postObj.src = postObj.prevSrc;
+    // }
+
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
     // Firebase DB creates own id for postObj
     // Firebase Storage does not create an image id
     //-----------------------------------------------------------

@@ -24,31 +24,25 @@ class NewsGroup extends Component {
     window.scrollTo(0, 0);
     // populates sibling NewsForm.jsx state (via parent component)
     // with data (including ID) of admin update post
-
     const editObj = {
-      id: id,
-      name: name,
-      title: title,
-      text: text
+      id,
+      src,
+      name,
+      title,
+      text
     };
-
-    if (src !== null) {
-      editObj.src = src;
-    }
-
     console.log("NewsGroup editObj", editObj);
-
     this.props.editPostInputs(editObj);
   }
   handleDelete(id, src) {
     console.log("POST FIRE DB ID TO DELETE: ", id);
 
     if (src !== null) {
-      console.log("DELETING IMAGE FROM FIRE STORAGE");
+      console.log("DELETING IMAGE FROM FIRE STORAGE", src);
       // DELETES IMAGE FROM FIREBASE STORAGE
-      deleteImageFireStorage(src, false);
+      deleteImageFireStorage(src);
     }
-    console.log("REMOVING IMAGE FROM FIRE DB");
+    console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
     removePostFireDB("news", id, this.props.deleteNews);
   }

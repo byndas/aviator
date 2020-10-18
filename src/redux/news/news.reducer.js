@@ -1,6 +1,7 @@
 import { newsActionTypes } from "./news.types";
 
 export const newsReducer = (state = {}, action) => {
+
   switch (action.type) {
     case newsActionTypes.FIREBASE_NEWS:
       return Object.assign({}, state, action.payload);
@@ -22,6 +23,9 @@ export const newsReducer = (state = {}, action) => {
 
       console.log("REDUX news STATE", state);
       return Object.assign({}, state);
+
+    case newsActionTypes.EDIT_POST:
+      return Object.assign({}, action.payload);
 
     default:
       return state;

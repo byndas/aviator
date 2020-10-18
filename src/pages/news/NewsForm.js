@@ -51,7 +51,6 @@ class NewsForm extends PureComponent {
         // merges objToEdit into current state
         // enables admin input form to edit post data
         this.setState(nextPropsEditObj);
-        this.setState({ prevProps: nextPropsEditObj });
       }
     }
   }

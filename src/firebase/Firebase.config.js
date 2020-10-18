@@ -99,7 +99,6 @@ export const putImageFireStorage = (
         imagePath +
         "?alt=media&token=00c54936-5fd4-41e8-9028-4432c1996816";
 
-      //this.setState({ src: fireStorageUrl });
       postObj.src = fireStorageUrl;
 
       console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
@@ -140,7 +139,7 @@ export const pushOrSetPostFireDB = (
   postObj,
   dispatchAction
 ) => {
-  console.log("POST OBJ", postObj);
+  console.log("POST OBJ, STATE", postObj, state);
 
   const pageFireDbRef = fireDbRef.child(pageName);
 

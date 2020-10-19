@@ -4,7 +4,6 @@ import {
   putImageFireStorage,
   deleteImageFireStorage
 } from "../../firebase/Firebase.config";
-// import { icon } from "@fortawesome/fontawesome-svg-core";
 
 class NewsForm extends PureComponent {
   constructor(props) {
@@ -26,9 +25,9 @@ class NewsForm extends PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   emptyState = {
-    id: null,
     imgFile: null,
     src: null,
+    id: null,
     name: "",
     title: "",
     text: ""

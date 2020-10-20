@@ -19,7 +19,6 @@ class NewsForm extends PureComponent {
       text: ""
     };
 
-
     this.clearState = this.clearState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.newImage = this.newImage.bind(this);
@@ -99,22 +98,20 @@ class NewsForm extends PureComponent {
     }
     // SINCE EDIT POST
     else if (this.state.imgFile !== null) {
-      console.log("STATE SRC", this.state.src);
       // IF WITH NEW IMAGE
       if (this.state.imgFile !== null) {
         deleteImageFireStorage(this.state.src);
         console.log("PUTTING NEW IMAGE INTO FIRE STORAGE");
-        putImageFireStorage("news", this.state, postObj, this.props.editNews);
+        putImageFireStorage("news", this.state, postObj);
       }
     } else {
       // SINCE WITHOUT NEW IMAGE
-      console.log("777777 PUTTING EDIT POST NO NEW IMAGE INTO FIRE STORAGE");
-      pushOrSetPostFireDB("news", this.state, postObj, this.props.editNews);
+      console.log("PUTTING EDIT POST NO NEW IMAGE INTO FIRE STORAGE");
+      pushOrSetPostFireDB("news", this.state, postObj);
     }
   }
   render() {
     const { name, title, text } = this.state;
-
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
@@ -124,7 +121,7 @@ class NewsForm extends PureComponent {
             <input
               value={name}
               name="name"
-              onChange={e => this.handleChange(e)}
+              onChange={this.handleChange}
               type="text"
               className="form-control"
               id="name"
@@ -136,7 +133,7 @@ class NewsForm extends PureComponent {
             <input
               value={title}
               name="title"
-              onChange={e => this.handleChange(e)}
+              onChange={this.handleChange}
               type="text"
               className="form-control"
               id="title"
@@ -149,7 +146,7 @@ class NewsForm extends PureComponent {
               value={text}
               name="text"
               rows="3"
-              onChange={e => this.handleChange(e)}
+              onChange={this.handleChange}
               className="form-control"
               id="text"
             ></textarea>

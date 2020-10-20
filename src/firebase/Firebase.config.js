@@ -45,12 +45,7 @@ export const removePostFireDB = (pageName, id, dispatchAction) => {
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
-export const putImageFireStorage = (
-  pageName,
-  state,
-  postObj,
-  dispatchAction
-) => {
+export const putImageFireStorage = (pageName, state, postObj) => {
   const randomNumber = () => {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
@@ -102,7 +97,7 @@ export const putImageFireStorage = (
       postObj.src = fireStorageUrl;
 
       console.log("PUSHING NEW POST OBJ INTO FIRE DB", postObj);
-      pushOrSetPostFireDB(pageName, state, postObj, dispatchAction);
+      pushOrSetPostFireDB(pageName, state, postObj);
     })
     .catch(error => {
       console.log("IMAGE STORAGE FAILED", error.message);
@@ -133,12 +128,7 @@ export const deleteImageFireStorage = src => {
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
-export const pushOrSetPostFireDB = (
-  pageName,
-  state,
-  postObj,
-  dispatchAction
-) => {
+export const pushOrSetPostFireDB = (pageName, state, postObj) => {
   console.log("POST OBJ, STATE", postObj, state);
 
   const pageFireDbRef = fireDbRef.child(pageName);
@@ -158,14 +148,7 @@ export const pushOrSetPostFireDB = (
 
   pushOrSet
     .then(() => {
-      console.log("777 POST OBJ", postObj);
-      // if updating a post, updates REDUX ID
-
-      if (postId !== null) {
-        // dispatchAction(postObj, postId);
-        console.log("REDUX MATCHES FIREBASE?");
-      }
-
+      console.log("POST OBJ", postObj);
       document.getElementById("clearBtn").click();
       console.log("STATE & FORM CLEARED");
     })

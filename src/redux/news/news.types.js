@@ -1,6 +1,5 @@
 export const newsActionTypes = {
   FIREBASE_NEWS: "FIREBASE_NEWS",
   DELETE_NEWS: "DELETE_NEWS",
-  EDIT_NEWS: "EDIT_NEWS",
-  EDIT_POST: "EDIT_POST"
+  EDIT_NEWS: "EDIT_NEWS"
 };

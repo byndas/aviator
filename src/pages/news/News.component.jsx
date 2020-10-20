@@ -8,11 +8,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
 import { getFireDbPage } from "../../firebase/Firebase.config";
 
-import {
-  firebaseNews,
-  deleteNews,
-  editNews
-} from "../../redux/news/news.actions";
+import { firebaseNews, deleteNews } from "../../redux/news/news.actions";
 
 const translate = {
   Geo: {
@@ -34,19 +30,19 @@ class News extends Component {
 
     this.editPostInputs = this.editPostInputs.bind(this);
   }
-  
+
   editPostInputs(postObj) {
     this.setState(postObj);
     console.log("News.component STATE", this.state);
   }
-  
+
   static contextType = LanguageContext;
 
   componentDidMount() {
     getFireDbPage("news", this.props.firebaseNews);
   }
   render() {
-    const { auth, reduxNews, deleteNews, editNews } = this.props;
+    const { auth, reduxNews, deleteNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
@@ -82,11 +78,7 @@ class News extends Component {
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
 
-        {auth && (
-          <NewsForm
-            editObj={this.state} editNews={editNews}
-          />
-        )}
+        {auth && <NewsForm editObj={this.state} />}
 
         <div className="container">
           {newsList}
@@ -105,6 +97,5 @@ const mapStateToProps = reduxStore => ({
 
 export default connect(mapStateToProps, {
   firebaseNews,
-  deleteNews,
-  editNews
+  deleteNews
 })(News);

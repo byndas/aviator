@@ -34,7 +34,6 @@ class NewsForm extends PureComponent {
   };
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
-    console.log("STATE", this.state);
 
     const nextPropsEditObj = nextProps.editObj;
 
@@ -94,22 +93,21 @@ class NewsForm extends PureComponent {
       if (this.state.imgFile === null) {
         return alert("UPLOAD AN IMAGE");
       }
-
       console.log("PUTTING NEW IMAGE INTO FIRE STORAGE:", postObj.src);
       putImageFireStorage("news", this.state, postObj);
     }
-    // SINCE EDIT POST WITH NEW IMAGE
-    else if (this.state.src !== null) {
+    // SINCE EDIT POST
+    else if (this.state.imgFile !== null) {
       console.log("STATE SRC", this.state.src);
+      // IF WITH NEW IMAGE
       if (this.state.imgFile !== null) {
         deleteImageFireStorage(this.state.src);
-        // postObj.src = null;  // UNNECESSARY?
         console.log("PUTTING NEW IMAGE INTO FIRE STORAGE");
         putImageFireStorage("news", this.state, postObj, this.props.editNews);
       }
-    }
-    // SINCE EDIT POST WITHOUT NEW IMAGE
-    else {
+    } else {
+      // SINCE WITHOUT NEW IMAGE
+      console.log("777777 PUTTING EDIT POST NO NEW IMAGE INTO FIRE STORAGE");
       pushOrSetPostFireDB("news", this.state, postObj, this.props.editNews);
     }
   }

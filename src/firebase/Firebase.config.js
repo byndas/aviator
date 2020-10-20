@@ -160,11 +160,10 @@ export const pushOrSetPostFireDB = (
     .then(() => {
       console.log("777 POST OBJ", postObj);
       // if updating a post, updates REDUX ID
+
       if (postId !== null) {
-        // BUG! sends postObj as "undefined" to REDUX postId
-        // postId is correct, postObj is not
-        dispatchAction(postObj, postId);
-        console.log("REDUX MATCHES FIREBASE");
+        // dispatchAction(postObj, postId);
+        console.log("REDUX MATCHES FIREBASE?");
       }
 
       document.getElementById("clearBtn").click();

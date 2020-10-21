@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 
 export const fireAuth = firebase.auth();
 
-const fireDbRef = firebase.database().ref("base");
+export const fireDbRef = firebase.database().ref("base");
 
 const storageRef = imageId =>
   firebase

@@ -5,6 +5,7 @@ import {
   deleteImageFireStorage
 } from "../../firebase/Firebase.config";
 // import * as adminForm from "../../pages/adminFormMethods";
+import { emptyState, clearState } from "../adminFormMethods";
 
 class NewsForm extends PureComponent {
   constructor(props) {
@@ -53,7 +54,7 @@ class NewsForm extends PureComponent {
     text: ""
   };
   clearState() {
-    this.setState(this.emptyState);
+    this.setState(emptyState);
   }
   handleChange(e) {
     this.setState({
@@ -78,7 +79,7 @@ class NewsForm extends PureComponent {
     e.preventDefault();
     console.log("STATE", this.state);
 
-    if (this.state === this.emptyState) return;
+    if (this.state === emptyState) return;
 
     const { src, name, title, text } = this.state;
 

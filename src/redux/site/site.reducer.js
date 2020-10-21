@@ -1,14 +1,14 @@
 import { FIREBASE_DATA } from "./site.actions";
 
-const initialState = {
-  news: null,
-  projects: null,
-  gallery: null,
-  catalog: null,
-  calendar: null
-};
+// const initialState = {
+//   news: null,
+//   projects: null,
+//   gallery: null,
+//   catalog: null,
+//   calendar: null
+// };
 
-export default (state = initialState, action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case FIREBASE_DATA:
       console.log(action.payload);

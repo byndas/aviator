@@ -47,9 +47,6 @@ class News extends Component {
 
     let newsList;
 
-    console.log("reduxNews:", this.props.reduxNews);
-    console.log("reduxEditPost:", this.props.reduxEditPost);
-
     if (reduxNews !== null) {
       const newsIds = Object.keys(reduxNews);
       const newsArr = Object.values(reduxNews);

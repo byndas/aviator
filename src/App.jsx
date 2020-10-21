@@ -2,9 +2,10 @@ import "./App.styles.css";
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import firebase from "firebase";
-import { fireAuth } from "./firebase/Firebase.config";
+import { fireAuth, fireDbRef } from "./firebase/Firebase.config";
 // import { createStructuredSelector } from "reselect";
+import { storeFireDb } from "./redux/site/site.actions";
+import { LanguageProvider } from "./context/LanguageContext";
 
 import Navbar from "./navbar/navbar.component";
 import Home from "./pages/home/home.component";
@@ -17,7 +18,7 @@ import Login from "./pages/login/Login.component";
 import News from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
 import SingleProject from "./pages/projects/SingleProject";
-import { LanguageProvider } from "./context/LanguageContext";
+import SearchResults from "./pages/searchResults/SearchResults.component";
 
 // import { logAdmin } from "./redux/admin/admin.actions";
 
@@ -42,6 +43,10 @@ class App extends React.Component {
         this.setState({ auth: false });
       }
       console.log("adminMode = " + this.state.auth);
+    });
+    fireDbRef.on("value", snapshot => {
+      console.log("FIRE DB BASE SNAPSHOT:", snapshot.val());
+      storeFireDb(snapshot.val());
     });
   }
   findProject(id) {
@@ -77,33 +82,35 @@ class App extends React.Component {
                 this.state.auth ? <Redirect to="/news" /> : <Login />
               }
             />
-
+            <Route
+              exact
+              path="/searchResults"
+              render={() => (
+                <SearchResults reduxStore={this.props.reduxStore} />
+              )}
+            />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route
               exact
               path="/calendar"
-              render={() => <Calendar auth={auth} searchInput={searchInput} />}
+              render={() => <Calendar auth={auth} />}
             />
             <Route
               exact
               path="/catalog"
-              render={() => <Catalog auth={auth} searchInput={searchInput} />}
+              render={() => <Catalog auth={auth} />}
             />
             <Route
               exact
               path="/gallery"
-              render={() => <Gallery auth={auth} searchInput={searchInput} />}
+              render={() => <Gallery auth={auth} />}
             />
-            <Route
-              exact
-              path="/news"
-              render={() => <News auth={auth} searchInput={searchInput} />}
-            />
+            <Route exact path="/news" render={() => <News auth={auth} />} />
             <Route
               exact
               path="/projects"
-              render={() => <Projects auth={auth} searchInput={searchInput} />}
+              render={() => <Projects auth={auth} />}
             />
             <Route
               exact
@@ -122,4 +129,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = reduxStore => reduxStore;
+
+export default connect(mapStateToProps, storeFireDb)(App);

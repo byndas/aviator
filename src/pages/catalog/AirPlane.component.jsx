@@ -1,6 +1,5 @@
 import "./Catalog.styles.css";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import AirPlaneGroup from "./AirPlanegroup";
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -21,26 +20,31 @@ class AirPlane extends Component {
   render() {
     const { language } = this.context;
     const { AirPlane } = translate[language];
-    const { auth } = this.props;
+    const {
+      auth,
+      reduxCatalog,
+      deleteCatalogItem,
+      editPostInputs
+    } = this.props;
 
     let planeList;
-    console.log(this.props.siteData.catalog);
 
-    if (this.props.siteData.catalog !== null) {
-      const planeArr = Object.values(this.props.siteData.catalog);
-      const planeIds = Object.keys(this.props.siteData.catalog);
-      planeList = planeArr.map(air => (
+    if (reduxCatalog !== null) {
+      const planeArr = Object.values(reduxCatalog);
+      const planeIds = Object.keys(reduxCatalog);
+
+      planeList = planeArr.map((airplane, index) => (
         <AirPlaneGroup
-          name={air.name}
-          text={air.text}
-          src={air.src}
-          id={air.id}
           auth={auth}
+          deleteCatalogItem={deleteCatalogItem}
+          editPostInputs={editPostInputs}
+          name={airplane.name}
+          text={airplane.text}
+          src={airplane.src}
+          id={planeIds[index]}
+          key={index}
         />
       ));
-    } else {
-      // add jsx loading html
-      planeList = "LOADING...";
     }
     return (
       <div className="container border-bottom">
@@ -51,10 +55,4 @@ class AirPlane extends Component {
   }
 }
 
-// export default AirPlane;
-
-const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
-};
-
-export default connect(mapStateToProps, null)(AirPlane);
+export default AirPlane;

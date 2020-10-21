@@ -2,18 +2,64 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  deleteImageFireStorage,
+  removePostFireDB
+} from "../../firebase/Firebase.config";
 
 class AirPlaneGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = { expanded: true };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      showMore: true,
+      btnText: "Show More"
+    };
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.toggleShowMore = this.toggleShowMore.bind(this);
   }
-  handleClick() {
-    this.setState({ expanded: !this.state.expanded });
+  handleEdit(id, src, title, name, text) {
+    // scrolls up to NewsForm
+    window.scrollTo(0, 0);
+    // populates sibling NewsForm.jsx state (via parent component)
+    // with data (including ID) of admin update post
+    const editObj = {
+      id,
+      src,
+      name,
+      title,
+      text
+    };
+    console.log("NewsGroup editObj", editObj);
+    this.props.editPostInputs(editObj);
+  }
+  handleDelete(id, src) {
+    console.log("POST FIRE DB ID TO DELETE: ", id);
+
+    if (src !== null) {
+      console.log("DELETING IMAGE FROM FIRE STORAGE", src);
+      // DELETES IMAGE FROM FIREBASE STORAGE
+      deleteImageFireStorage(src);
+    }
+    console.log("REMOVING POST FROM FIRE DB");
+    // REMOVES POST FROM FIREBASE DB
+    removePostFireDB("catalog", id, this.props.deleteCatalogItem);
+  }
+  toggleShowMore() {
+    if (this.state.showMore) {
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show Less"
+      }));
+    } else {
+      this.setState(state => ({
+        showMore: !state.showMore,
+        btnText: "Show More"
+      }));
+    }
   }
   render() {
-    const { text, name, src, title, id, auth } = this.props;
+    const { id, src, title, name, text, imgFile, auth } = this.props;
     const { expanded } = this.state;
     return (
       <div className="col mb-4">
@@ -29,20 +75,35 @@ class AirPlaneGroup extends Component {
               {text}
             </p>
             <button
-              onClick={this.handleClick}
+              id="moreLessBtn"
               className="btn btn-primary"
               type="button"
               data-toggle="collapse"
               data-target={`#${id}`}
               aria-expanded="false"
               aria-controls="collapseExample"
+              onClick={this.toggleShowMore}
             >
-              Read More...
+              {this.state.btnText}
             </button>
             {auth && (
-              <div className="float-right">
-                <FontAwesomeIcon className="icons" icon={faEdit} />
-                <FontAwesomeIcon className="icons" icon={faTrash} />
+              <div id="flex" className="float-right">
+                <FontAwesomeIcon
+                  type="button"
+                  onClick={() => {
+                    this.handleEdit(id, src, title, name, text, imgFile);
+                  }}
+                  className="icons"
+                  icon={faEdit}
+                />
+                <FontAwesomeIcon
+                  type="button"
+                  onClick={() => {
+                    this.handleDelete(id, src);
+                  }}
+                  className="icons"
+                  icon={faTrash}
+                />
               </div>
             )}
           </div>

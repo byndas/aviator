@@ -10,7 +10,6 @@ import { emptyState } from "../adminFormMethods";
 class NewsForm extends PureComponent {
   constructor(props) {
     super(props);
-
     // state controls form inputs
     this.state = {
       imgFile: null, // "choose file" click populates imgFile

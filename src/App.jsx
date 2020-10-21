@@ -74,7 +74,6 @@ class App extends React.Component {
           />
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* <Route exact path="/login" render={props => <Login {...props} />} /> */}
             <Route
               exact
               path="/login"
@@ -86,7 +85,10 @@ class App extends React.Component {
               exact
               path="/searchResults"
               render={() => (
-                <SearchResults reduxStore={this.props.reduxStore} />
+                <SearchResults
+                  reduxStore={this.props.reduxStore}
+                  searchInput={this.state.searchInput}
+                />
               )}
             />
             <Route exact path="/about" component={About} />

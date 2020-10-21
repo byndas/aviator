@@ -1,13 +1,49 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import {
+  deleteImageFireStorage,
+  removePostFireDB
+} from "../../firebase/Firebase.config";
 
 class ProjectGroup extends Component {
+  constructor(props) {
+    super(props);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleEdit(id, src, title, name, text) {
+    // scrolls up to NewsForm
+    window.scrollTo(0, 0);
+    // populates sibling NewsForm.jsx state (via parent component)
+    // with data (including ID) of admin update post
+    const editObj = {
+      id,
+      src,
+      name,
+      title,
+      text
+    };
+    console.log("ProjectGroup editObj", editObj);
+    this.props.editPostInputs(editObj);
+  }
+  handleDelete(id, src) {
+    console.log("POST ID TO DELETE IN FIRE DB: ", id);
+
+    if (src !== null) {
+      console.log("DELETING IMAGE FROM FIRE STORAGE", src);
+      // DELETES IMAGE FROM FIREBASE STORAGE
+      deleteImageFireStorage(src);
+    }
+    console.log("REMOVING POST FROM FIRE DB");
+    // REMOVES POST FROM FIREBASE DB
+    removePostFireDB("projects", id, this.props.deleteProject);
+  }
   render() {
-    const { name, text, src, title, id, auth } = this.props;
-    console.log(id);
+    const { id, src, title, name, text, imgFile, auth } = this.props;
     return (
       <div>
         <div className="card project_content_title">
@@ -16,9 +52,19 @@ class ProjectGroup extends Component {
             <span className="ml-5">31.08.2020</span>
             {auth && (
               <div className="float-right">
-                <FontAwesomeIcon className="icons" icon={faEdit} />
                 <FontAwesomeIcon
-                  onClick={() => {}}
+                  type="button"
+                  onClick={() => {
+                    this.handleEdit(id, src, title, name, text, imgFile);
+                  }}
+                  className="icons"
+                  icon={faEdit}
+                />
+                <FontAwesomeIcon
+                  type="button"
+                  onClick={() => {
+                    this.handleDelete(id, src);
+                  }}
                   className="icons"
                   icon={faTrash}
                 />

@@ -8,18 +8,18 @@ class SingleProject extends Component {
     return (
       <div className="project_container">
         <h1 className="project_title font-italic">{name}</h1>
-        <div class="card card_project_content">
-          <div class="card-header">
+        <div className="card card_project_content">
+          <div className="card-header">
             {name}
             <span className="ml-5">31.08.2020</span>
           </div>
-          <h5 class="card-title text-center">{title}</h5>
-          <div class="card-body d-flex">
-            <div class="col-md-4">
-              <img src={src} alt="..." class="img-thumbnail" />
+          <h5 className="card-title text-center">{title}</h5>
+          <div className="card-body d-flex">
+            <div className="col-md-4">
+              <img src={src} alt="..." className="img-thumbnail" />
             </div>
-            <div class="col-md-8">
-              <p class="card-text">{text}</p>
+            <div className="col-md-8">
+              <p className="card-text">{text}</p>
               <Link className="btn btn-primary" type="button" to="/projects">
                 go Back
               </Link>

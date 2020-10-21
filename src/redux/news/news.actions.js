@@ -5,7 +5,7 @@ export const firebaseNews = data => ({
   payload: data
 });
 
-export const deleteNews = id => ({
-  type: newsActionTypes.DELETE_NEWS,
+export const deleteNewsItem = id => ({
+  type: newsActionTypes.DELETE_NEWS_ITEM,
   id: id
 });

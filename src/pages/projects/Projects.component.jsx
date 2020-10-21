@@ -1,12 +1,15 @@
 import "./Projects.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import ProjectsForm from "./ProjectsForm";
 import ProjectGroup from "./ProjectGroup";
+import ProjectsForm from "./ProjectsForm";
 import Footer from "../../footer/Footer.component";
-import firebase from "firebase";
 import { LanguageContext } from "../../context/LanguageContext";
+import { getFireDbPage } from "../../firebase/Firebase.config";
+import {
+  firebaseProjects,
+  deleteProject
+} from "../../redux/projects/projects.actions";
 
 const translate = {
   Geo: {
@@ -21,41 +24,52 @@ const translate = {
 };
 
 class Projects extends Component {
-  static contextType = LanguageContext;
-  // componentDidMount() {
-  //   const dbRef = firebase.database().ref("projects");
+  constructor(props) {
+    super(props);
+    // state controls form inputs
+    this.state = null;
 
-  //   dbRef.on("value", snapshot => {
-  //     // save snapshot.val() to Redux store ( not this.setState() )
-  //     // Redux store needs to map projects from database
-  //     console.log(snapshot.val());
-  //   });
-  // }
+    this.editPostInputs = this.editPostInputs.bind(this);
+  }
+
+  editPostInputs(postObj) {
+    this.setState(postObj);
+    console.log("Projects.component STATE", this.state);
+  }
+
+  static contextType = LanguageContext;
+
+  componentDidMount() {
+    getFireDbPage("projects", this.props.firebaseProjects);
+  }
 
   render() {
-    const { auth } = this.props;
+    const { auth, reduxProjects, deleteProject } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
     let projectList;
-    console.log(this.props.siteData.projects);
-    if (this.props.siteData.projects !== null) {
-      const projectsArr = Object.values(this.props.siteData.projects);
-      const projectsIds = Object.keys(this.props.siteData.projects);
 
-      projectList = projectsArr.map((prj, index) => (
-        <ProjectGroup
-          name={prj.name}
-          text={prj.text}
-          src={prj.src}
-          title={prj.title}
-          id={index}
-          auth={auth}
-        />
-      ));
-    } else {
-      // add jsx loading html
-      projectList = "LOADING...";
+    if (reduxProjects !== null) {
+      const projectsArr = Object.values(reduxProjects);
+      const projectsIds = Object.keys(reduxProjects);
+      // collects all projects in redux store
+      projectList = projectsArr
+        // reverse mis-aligns firebase & redux objects
+        // .reverse()
+        .map((item, index) => (
+          <ProjectGroup
+            auth={auth}
+            deleteProject={deleteProject}
+            editPostInputs={this.editPostInputs}
+            name={item.name}
+            title={item.title}
+            text={item.text}
+            src={item.src}
+            key={index}
+            id={projectsIds[index]}
+          />
+        ));
     }
     return (
       <div>
@@ -69,18 +83,18 @@ class Projects extends Component {
                 data-toggle="modal"
                 data-target="#create"
               >
-                Create
+                CREATE PROJECT
               </button>
               <div className="modal fade" id="create" role="dialog">
                 <div className="modal-dialog modal-md">
                   <div className="modal-content">
-                    <ProjectsForm />
+                    <ProjectsForm editObj={this.state} />
                     <button
                       type="button"
                       className="btn btn-default"
                       data-dismiss="modal"
                     >
-                      Close
+                      CLOSE
                     </button>
                   </div>
                 </div>
@@ -88,7 +102,6 @@ class Projects extends Component {
             </div>
           )}
           <br />
-          {/* PROJECTS DISPLAY HERE */}
           {projectList}
         </div>
         <Footer />
@@ -97,9 +110,11 @@ class Projects extends Component {
   }
 }
 
-//CHANGE siteData.projects --> selectors! */}
-const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
-};
+const mapStateToProps = reduxStore => ({
+  reduxProjects: reduxStore.projects
+});
 
-export default connect(mapStateToProps, null)(Projects);
+export default connect(mapStateToProps, {
+  firebaseProjects,
+  deleteProject
+})(Projects);

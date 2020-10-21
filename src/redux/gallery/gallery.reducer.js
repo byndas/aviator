@@ -1,16 +1,14 @@
 import { galleryActionTypes } from "./gallery.types";
 
-const INITIAL_STATE = {
-  galleryId: null
-};
-
-export const galleryReducer = (state = INITIAL_STATE, action) => {
+export const galleryReducer = (state = null, action) => {
   switch (action.type) {
-    case galleryActionTypes.SET_GALLERY_ID:
-      return {
-        ...state,
-        galleryId: action.payload
-      };
+    case galleryActionTypes.FIREBASE_GALLERY:
+      return Object.assign({}, state, action.payload);
+
+    case galleryActionTypes.DELETE_GALLERY_ITEM:
+      const deleteID = action.id;
+      delete state[deleteID];
+      return Object.assign({}, state);
     default:
       return state;
   }

@@ -44,7 +44,7 @@ class NewsGroup extends Component {
     }
     console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
-    removePostFireDB("news", id, this.props.deleteNews);
+    removePostFireDB("news", id, this.props.deleteNewsItem);
   }
   toggleShowMore() {
     if (this.state.showMore) {

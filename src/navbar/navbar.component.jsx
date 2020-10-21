@@ -151,14 +151,15 @@ class Navbar extends React.Component {
                 value={this.props.searchInput}
                 onChange={this.props.setSearchInput}
               />
-              <button
+              <Link
                 style={{ width: "75px", height: "35px" }}
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="button"
                 onClick={clearSearchBar}
+                to="/searchResults"
               >
                 {Search}
-              </button>
+              </Link>
             </form>
             {this.props.auth && (
               <div className="option" onClick={logOut}>

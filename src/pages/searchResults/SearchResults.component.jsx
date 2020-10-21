@@ -5,51 +5,55 @@ import { connect } from "react-redux";
 class SearchResults extends React.Component {
   constructor(props) {
     super(props);
+    this.pageSearch = this.pageSearch.bind(this);
   }
-  // componentWillReceiveProps(nextProps) {}
+
+  pageSearch(reduxState, searchInput, finalResultArr) {
+    console.log("REDUX STORE", reduxState);
+    const pageMatches = [];
+    const pageIds = Object.keys(reduxState);
+    const pageValues = Object.values(reduxState);
+    // collects redux page items that include the search input value
+    for (let i = 0; i < pageValues.length; i++) {
+      if (pageValues[i].name.includes(searchInput)) {
+        pageMatches.push(pageValues[i]);
+        continue;
+      }
+      if (pageValues[i].title.includes(searchInput)) {
+        pageMatches.push(pageValues[i]);
+        continue;
+      }
+      if (pageValues[i].text.includes(searchInput)) {
+        pageMatches.push(pageValues[i]);
+        continue;
+      }
+    }
+    let pageMatchDivArray = pageMatches
+      // reverse mis-aligns firebase & redux objects
+      // .reverse()
+      .map((item, index) => (
+        <div id={pageIds[index]} key={pageIds[index]}>
+          {item.name}
+          {item.title}
+          {item.text}
+          <img src={item.src} />
+        </div>
+      ));
+    console.log("pageMatchDivArray", pageMatchDivArray);
+    finalResultArr.push(...pageMatchDivArray);
+  }
   render() {
     const { entireRedux, searchInput } = this.props;
 
-    console.log("SEARCH RESULTS", searchInput);
-    console.log("REDUX STORE", entireRedux);
-
-    let postResults;
+    let finalSearchResults = [];
 
     if (entireRedux !== null) {
-      const resultArr = [];
-
-      const newsIds = Object.keys(entireRedux.news);
-      const newsArr = Object.values(entireRedux.news);
-      // collects all items in redux store
-      for (let i = 0; i < newsArr.length; i++) {
-        if (newsArr[i].title.includes(searchInput)) {
-          resultArr.push(newsArr[i]);
-          continue;
-        }
-        if (newsArr[i].name.includes(searchInput)) {
-          resultArr.push(newsArr[i]);
-          continue;
-        }
-        if (newsArr[i].text.includes(searchInput)) {
-          resultArr.push(newsArr[i]);
-          continue;
-        }
-      }
-
-      postResults = resultArr
-        // reverse mis-aligns firebase & redux objects
-        // .reverse()
-        .map((item, index) => (
-          <div id={newsIds[index]} key={index}>
-            {item.name}
-            {item.title}
-            {item.text}
-            <img src={item.src} />
-          </div>
-        ));
-      console.log("POST RESULTS", postResults);
+      this.pageSearch(entireRedux.news, searchInput, finalSearchResults);
+      this.pageSearch(entireRedux.gallery, searchInput, finalSearchResults);
+      this.pageSearch(entireRedux.projects, searchInput, finalSearchResults);
+      console.log("FINAL SEARCH RESULT", finalSearchResults);
     }
-    return <div id="container">{postResults}</div>;
+    return <div id="container">{finalSearchResults}</div>;
   }
 }
 
@@ -58,9 +62,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps, null)(SearchResults);
-
-// if one match, push it and move on to the next post
-
-// combine all other pages into one giant array
-// then concat that arrary
-// then map over that array for final results

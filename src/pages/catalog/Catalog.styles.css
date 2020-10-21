@@ -1,13 +1,17 @@
 .pilot_images {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
 .heading {
-    color: #22366e;
+  color: #22366e;
 }
 
 .airplain_background {
-    background-color: #1b62a5;
-    color: white;
+  background-color: #1b62a5;
+  color: white;
 }
 
+#flex {
+  display: flex;
+  justify-content: space-between;
+}

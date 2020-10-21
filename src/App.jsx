@@ -31,7 +31,7 @@ class App extends React.Component {
       searchMode: false,
       searchInput: ""
     };
-    // this.findProject = this.findProject.bind(this);
+    this.findProject = this.findProject.bind(this);
     this.setSearchInput = this.setSearchInput.bind(this);
   }
   componentDidMount() {
@@ -45,7 +45,7 @@ class App extends React.Component {
     });
   }
   findProject(id) {
-    return this.state.projects.find(prj => prj.id === id);
+    // return this.state.projects.find(prj => prj.id === id);
   }
   setSearchInput(event) {
     this.setState({

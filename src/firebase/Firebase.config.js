@@ -169,12 +169,11 @@ export const pushOrSetPostFireDB = (pageName, state, postObj) => {
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
-// WORKS!
 export const getFireDbPage = (pageName, dispatchAction) => {
-  // LISTENER: UPDATES REDUX when Firebase NEWS changes
+  // LISTENER: UPDATES REDUX when Fire DB page changes
 
   fireDbRef.child(pageName).on("value", snapshot => {
-    console.log("FIREBASE NEWS SNAPSHOT:", snapshot.val());
+    console.log("FIRE DB PAGE SNAPSHOT:", snapshot.val());
     dispatchAction(snapshot.val());
   });
 };

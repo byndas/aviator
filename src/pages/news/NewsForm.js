@@ -4,6 +4,7 @@ import {
   putImageFireStorage,
   deleteImageFireStorage
 } from "../../firebase/Firebase.config";
+// import * as adminForm from "../../pages/adminFormMethods";
 
 class NewsForm extends PureComponent {
   constructor(props) {
@@ -24,14 +25,6 @@ class NewsForm extends PureComponent {
     this.newImage = this.newImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  emptyState = {
-    imgFile: null,
-    src: null,
-    id: null,
-    name: "",
-    title: "",
-    text: ""
-  };
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
 
@@ -51,6 +44,14 @@ class NewsForm extends PureComponent {
       }
     }
   }
+  emptyState = {
+    imgFile: null,
+    src: null,
+    id: null,
+    name: "",
+    title: "",
+    text: ""
+  };
   clearState() {
     this.setState(this.emptyState);
   }
@@ -154,10 +155,10 @@ class NewsForm extends PureComponent {
           <div className="form-group">
             <label htmlFor="img">image</label>
             <input
-              name="img"
               onChange={this.newImage}
-              type="file"
               className="form-control-file"
+              type="file"
+              name="img"
               id="img"
             />
           </div>

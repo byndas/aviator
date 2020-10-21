@@ -1,38 +1,56 @@
 import "./Gallery.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import firebase from "firebase";
-import Poster from "../../images/jpg/starPoster.jpg";
 import GalleryGroup from "./GalleryGroup";
 import GalleryForm from "./GalleryForm";
 import Footer from "../../footer/Footer.component";
+import Poster from "../../images/jpg/starPoster.jpg";
+import { getFireDbPage } from "../../firebase/Firebase.config";
+import {
+  firebaseGallery,
+  deleteGalleryItem
+} from "../../redux/gallery/gallery.actions";
 import { backgroundColor } from "../catalog/Catalog.component";
 
 class Gallery extends Component {
-  // componentDidMount() {
-  //   const dbRef = firebase.database().ref("gallery");
+  constructor(props) {
+    super(props);
+    // state controls form inputs
+    this.state = null;
 
-  //   dbRef.on("value", snapshot => {
-  //     // save to Redux store ( not this.setState() )
-  //     console.log(snapshot.val());
-  //   });
-  // }
+    this.editPostInputs = this.editPostInputs.bind(this);
+  }
+
+  editPostInputs(postObj) {
+    this.setState(postObj);
+    console.log("Gallery.component STATE", this.state);
+  }
+  componentDidMount() {
+    getFireDbPage("gallery", this.props.firebaseGallery);
+  }
   render() {
-    const { auth } = this.props;
+    const { auth, reduxGallery, deleteGalleryItem } = this.props;
 
     let galleryList;
-    console.log(this.props.siteData);
-    if (this.props.siteData.gallery !== null) {
-      const galleryArr = Object.values(this.props.siteData.gallery);
-      const galleryIds = Object.keys(this.props.siteData.gallery);
 
-      // galleryList = galleryArr.map(glr => console.log(glr));
-      galleryList = galleryArr.map(glr => (
-        <GalleryGroup src={glr.src} text={glr.text} />
-      ));
-    } else {
-      // add jsx loading html
-      galleryList = "LOADING...";
+    if (reduxGallery !== null) {
+      const galleryArr = Object.values(reduxGallery);
+      const galleryIds = Object.keys(reduxGallery);
+
+      galleryList = galleryArr
+        // reverse mis-aligns firebase & redux objects
+        // .reverse()
+        .map((item, index) => (
+          <GalleryGroup
+            src={item.src}
+            text={item.text}
+            auth={auth}
+            deleteGalleryItem={deleteGalleryItem}
+            editPostInputs={this.editPostInputs}
+            key={index}
+            id={galleryIds[index]}
+          />
+        ));
     }
     return (
       <div style={backgroundColor}>
@@ -57,7 +75,6 @@ class Gallery extends Component {
                 <img src={Poster} className="gallery_img" alt="..." />
                 <div className="carousel-caption d-none d-md-block"></div>
               </div>
-              {/* GALLERY DISPLAY HERE */}
               {galleryList}
             </div>
             <a
@@ -85,7 +102,7 @@ class Gallery extends Component {
               <span className="sr-only">Next</span>
             </a>
           </div>
-          {auth && <GalleryForm />}
+          {auth && <GalleryForm editObj={this.state} />}
           <br />
         </div>
         <Footer />
@@ -93,9 +110,12 @@ class Gallery extends Component {
     );
   }
 }
-// CHANGE siteData.gallery --> selectors!
-const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
-};
 
-export default connect(mapStateToProps, null)(Gallery);
+const mapStateToProps = reduxStore => ({
+  reduxGallery: reduxStore.gallery
+});
+
+export default connect(mapStateToProps, {
+  firebaseGallery,
+  deleteGalleryItem
+})(Gallery);

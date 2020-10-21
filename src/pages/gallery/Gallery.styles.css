@@ -11,6 +11,7 @@
   font-weight: 700;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  text-align: center;
 }
 
 .gallery_img:hover {
@@ -19,4 +20,9 @@
 
 .gallery_text:hover .gallery_img {
   opacity: 0.4;
+}
+
+#flex {
+  display: flex;
+  justify-content: space-between;
 }

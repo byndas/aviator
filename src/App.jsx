@@ -141,8 +141,4 @@ class App extends React.Component {
   }
 }
 
-// const mapStateToProps = reduxStore => ({
-//   entireRedux: reduxStore.siteData
-// });
-
 export default connect(null, { storeFireDb })(App);

@@ -1,6 +1,6 @@
 import { SEARCH_RESULTS } from "./search.actions";
 
-export const editPostReducer = (state = null, action) => {
+export const searchReducer = (state = null, action) => {
   switch (action.type) {
     case SEARCH_RESULTS:
       return Object.assign({}, action.payload);

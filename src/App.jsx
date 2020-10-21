@@ -46,7 +46,7 @@ class App extends React.Component {
     });
     fireDbRef.on("value", snapshot => {
       console.log("FIRE DB BASE SNAPSHOT:", snapshot.val());
-      storeFireDb(snapshot.val());
+      this.props.storeFireDb(snapshot.val());
     });
   }
   findProject(id) {
@@ -85,10 +85,7 @@ class App extends React.Component {
               exact
               path="/searchResults"
               render={() => (
-                <SearchResults
-                  reduxStore={this.props.reduxStore}
-                  searchInput={this.state.searchInput}
-                />
+                <SearchResults searchInput={this.state.searchInput} />
               )}
             />
             <Route exact path="/about" component={About} />
@@ -101,24 +98,37 @@ class App extends React.Component {
             <Route
               exact
               path="/catalog"
-              render={() => <Catalog auth={auth} />}
+              render={() => (
+                <Catalog auth={auth} reduxStore={this.props.reduxStore} />
+              )}
             />
             <Route
               exact
               path="/gallery"
-              render={() => <Gallery auth={auth} />}
+              render={() => (
+                <Gallery auth={auth} reduxStore={this.props.reduxStore} />
+              )}
             />
-            <Route exact path="/news" render={() => <News auth={auth} />} />
+            <Route
+              exact
+              path="/news"
+              render={() => (
+                <News auth={auth} reduxStore={this.props.reduxStore} />
+              )}
+            />
             <Route
               exact
               path="/projects"
-              render={() => <Projects auth={auth} />}
+              render={() => (
+                <Projects auth={auth} reduxStore={this.props.reduxStore} />
+              )}
             />
             <Route
               exact
               path="/projects/:id"
               render={props => (
                 <SingleProject
+                  reduxStore={this.props.reduxStore}
                   projects={this.findProject(props.match.params.id)}
                 />
               )}
@@ -131,6 +141,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = reduxStore => reduxStore;
+// const mapStateToProps = reduxStore => ({
+//   entireRedux: reduxStore.siteData
+// });
 
-export default connect(mapStateToProps, storeFireDb)(App);
+export default connect(null, { storeFireDb })(App);

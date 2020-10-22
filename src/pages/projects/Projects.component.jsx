@@ -75,34 +75,10 @@ class Projects extends Component {
       <div>
         <div className="project_container">
           <h1 className="project_title font-italic">{Projects}</h1>
-          {auth && (
-            <div className="container project_form">
-              <button
-                type="button"
-                className="btn btn-info btn-sm"
-                data-toggle="modal"
-                data-target="#create"
-              >
-                CREATE PROJECT
-              </button>
-              <div className="modal fade" id="create" role="dialog">
-                <div className="modal-dialog modal-md">
-                  <div className="modal-content">
-                    <ProjectsForm editObj={this.state} />
-                    <button
-                      type="button"
-                      className="btn btn-default"
-                      data-dismiss="modal"
-                    >
-                      CLOSE
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          {auth && <ProjectsForm editObj={this.state} />}
           <br />
           {projectList}
+          <br />
         </div>
         <Footer />
       </div>

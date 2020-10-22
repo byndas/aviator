@@ -15,16 +15,32 @@ export const backgroundColor = {
 };
 
 class Catalog extends Component {
+  constructor(props) {
+    super(props);
+    // state controls form inputs
+    this.state = null;
+
+    this.editPostInputs = this.editPostInputs.bind(this);
+  }
   componentDidMount() {
     getFireDbPage("catalog", this.props.firebaseCatalog);
+  }
+  editPostInputs(postObj) {
+    this.setState(postObj);
+    console.log("Catalog.component STATE", this.state);
   }
   render() {
     const { auth, reduxCatalog, deleteCatalogItem } = this.props;
 
     return (
       <div style={backgroundColor}>
-        <CatalogForm />
-        <AirPlane auth={auth} />
+        {auth && <CatalogForm editObj={this.state} />}
+        <AirPlane
+          auth={auth}
+          editPostInputs={this.editPostInputs}
+          deleteCatalogItem={deleteCatalogItem}
+          reduxCatalog={reduxCatalog}
+        />
         <Pilots />
         <Footer />
       </div>

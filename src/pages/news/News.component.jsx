@@ -71,9 +71,7 @@ class News extends Component {
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-
         {auth && <NewsForm editObj={this.state} />}
-
         <div className="container">
           {newsList}
           <br />

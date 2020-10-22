@@ -105,7 +105,7 @@ class Gallery extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxGallery: reduxStore.sitaData.gallery
+  reduxGallery: reduxStore.siteData.gallery
 });
 
 export default connect(mapStateToProps, {

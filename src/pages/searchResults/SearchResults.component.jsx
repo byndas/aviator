@@ -50,6 +50,7 @@ class SearchResults extends React.Component {
       this.pageSearch(entireRedux.news, searchInput, finalSearchResults);
       this.pageSearch(entireRedux.gallery, searchInput, finalSearchResults);
       this.pageSearch(entireRedux.projects, searchInput, finalSearchResults);
+      this.pageSearch(entireRedux.catalog, searchInput, finalSearchResults);
       console.log("FINAL SEARCH RESULT", finalSearchResults);
     }
     return <div id="container">{finalSearchResults}</div>;

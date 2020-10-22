@@ -43,12 +43,12 @@ class Projects extends Component {
     let projectList;
 
     if (reduxProjects !== null) {
-      const projectsArr = Object.values(reduxProjects);
+      const projectsArr = Object.values(reduxProjects).reverse();
       const projectsIds = Object.keys(reduxProjects);
       // collects all projects in redux store
       projectList = projectsArr
         // reverse mis-aligns firebase & redux objects
-        // .reverse()
+        .reverse()
         .map((item, index) => (
           <ProjectGroup
             auth={auth}

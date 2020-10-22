@@ -7,45 +7,44 @@ class SearchResults extends React.Component {
     super(props);
     this.pageSearch = this.pageSearch.bind(this);
   }
-
   pageSearch(reduxState, searchInput, finalResultArr) {
-    console.log("REDUX STORE", reduxState);
-    const pageMatches = [];
-    const pageIds = Object.keys(reduxState);
-    const pageValues = Object.values(reduxState);
-    // collects redux page items that include the search input value
-    for (let i = 0; i < pageValues.length; i++) {
-      if (pageValues[i].name.includes(searchInput)) {
-        pageMatches.push(pageValues[i]);
-        continue;
-      }
-      if (pageValues[i].title.includes(searchInput)) {
-        pageMatches.push(pageValues[i]);
-        continue;
-      }
-      if (pageValues[i].text.includes(searchInput)) {
-        pageMatches.push(pageValues[i]);
-        continue;
+    if (searchInput !== "") {
+      if (finalResultArr.length < 20) {
+        console.log("REDUX STORE", reduxState);
+        const pageMatches = [];
+        const pageIds = Object.keys(reduxState);
+        const pageValues = Object.values(reduxState);
+        // collects redux page items that include the search input value
+        for (let i = 0; i < pageValues.length; i++) {
+          if (pageValues[i].name.includes(searchInput)) {
+            pageMatches.push(pageValues[i]);
+            continue;
+          }
+          if (pageValues[i].title.includes(searchInput)) {
+            pageMatches.push(pageValues[i]);
+            continue;
+          }
+          if (pageValues[i].text.includes(searchInput)) {
+            pageMatches.push(pageValues[i]);
+            continue;
+          }
+        }
+        let pageMatchDivArray = pageMatches.map((item, index) => (
+          <div id={pageIds[index]} key={pageIds[index]}>
+            {item.name}
+            {item.title}
+            {item.text}
+            <img src={item.src} />
+          </div>
+        ));
+        console.log("pageMatchDivArray", pageMatchDivArray);
+        finalResultArr.push(...pageMatchDivArray);
       }
     }
-    let pageMatchDivArray = pageMatches
-      // reverse mis-aligns firebase & redux objects
-      // .reverse()
-      .map((item, index) => (
-        <div id={pageIds[index]} key={pageIds[index]}>
-          {item.name}
-          {item.title}
-          {item.text}
-          <img src={item.src} />
-        </div>
-      ));
-    console.log("pageMatchDivArray", pageMatchDivArray);
-    finalResultArr.push(...pageMatchDivArray);
   }
   render() {
     const { entireRedux, searchInput } = this.props;
-
-    let finalSearchResults = [];
+    const finalSearchResults = [];
 
     if (entireRedux !== null) {
       this.pageSearch(entireRedux.news, searchInput, finalSearchResults);
@@ -56,7 +55,6 @@ class SearchResults extends React.Component {
     return <div id="container">{finalSearchResults}</div>;
   }
 }
-
 const mapStateToProps = reduxState => ({
   entireRedux: reduxState.siteData
 });

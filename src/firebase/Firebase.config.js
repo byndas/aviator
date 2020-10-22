@@ -34,7 +34,7 @@ export const removePostFireDB = (pageName, id, dispatchAction) => {
     .then(() => {
       console.log("REMOVED POST FROM FIRE DB");
       // REMOVES POST FROM REDUX, REFRESHES PAGE COMPONENT
-      dispatchAction(id);
+      dispatchAction(id, pageName);
       console.log("REMOVED POST FROM REDUX");
     })
     .catch(error => {

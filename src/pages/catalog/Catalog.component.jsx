@@ -4,11 +4,7 @@ import CatalogForm from "./CatalogForm";
 import AirPlane from "./AirPlane.component";
 import Pilots from "./Pilots.component";
 import Footer from "../../footer/Footer.component";
-import { getFireDbPage } from "../../firebase/Firebase.config";
-import {
-  firebaseCatalog,
-  deleteCatalogItem
-} from "../../redux/catalog/catalog.actions";
+import { deletePageItem } from "../../redux/site/site.actions";
 
 export const backgroundColor = {
   backgroundImage: "linear-gradient(to right, #d8e2f9, #83abed)"
@@ -22,15 +18,12 @@ class Catalog extends Component {
 
     this.editPostInputs = this.editPostInputs.bind(this);
   }
-  componentDidMount() {
-    getFireDbPage("catalog", this.props.firebaseCatalog);
-  }
   editPostInputs(postObj) {
     this.setState(postObj);
     console.log("Catalog.component STATE", this.state);
   }
   render() {
-    const { auth, reduxCatalog, deleteCatalogItem } = this.props;
+    const { auth, reduxCatalog, deletePageItem } = this.props;
 
     return (
       <div style={backgroundColor}>
@@ -38,7 +31,7 @@ class Catalog extends Component {
         <AirPlane
           auth={auth}
           editPostInputs={this.editPostInputs}
-          deleteCatalogItem={deleteCatalogItem}
+          deletePageItem={deletePageItem}
           reduxCatalog={reduxCatalog}
         />
         <Pilots />
@@ -49,10 +42,9 @@ class Catalog extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxCatalog: reduxStore.catalog
+  reduxCatalog: reduxStore.siteData.catalog
 });
 
 export default connect(mapStateToProps, {
-  firebaseCatalog,
-  deleteCatalogItem
+  deletePageItem
 })(Catalog);

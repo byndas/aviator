@@ -38,7 +38,7 @@ class GalleryGroup extends Component {
     }
     console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
-    removePostFireDB("gallery", id, this.props.deleteGalleryItem);
+    removePostFireDB("gallery", id, this.props.deletePageItem);
   }
   render() {
     const { src, text, imgFile, auth, id } = this.props;

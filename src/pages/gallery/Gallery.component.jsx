@@ -5,11 +5,7 @@ import GalleryGroup from "./GalleryGroup";
 import GalleryForm from "./GalleryForm";
 import Footer from "../../footer/Footer.component";
 import Poster from "../../images/jpg/starPoster.jpg";
-import { getFireDbPage } from "../../firebase/Firebase.config";
-import {
-  firebaseGallery,
-  deleteGalleryItem
-} from "../../redux/gallery/gallery.actions";
+import { deletePageItem } from "../../redux/site/site.actions";
 import { backgroundColor } from "../catalog/Catalog.component";
 
 class Gallery extends Component {
@@ -25,11 +21,8 @@ class Gallery extends Component {
     this.setState(postObj);
     console.log("Gallery.component STATE", this.state);
   }
-  componentDidMount() {
-    getFireDbPage("gallery", this.props.firebaseGallery);
-  }
   render() {
-    const { auth, reduxGallery, deleteGalleryItem } = this.props;
+    const { auth, reduxGallery, deletePageItem } = this.props;
 
     let galleryList;
 
@@ -45,7 +38,7 @@ class Gallery extends Component {
             src={item.src}
             text={item.text}
             auth={auth}
-            deleteGalleryItem={deleteGalleryItem}
+            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             key={index}
             id={galleryIds[index]}
@@ -112,10 +105,9 @@ class Gallery extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxGallery: reduxStore.gallery
+  reduxGallery: reduxStore.sitaData.gallery
 });
 
 export default connect(mapStateToProps, {
-  firebaseGallery,
-  deleteGalleryItem
+  deletePageItem
 })(Gallery);

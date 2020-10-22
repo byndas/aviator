@@ -8,38 +8,26 @@ import { backgroundColor } from "../catalog/Catalog.component";
 class Calendar extends Component {
   render() {
     const { auth } = this.props;
-    // componentDidMount() {
-    //   const dbRef = firebase.database().ref("calendar");
-
-    //   dbRef.on("value", snapshot => {
-    //     // save snapshot.val() to Redux store ( not this.setState() )
-    //     // Redux store needs to map projects from database
-    //     console.log(snapshot.val());
-    //   });
-    // }
 
     let calendarList;
-    console.log(this.props.siteData.calendar);
-    if (this.props.siteData.calendar !== null) {
-      const calendarArr = Object.values(this.props.siteData.calendar);
-      const calendarIds = Object.keys(this.props.siteData.calendar);
-      calendarList = calendarArr.map(cl => (
+    console.log(this.props.reduxCalendar.calendar);
+    if (this.props.reduxCalendar.calendar !== null) {
+      const calendarArr = Object.values(this.props.reduxCalendar.calendar);
+      const calendarIds = Object.keys(this.props.reduxCalendar.calendar);
+      calendarList = calendarArr.map((item, index) => (
         <div className="col mt-5 px-md-4 ml-5">
           <CalendarGroup
-            name={cl.name}
-            month={cl.month}
-            day={cl.day}
-            year={cl.year}
-            text={cl.text}
-            key={cl.id}
-            id={cl.id}
+            name={item.name}
+            month={item.month}
+            day={item.day}
+            year={item.year}
+            text={item.text}
+            key={index}
+            id={calendarIds[index]}
             auth={auth}
           />
         </div>
       ));
-    } else {
-      // add jsx loading html
-      calendarList = "LOADING...";
     }
 
     return (
@@ -54,7 +42,7 @@ class Calendar extends Component {
 }
 
 const mapStateToProps = reduxStore => {
-  return { siteData: reduxStore.siteData };
+  return { reduxCalendar: reduxStore.siteData.calendar };
 };
 
-export default connect(mapStateToProps, null)(Calendar);
+export default connect(mapStateToProps)(Calendar);

@@ -5,11 +5,7 @@ import ProjectGroup from "./ProjectGroup";
 import ProjectsForm from "./ProjectsForm";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
-import { getFireDbPage } from "../../firebase/Firebase.config";
-import {
-  firebaseProjects,
-  deleteProject
-} from "../../redux/projects/projects.actions";
+import { deletePageItem } from "../../redux/site/site.actions";
 
 const translate = {
   Geo: {
@@ -39,12 +35,8 @@ class Projects extends Component {
 
   static contextType = LanguageContext;
 
-  componentDidMount() {
-    getFireDbPage("projects", this.props.firebaseProjects);
-  }
-
   render() {
-    const { auth, reduxProjects, deleteProject } = this.props;
+    const { auth, reduxProjects, deletePageItem } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
@@ -60,7 +52,7 @@ class Projects extends Component {
         .map((item, index) => (
           <ProjectGroup
             auth={auth}
-            deleteProject={deleteProject}
+            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
@@ -87,10 +79,9 @@ class Projects extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxProjects: reduxStore.projects
+  reduxProjects: reduxStore.siteData.projects
 });
 
 export default connect(mapStateToProps, {
-  firebaseProjects,
-  deleteProject
+  deletePageItem
 })(Projects);

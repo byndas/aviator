@@ -1,4 +1,0 @@
-export const projectsActionTypes = {
-  FIREBASE_PROJECTS: "FIREBASE_PROJECTS",
-  DELETE_PROJECT: "DELETE_PROJECT"
-};

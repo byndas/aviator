@@ -43,7 +43,7 @@ class ProjectGroup extends Component {
     }
     console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
-    removePostFireDB("projects", id, this.props.deleteProject);
+    removePostFireDB("projects", id, this.props.deletePageItem);
   }
   toggleShowMore() {
     if (this.state.showMore) {

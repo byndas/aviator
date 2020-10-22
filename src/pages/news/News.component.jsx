@@ -6,8 +6,7 @@ import NewsForm from "./NewsForm";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { getFireDbPage } from "../../firebase/Firebase.config";
-import { firebaseNews, deleteNewsItem } from "../../redux/news/news.actions";
+import { deletePageItem } from "../../redux/site/site.actions";
 
 const translate = {
   Geo: {
@@ -37,27 +36,23 @@ class News extends Component {
 
   static contextType = LanguageContext;
 
-  componentDidMount() {
-    getFireDbPage("news", this.props.firebaseNews);
-  }
   render() {
-    const { auth, reduxNews, deleteNewsItem } = this.props;
+    const { auth, reduxNews, deletePageItem } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
     let newsList;
 
     if (reduxNews !== null) {
-      const newsIds = Object.keys(reduxNews);
+      const newsIds = Object.keys(reduxNews).reverse();
       const newsArr = Object.values(reduxNews);
       // collects all news items in redux store
       newsList = newsArr
-        // reverse mis-aligns firebase & redux objects
-        // .reverse()
+        .reverse()
         .map((item, index) => (
           <NewsGroup
             auth={auth}
-            deleteNewsItem={deleteNewsItem}
+            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
@@ -83,10 +78,9 @@ class News extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxNews: reduxStore.news
+  reduxNews: reduxStore.siteData.news
 });
 
 export default connect(mapStateToProps, {
-  firebaseNews,
-  deleteNewsItem
+  deletePageItem
 })(News);

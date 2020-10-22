@@ -20,12 +20,7 @@ class AirPlane extends Component {
   render() {
     const { language } = this.context;
     const { AirPlane } = translate[language];
-    const {
-      auth,
-      reduxCatalog,
-      deleteCatalogItem,
-      editPostInputs
-    } = this.props;
+    const { auth, reduxCatalog, deletePageItem, editPostInputs } = this.props;
 
     let planeList;
 
@@ -36,7 +31,7 @@ class AirPlane extends Component {
       planeList = planeArr.map((airplane, index) => (
         <AirPlaneGroup
           auth={auth}
-          deleteCatalogItem={deleteCatalogItem}
+          deletePageItem={deletePageItem}
           editPostInputs={editPostInputs}
           name={airplane.name}
           text={airplane.text}

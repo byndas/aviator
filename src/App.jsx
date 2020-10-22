@@ -57,9 +57,6 @@ class App extends React.Component {
       searchInput: event.target.value
     });
   }
-  // searchResultsPage(page) {
-  // filtered = this.state.page.filter(pg => pg.id !== id);
-  // }
 
   render() {
     const { auth, searchMode, searchInput } = this.state;

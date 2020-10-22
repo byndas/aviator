@@ -1,4 +1,0 @@
-export const catalogActionTypes = {
-  FIREBASE_CATALOG: "FIREBASE_CATALOG",
-  DELETE_CATALOG_ITEM: "DELETE_CATALOG_ITEM"
-};

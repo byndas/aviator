@@ -27,12 +27,12 @@ class Gallery extends Component {
     let galleryList;
 
     if (reduxGallery !== null) {
+      const galleryIds = Object.keys(reduxGallery).reverse();
       const galleryArr = Object.values(reduxGallery);
-      const galleryIds = Object.keys(reduxGallery);
 
       galleryList = galleryArr
         // reverse mis-aligns firebase & redux objects
-        // .reverse()
+        .reverse()
         .map((item, index) => (
           <GalleryGroup
             src={item.src}
@@ -105,7 +105,7 @@ class Gallery extends Component {
 }
 
 const mapStateToProps = reduxStore => ({
-  reduxGallery: reduxStore.sitaData.gallery
+  reduxGallery: reduxStore.siteData.gallery
 });
 
 export default connect(mapStateToProps, {

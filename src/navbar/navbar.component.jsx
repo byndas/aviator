@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./navbar.styles.css";
 
 import Logo from "../images/logo.png";
@@ -12,14 +12,25 @@ import translate from "./translate";
 
 class Navbar extends React.Component {
   static contextType = LanguageContext;
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    console.log("APP searchInput STATE = " + this.props.searchInput);
+    if (this.props.searchInput !== "") {
+      this.props.history.push("/searchResults");
+      document.getElementById("search").value = "";
+    }
+  }
 
   render() {
+    const { auth, searchInput, setSearchInput } = this.props;
+    const { language } = this.context;
     const logOut = () => fireAuth.signOut();
-    const clearSearchBar = () => {
-      console.log("App searchInput state = " + this.props.searchInput);
-      document.getElementById("search").value = "";
-    };
-    const { language, handleChange } = this.context;
+
     const {
       News,
       Home,
@@ -27,7 +38,6 @@ class Navbar extends React.Component {
       Projects,
       Gallery,
       Catalog,
-      Calendar,
       Contact,
       Search
     } = translate[language];
@@ -92,12 +102,6 @@ class Navbar extends React.Component {
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link link_color" to="/calendar">
-                  {Calendar}
-                </Link>
-              </li>
-
-              <li className="nav-item">
                 <Link className="nav-link link_color" to="/contact">
                   {Contact}
                 </Link>
@@ -142,25 +146,25 @@ class Navbar extends React.Component {
             >
               <input
                 id="search"
+                name="searchState"
                 style={{ width: "150px", height: "35px" }}
                 className="form-control mr-sm-2"
                 type="search"
                 aria-label="Search"
                 placeholder={Search}
-                value={this.props.searchInput}
-                onChange={this.props.setSearchInput}
+                value={searchInput}
+                onChange={setSearchInput}
               />
-              <Link
+              <button
                 style={{ width: "75px", height: "35px" }}
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="button"
-                onClick={clearSearchBar}
-                to="/searchResults"
+                onClick={this.handleClick}
               >
                 {Search}
-              </Link>
+              </button>
             </form>
-            {this.props.auth && (
+            {auth && (
               <div className="option" onClick={logOut}>
                 LOG OUT
               </div>
@@ -168,7 +172,7 @@ class Navbar extends React.Component {
             <select
               className="language"
               value={language}
-              onChange={handleChange}
+              onChange={setSearchInput}
             >
               <option value="Geo">Geo</option>
               <option value="Eng">Eng</option>
@@ -181,4 +185,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

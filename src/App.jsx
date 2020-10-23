@@ -25,7 +25,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       auth: false,
-      searchMode: false,
       searchInput: ""
     };
     this.findProject = this.findProject.bind(this);
@@ -55,13 +54,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { auth, searchMode, searchInput } = this.state;
+    const { auth, searchInput } = this.state;
     return (
       <div>
         <LanguageProvider>
           <Navbar
             auth={auth}
-            searchMode={searchMode}
             searchInput={searchInput}
             setSearchInput={this.setSearchInput}
           />
@@ -77,9 +75,7 @@ class App extends React.Component {
             <Route
               exact
               path="/searchResults"
-              render={() => (
-                <SearchResults searchInput={this.state.searchInput} />
-              )}
+              render={() => <SearchResults searchInput={searchInput} />}
             />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />

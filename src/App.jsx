@@ -3,14 +3,12 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fireAuth, fireDbRef } from "./firebase/Firebase.config";
-// import { createStructuredSelector } from "reselect";
 import { storeFireDb } from "./redux/site/site.actions";
 import { LanguageProvider } from "./context/LanguageContext";
 
 import Navbar from "./navbar/navbar.component";
 import Home from "./pages/home/home.component";
 import About from "./pages/about/about.component";
-import Calendar from "./pages/calendar/Calendar.component";
 import Catalog from "./pages/catalog/Catalog.component";
 import Contact from "./pages/contact/Contact.component";
 import Gallery from "./pages/gallery/Gallery.component";
@@ -19,8 +17,6 @@ import News from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
 import SingleProject from "./pages/projects/SingleProject";
 import SearchResults from "./pages/searchResults/SearchResults.component";
-
-// import { logAdmin } from "./redux/admin/admin.actions";
 
 // 1nt3rnat10nal
 
@@ -87,11 +83,6 @@ class App extends React.Component {
             />
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
-            <Route
-              exact
-              path="/calendar"
-              render={() => <Calendar auth={auth} />}
-            />
             <Route
               exact
               path="/catalog"

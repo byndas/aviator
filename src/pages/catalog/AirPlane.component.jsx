@@ -25,21 +25,23 @@ class AirPlane extends Component {
     let planeList;
 
     if (reduxCatalog !== null) {
+      const planeIds = Object.keys(reduxCatalog).reverse();
       const planeArr = Object.values(reduxCatalog);
-      const planeIds = Object.keys(reduxCatalog);
 
-      planeList = planeArr.map((airplane, index) => (
-        <AirPlaneGroup
-          auth={auth}
-          deletePageItem={deletePageItem}
-          editPostInputs={editPostInputs}
-          name={airplane.name}
-          text={airplane.text}
-          src={airplane.src}
-          id={planeIds[index]}
-          key={index}
-        />
-      ));
+      planeList = planeArr
+        .reverse()
+        .map((airplane, index) => (
+          <AirPlaneGroup
+            auth={auth}
+            deletePageItem={deletePageItem}
+            editPostInputs={editPostInputs}
+            name={airplane.name}
+            text={airplane.text}
+            src={airplane.src}
+            id={planeIds[index]}
+            key={index}
+          />
+        ));
     }
     return (
       <div className="container border-bottom">

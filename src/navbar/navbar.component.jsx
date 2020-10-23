@@ -143,6 +143,7 @@ class Navbar extends React.Component {
             <form
               style={{ marginLeft: "30px" }}
               className="form-inline my-2 my-lg-0 mr-auto"
+              onSubmit={this.handleClick}
             >
               <input
                 id="search"
@@ -156,6 +157,7 @@ class Navbar extends React.Component {
                 onChange={setSearchInput}
               />
               <button
+                id="searchBtn"
                 style={{ width: "75px", height: "35px" }}
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="button"

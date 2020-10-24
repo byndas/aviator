@@ -5,7 +5,6 @@ import GalleryGroup from "./GalleryGroup";
 import GalleryForm from "./GalleryForm";
 import Footer from "../../footer/Footer.component";
 import Poster from "../../images/jpg/starPoster.jpg";
-import { deletePageItem } from "../../redux/site/site.actions";
 import { backgroundColor } from "../catalog/Catalog.component";
 
 class Gallery extends Component {
@@ -22,7 +21,7 @@ class Gallery extends Component {
     console.log("Gallery.component STATE", this.state);
   }
   render() {
-    const { auth, reduxGallery, deletePageItem } = this.props;
+    const { auth, reduxGallery } = this.props;
 
     let galleryList;
 
@@ -38,7 +37,6 @@ class Gallery extends Component {
             src={item.src}
             text={item.text}
             auth={auth}
-            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             key={index}
             id={galleryIds[index]}
@@ -108,6 +106,4 @@ const mapStateToProps = reduxStore => ({
   reduxGallery: reduxStore.siteData.gallery
 });
 
-export default connect(mapStateToProps, {
-  deletePageItem
-})(Gallery);
+export default connect(mapStateToProps)(Gallery);

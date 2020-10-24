@@ -43,7 +43,7 @@ class AirPlaneGroup extends Component {
     }
     console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
-    removePostFireDB("catalog", id, this.props.deletePageItem);
+    removePostFireDB("catalog", id);
   }
   toggleShowMore() {
     if (this.state.showMore) {

@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fireAuth, fireDbRef } from "./firebase/Firebase.config";
-import { storeFireDb } from "./redux/site/site.actions";
+import { updateReduxWithFireDb } from "./redux/site/site.actions";
 import { LanguageProvider } from "./context/LanguageContext";
 
 import Navbar from "./navbar/navbar.component";
@@ -40,8 +40,8 @@ class App extends React.Component {
       console.log("adminMode = " + this.state.auth);
     });
     fireDbRef.on("value", snapshot => {
-      console.log("FIRE DB BASE SNAPSHOT:", snapshot.val());
-      this.props.storeFireDb(snapshot.val());
+      console.log("REDUX UPDATES TO FIRE DB BASE SNAPSHOT:", snapshot.val());
+      this.props.updateReduxWithFireDb(snapshot.val());
     });
   }
   findProject(id) {
@@ -125,4 +125,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { storeFireDb })(App);
+export default connect(null, { updateReduxWithFireDb })(App);

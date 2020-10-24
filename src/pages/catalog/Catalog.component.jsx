@@ -4,7 +4,6 @@ import CatalogForm from "./CatalogForm";
 import AirPlane from "./AirPlane.component";
 import Pilots from "./Pilots.component";
 import Footer from "../../footer/Footer.component";
-import { deletePageItem } from "../../redux/site/site.actions";
 
 export const backgroundColor = {
   backgroundImage: "linear-gradient(to right, #d8e2f9, #83abed)"
@@ -23,7 +22,7 @@ class Catalog extends Component {
     console.log("Catalog.component STATE", this.state);
   }
   render() {
-    const { auth, reduxCatalog, deletePageItem } = this.props;
+    const { auth, reduxCatalog } = this.props;
 
     return (
       <div style={backgroundColor}>
@@ -31,7 +30,6 @@ class Catalog extends Component {
         <AirPlane
           auth={auth}
           editPostInputs={this.editPostInputs}
-          deletePageItem={deletePageItem}
           reduxCatalog={reduxCatalog}
         />
         <Pilots />
@@ -45,6 +43,4 @@ const mapStateToProps = reduxStore => ({
   reduxCatalog: reduxStore.siteData.catalog
 });
 
-export default connect(mapStateToProps, {
-  deletePageItem
-})(Catalog);
+export default connect(mapStateToProps)(Catalog);

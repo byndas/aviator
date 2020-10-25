@@ -5,7 +5,6 @@ import ProjectGroup from "./ProjectGroup";
 import ProjectsForm from "./ProjectsForm";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
-import { deletePageItem } from "../../redux/site/site.actions";
 
 const translate = {
   Geo: {
@@ -36,7 +35,7 @@ class Projects extends Component {
   static contextType = LanguageContext;
 
   render() {
-    const { auth, reduxProjects, deletePageItem } = this.props;
+    const { auth, reduxProjects } = this.props;
     const { language } = this.context;
     const { Projects } = translate[language];
 
@@ -52,7 +51,6 @@ class Projects extends Component {
         .map((item, index) => (
           <ProjectGroup
             auth={auth}
-            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
@@ -82,6 +80,4 @@ const mapStateToProps = reduxStore => ({
   reduxProjects: reduxStore.siteData.projects
 });
 
-export default connect(mapStateToProps, {
-  deletePageItem
-})(Projects);
+export default connect(mapStateToProps)(Projects);

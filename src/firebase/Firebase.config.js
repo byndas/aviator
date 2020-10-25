@@ -27,14 +27,12 @@ const storageRef = imageId =>
 //------------------------------------------------------
 //------------------------------------------------------
 //------------------------------------------------------
-export const removePostFireDB = (pageName, id, dispatchAction) => {
+export const removePostFireDB = (pageName, id) => {
   const removePost = fireDbRef.child(pageName + "/" + id).remove();
 
   removePost
     .then(() => {
       console.log("REMOVED POST FROM FIRE DB");
-      // REMOVES POST FROM REDUX, REFRESHES PAGE COMPONENT
-      dispatchAction(id, pageName);
       console.log("REMOVED POST FROM REDUX");
     })
     .catch(error => {

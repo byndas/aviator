@@ -1,4 +1,4 @@
-import { FIREBASE_DATA, DELETE_REDUX_ITEM } from "./site.actions";
+import { UPDATE_REDUX_WITH_FIRE_DB } from "./site.actions";
 
 const INITAL_STATE = {
   calendar: null,
@@ -10,14 +10,8 @@ const INITAL_STATE = {
 
 export const siteReducer = (state = INITAL_STATE, action) => {
   switch (action.type) {
-    case FIREBASE_DATA:
+    case UPDATE_REDUX_WITH_FIRE_DB:
       return Object.assign({}, state, action.payload);
-
-    case DELETE_REDUX_ITEM:
-      const deleteID = action.id;
-      const page = action.page;
-      delete state[page][deleteID];
-      return Object.assign({}, state);
 
     default:
       return state;

@@ -6,7 +6,6 @@ import NewsForm from "./NewsForm";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
-import { deletePageItem } from "../../redux/site/site.actions";
 
 const translate = {
   Geo: {
@@ -37,7 +36,7 @@ class News extends Component {
   static contextType = LanguageContext;
 
   render() {
-    const { auth, reduxNews, deletePageItem } = this.props;
+    const { auth, reduxNews } = this.props;
     const { language } = this.context;
     const { News } = translate[language];
 
@@ -52,7 +51,6 @@ class News extends Component {
         .map((item, index) => (
           <NewsGroup
             auth={auth}
-            deletePageItem={deletePageItem}
             editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
@@ -81,6 +79,4 @@ const mapStateToProps = reduxStore => ({
   reduxNews: reduxStore.siteData.news
 });
 
-export default connect(mapStateToProps, {
-  deletePageItem
-})(News);
+export default connect(mapStateToProps)(News);

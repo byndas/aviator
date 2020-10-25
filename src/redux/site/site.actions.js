@@ -1,15 +1,8 @@
-export const FIREBASE_DATA = "FIREBASE_DATA";
-export const DELETE_REDUX_ITEM = "DELETE_REDUX_ITEM";
+export const UPDATE_REDUX_WITH_FIRE_DB = "FIREBASE_DATA";
 
-export const storeFireDb = data => {
+export const updateReduxWithFireDb = data => {
   return {
-    type: FIREBASE_DATA,
+    type: UPDATE_REDUX_WITH_FIRE_DB,
     payload: data
   };
 };
-
-export const deletePageItem = (id, page) => ({
-  type: DELETE_REDUX_ITEM,
-  id: id,
-  page: page
-});

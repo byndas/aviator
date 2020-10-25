@@ -21,7 +21,7 @@ class Navbar extends React.Component {
     e.preventDefault();
     console.log("APP searchInput STATE = " + this.props.searchInput);
     if (this.props.searchInput !== "") {
-      this.props.history.push("/searchResults");
+      this.props.history.push("/search-results");
       document.getElementById("search").value = "";
     }
   }

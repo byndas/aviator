@@ -74,7 +74,7 @@ class App extends React.Component {
             />
             <Route
               exact
-              path="/searchResults"
+              path="/search-results"
               render={() => <SearchResults searchInput={searchInput} />}
             />
             <Route exact path="/about" component={About} />

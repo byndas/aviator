@@ -2,7 +2,7 @@ import "./News.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import NewsGroup from "./NewsGroup.component";
-import NewsForm from "./NewsForm";
+import AdminForm from "../AdminForm.component";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 import { backgroundColor } from "../catalog/Catalog.component";
@@ -46,25 +46,25 @@ class News extends Component {
       const newsIds = Object.keys(reduxNews).reverse();
       const newsArr = Object.values(reduxNews);
       // collects all news items in redux store
-      newsList = newsArr
-        .reverse()
-        .map((item, index) => (
-          <NewsGroup
-            auth={auth}
-            editPostInputs={this.editPostInputs}
-            name={item.name}
-            title={item.title}
-            text={item.text}
-            src={item.src}
-            key={index}
-            id={newsIds[index]}
-          />
-        ));
+      newsList = newsArr.reverse().map((item, index) => (
+        // consider instead a Group component
+        <NewsGroup
+          auth={auth}
+          editPostInputs={this.editPostInputs}
+          name={item.name}
+          title={item.title}
+          text={item.text}
+          src={item.src}
+          key={index}
+          id={newsIds[index]}
+          pageName="news"
+        />
+      ));
     }
     return (
       <div style={backgroundColor}>
         <h1 className="text-center font-italic heading">{News}</h1>
-        {auth && <NewsForm editObj={this.state} />}
+        {auth && <AdminForm editObj={this.state} pageName="news" />}
         <div className="container">
           {newsList}
           <br />

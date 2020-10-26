@@ -18,11 +18,10 @@ class NewsGroup extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleShowMore = this.toggleShowMore.bind(this);
   }
-
   handleEdit(id, src, title, name, text) {
-    // scrolls up to NewsForm
+    // scrolls up to Form
     window.scrollTo(0, 0);
-    // populates sibling NewsForm.jsx state (via parent component)
+    // populates sibling Form.jsx state (via parent component)
     // with data (including ID) of admin update post
     const editObj = {
       id,
@@ -34,7 +33,7 @@ class NewsGroup extends Component {
     console.log("NewsGroup editObj", editObj);
     this.props.editPostInputs(editObj);
   }
-  handleDelete(id, src) {
+  handleDelete(id, src, pageName) {
     console.log("POST FIRE DB ID TO DELETE: ", id);
 
     if (src !== null) {
@@ -44,7 +43,7 @@ class NewsGroup extends Component {
     }
     console.log("REMOVING POST FROM FIRE DB");
     // REMOVES POST FROM FIREBASE DB
-    removePostFireDB("news", id);
+    removePostFireDB(pageName, id);
   }
   toggleShowMore() {
     if (this.state.showMore) {
@@ -60,7 +59,7 @@ class NewsGroup extends Component {
     }
   }
   render() {
-    const { id, src, title, name, text, imgFile, auth } = this.props;
+    const { id, src, title, name, text, imgFile, auth, pageName } = this.props;
     return (
       <div className="card mb-5 project_content">
         <h5 className="card-header  text-center">{name}</h5>
@@ -79,7 +78,7 @@ class NewsGroup extends Component {
               <FontAwesomeIcon
                 type="button"
                 onClick={() => {
-                  this.handleDelete(id, src);
+                  this.handleDelete(id, src, pageName);
                 }}
                 className="icons"
                 icon={faTrash}

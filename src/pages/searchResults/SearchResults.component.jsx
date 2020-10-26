@@ -35,7 +35,7 @@ class SearchResults extends React.Component {
               {item.name}
               {item.title}
               {item.text}
-              <img src={item.src} />
+              <img src={item.src} alt="" />
             </div>
           ));
           console.log("pageMatchDivArray", pageMatchDivArray);

@@ -14,9 +14,9 @@ class GalleryGroup extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
   handleEdit(id, src, title, name, text) {
-    // scrolls up to NewsForm
+    // scrolls up to Form
     window.scrollTo(0, 0);
-    // populates sibling NewsForm.jsx state (via parent component)
+    // populates sibling Form.jsx state (via parent component)
     // with data (including ID) of admin update post
     const editObj = {
       id,

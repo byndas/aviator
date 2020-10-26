@@ -113,7 +113,6 @@ class GalleryForm extends Component {
 
   render() {
     const { text } = this.state;
-
     return (
       // ONLY TEXT & IMAGE ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">

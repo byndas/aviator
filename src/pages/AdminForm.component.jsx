@@ -3,11 +3,9 @@ import {
   pushOrSetPostFireDB,
   putImageFireStorage,
   deleteImageFireStorage
-} from "../../firebase/Firebase.config";
-// import * as adminForm from "../../pages/adminFormMethods";
-// import { emptyState } from "../adminFormMethods";
+} from "../firebase/Firebase.config";
 
-class NewsForm extends PureComponent {
+class AdminForm extends PureComponent {
   constructor(props) {
     super(props);
     // state controls form inputs
@@ -25,6 +23,14 @@ class NewsForm extends PureComponent {
     this.newImage = this.newImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  emptyState = {
+    imgFile: null,
+    src: null,
+    id: null,
+    name: "",
+    title: "",
+    text: ""
+  };
   componentWillReceiveProps(nextProps) {
     console.log("EDIT OBJ", nextProps.editObj);
 
@@ -44,14 +50,6 @@ class NewsForm extends PureComponent {
       }
     }
   }
-  emptyState = {
-    imgFile: null,
-    src: null,
-    id: null,
-    name: "",
-    title: "",
-    text: ""
-  };
   clearState() {
     this.setState(this.emptyState);
   }
@@ -81,7 +79,7 @@ class NewsForm extends PureComponent {
     if (this.state === this.emptyState) return;
 
     const { src, name, title, text } = this.state;
-
+    const { pageName } = this.props;
     const postObj = {
       src,
       name,
@@ -95,7 +93,7 @@ class NewsForm extends PureComponent {
         return alert("UPLOAD AN IMAGE");
       }
       console.log("PUTTING NEW IMAGE INTO FIRE STORAGE:", postObj.src);
-      putImageFireStorage("news", this.state, postObj);
+      putImageFireStorage(pageName, this.state, postObj);
     }
     // SINCE EDIT POST
     else if (this.state.imgFile !== null) {
@@ -103,12 +101,12 @@ class NewsForm extends PureComponent {
       if (this.state.imgFile !== null) {
         deleteImageFireStorage(this.state.src);
         console.log("PUTTING NEW IMAGE INTO FIRE STORAGE");
-        putImageFireStorage("news", this.state, postObj);
+        putImageFireStorage(pageName, this.state, postObj);
       }
     } else {
       // SINCE WITHOUT NEW IMAGE
       console.log("PUTTING EDIT POST NO NEW IMAGE INTO FIRE STORAGE");
-      pushOrSetPostFireDB("news", this.state, postObj);
+      pushOrSetPostFireDB(pageName, this.state, postObj);
     }
   }
   render() {
@@ -177,4 +175,4 @@ class NewsForm extends PureComponent {
   }
 }
 
-export default NewsForm;
+export default AdminForm;

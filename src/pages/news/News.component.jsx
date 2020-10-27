@@ -1,7 +1,7 @@
 import "./News.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import NewsGroup from "./NewsGroup.component";
+import PagePosts from "../PagePosts.component";
 import AdminForm from "../AdminForm.component";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
@@ -47,8 +47,8 @@ class News extends Component {
       const newsArr = Object.values(reduxNews);
       // collects all news items in redux store
       newsList = newsArr.reverse().map((item, index) => (
-        // consider instead a Group component
-        <NewsGroup
+        // consider instead a PagePosts component
+        <PagePosts
           auth={auth}
           editPostInputs={this.editPostInputs}
           name={item.name}

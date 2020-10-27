@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   pushOrSetPostFireDB,
   putImageFireStorage,
   deleteImageFireStorage
 } from "../firebase/Firebase.config";
 
-class AdminForm extends PureComponent {
+class AdminForm extends Component {
   constructor(props) {
     super(props);
     // state controls form inputs
@@ -110,35 +110,42 @@ class AdminForm extends PureComponent {
     }
   }
   render() {
+    // IF AIRPLANE CATALOG FORM, NO TITLE
+    // ELSE (NEWS / PROJECTS / CATALOG), ALL INPUTS
     const { name, title, text } = this.state;
     return (
       // NAME, TITLE, TEXT, IMG ADMIN INPUTS
       <div style={{ width: "50%", marginBottom: "50px" }} className="container">
         <form onSubmit={this.handleSubmit} id="form">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              value={name}
-              name="name"
-              onChange={this.handleChange}
-              type="text"
-              className="form-control"
-              id="name"
-              placeholder="name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              value={title}
-              name="title"
-              onChange={this.handleChange}
-              type="text"
-              className="form-control"
-              id="title"
-              placeholder="title"
-            />
-          </div>
+          {this.props.pageName !== "gallery" && (
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                value={name}
+                name="name"
+                onChange={this.handleChange}
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="name"
+              />
+            </div>
+          )}
+          {this.props.pageName !== "catalog" ||
+            (this.props.pageName !== "gallery" && (
+              <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input
+                  value={title}
+                  name="title"
+                  onChange={this.handleChange}
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  placeholder="title"
+                />
+              </div>
+            ))}
           <div className="form-group">
             <label htmlFor="text">Text</label>
             <textarea

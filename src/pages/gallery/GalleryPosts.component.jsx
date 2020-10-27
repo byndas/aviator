@@ -7,7 +7,7 @@ import {
   removePostFireDB
 } from "../../firebase/Firebase.config";
 
-class GalleryGroup extends Component {
+class GalleryPosts extends Component {
   constructor(props) {
     super(props);
     this.handleEdit = this.handleEdit.bind(this);
@@ -42,7 +42,6 @@ class GalleryGroup extends Component {
   }
   render() {
     const { src, text, imgFile, auth, id } = this.props;
-    // HOW TO FINISH THIS?
     return (
       <div className="carousel-item mt-5 mb-5 rounded">
         <img src={src} className="gallery_img" alt="..." />
@@ -72,4 +71,4 @@ class GalleryGroup extends Component {
   }
 }
 
-export default GalleryGroup;
+export default GalleryPosts;

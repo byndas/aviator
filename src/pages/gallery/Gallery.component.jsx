@@ -1,8 +1,8 @@
 import "./Gallery.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import GalleryGroup from "./GalleryGroup";
-import GalleryForm from "./GalleryForm";
+import GalleryPosts from "./GalleryPosts.component";
+import AdminForm from "../AdminForm.component";
 import Footer from "../../footer/Footer.component";
 import Poster from "../../images/jpg/starPoster.jpg";
 import { backgroundColor } from "../catalog/Catalog.component";
@@ -30,16 +30,16 @@ class Gallery extends Component {
       const galleryArr = Object.values(reduxGallery);
 
       galleryList = galleryArr
-        // reverse mis-aligns firebase & redux objects
         .reverse()
         .map((item, index) => (
-          <GalleryGroup
+          <GalleryPosts
             src={item.src}
             text={item.text}
             auth={auth}
             editPostInputs={this.editPostInputs}
             key={index}
             id={galleryIds[index]}
+            pageName="gallery"
           />
         ));
     }
@@ -93,7 +93,7 @@ class Gallery extends Component {
               <span className="sr-only">Next</span>
             </a>
           </div>
-          {auth && <GalleryForm editObj={this.state} />}
+          {auth && <AdminForm editObj={this.state} pageName="gallery" />}
           <br />
         </div>
         <Footer />

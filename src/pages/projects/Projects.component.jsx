@@ -1,8 +1,8 @@
 import "./Projects.styles.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProjectGroup from "./ProjectGroup";
-import ProjectsForm from "./ProjectsForm";
+import PagePosts from "../PagePosts.component";
+import AdminForm from "../AdminForm.component";
 import Footer from "../../footer/Footer.component";
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -46,10 +46,9 @@ class Projects extends Component {
       const projectsArr = Object.values(reduxProjects);
       // collects all projects in redux store
       projectList = projectsArr
-        // reverse mis-aligns firebase & redux objects
         .reverse()
         .map((item, index) => (
-          <ProjectGroup
+          <PagePosts
             auth={auth}
             editPostInputs={this.editPostInputs}
             name={item.name}
@@ -58,6 +57,7 @@ class Projects extends Component {
             src={item.src}
             key={index}
             id={projectsIds[index]}
+            pageName="projects"
           />
         ));
     }
@@ -65,7 +65,7 @@ class Projects extends Component {
       <div>
         <div className="project_container">
           <h1 className="project_title font-italic">{Projects}</h1>
-          {auth && <ProjectsForm editObj={this.state} />}
+          {auth && <AdminForm editObj={this.state} pageName="projects" />}
           <br />
           {projectList}
           <br />

@@ -65,8 +65,8 @@ function Contact() {
             <iframe
               title="map"
               src="https://maps.google.com/maps?q=tbilisi&t=k&z=13&ie=UTF8&iwloc=&output=embed"
-              frameborder="0"
-              allowfullscreen
+              frameBorder="0"
+              allowFullScreen
             ></iframe>
           </div>
         </div>

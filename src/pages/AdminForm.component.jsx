@@ -131,21 +131,21 @@ class AdminForm extends Component {
               />
             </div>
           )}
-          {this.props.pageName !== "catalog" ||
-            (this.props.pageName !== "gallery" && (
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  value={title}
-                  name="title"
-                  onChange={this.handleChange}
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  placeholder="title"
-                />
-              </div>
-            ))}
+          {(this.props.pageName !== "catalog" ||
+            this.props.pageName !== "gallery") && (
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                value={title}
+                name="title"
+                onChange={this.handleChange}
+                type="text"
+                className="form-control"
+                id="title"
+                placeholder="title"
+              />
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="text">Text</label>
             <textarea

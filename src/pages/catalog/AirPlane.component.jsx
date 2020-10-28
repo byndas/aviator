@@ -1,6 +1,6 @@
 import "./Catalog.styles.css";
 import React, { Component } from "react";
-import PagePosts from "../PagePosts.component";
+import CatalogPosts from "./CatalogPosts.component";
 import { LanguageContext } from "../../context/LanguageContext";
 
 const translate = {
@@ -31,7 +31,7 @@ class AirPlane extends Component {
       planeList = planeArr
         .reverse()
         .map((airplane, index) => (
-          <PagePosts
+          <CatalogPosts
             auth={auth}
             editPostInputs={editPostInputs}
             name={airplane.name}

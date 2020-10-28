@@ -15,7 +15,7 @@ import Gallery from "./pages/gallery/Gallery.component";
 import Login from "./pages/login/Login.component";
 import News from "./pages/news/News.component";
 import Projects from "./pages/projects/Projects.component";
-import SingleProject from "./pages/projects/SingleProject";
+import SingleProject from "./pages/projects/SingleProject.component";
 import SearchResults from "./pages/searchResults/SearchResults.component";
 
 // 1nt3rnat10nal

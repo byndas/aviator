@@ -13,17 +13,16 @@ class GalleryPosts extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-  handleEdit(id, src, title, name, text) {
-    // scrolls up to Form
-    window.scrollTo(0, 0);
+  handleEdit(id, text, src, imgFile) {
+    // scrolls up to AminForm
+    window.scrollTo(0, document.body.scrollHeight);
     // populates sibling Form.jsx state (via parent component)
     // with data (including ID) of admin update post
     const editObj = {
       id,
+      text,
       src,
-      name,
-      title,
-      text
+      imgFile
     };
     console.log("GalleryGroup editObj", editObj);
     this.props.editPostInputs(editObj);
@@ -50,7 +49,7 @@ class GalleryPosts extends Component {
             <FontAwesomeIcon
               type="button"
               onClick={() => {
-                this.handleEdit(id, src, text, imgFile);
+                this.handleEdit(id, text, src, imgFile);
               }}
               className="icons"
               icon={faEdit}

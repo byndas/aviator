@@ -15,7 +15,7 @@ class Gallery extends Component {
 
     this.editPostInputs = this.editPostInputs.bind(this);
   }
-
+  // import editPostsInputs in all page components
   editPostInputs(postObj) {
     this.setState(postObj);
     console.log("Gallery.component STATE", this.state);

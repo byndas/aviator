@@ -95,22 +95,19 @@ class AdminForm extends Component {
       console.log("PUTTING NEW IMAGE INTO FIRE STORAGE:", postObj.src);
       putImageFireStorage(pageName, this.state, postObj);
     }
-    // SINCE EDIT POST
+    // SINCE EDIT POST WITH NEW IMAGE
     else if (this.state.imgFile !== null) {
-      // IF WITH NEW IMAGE
-      if (this.state.imgFile !== null) {
-        deleteImageFireStorage(this.state.src);
-        console.log("PUTTING NEW IMAGE INTO FIRE STORAGE");
-        putImageFireStorage(pageName, this.state, postObj);
-      }
+      deleteImageFireStorage(this.state.src);
+      console.log("PUTTING NEW IMAGE INTO FIRE STORAGE");
+      putImageFireStorage(pageName, this.state, postObj);
     } else {
-      // SINCE WITHOUT NEW IMAGE
+      // SINCE EDIT POST WITHOUT NEW IMAGE
       console.log("PUTTING EDIT POST NO NEW IMAGE INTO FIRE STORAGE");
       pushOrSetPostFireDB(pageName, this.state, postObj);
     }
   }
   render() {
-    // IF AIRPLANE CATALOG FORM, NO TITLE
+    // IF GALLERY FORM, NO TITLE
     // ELSE (NEWS / PROJECTS / CATALOG), ALL INPUTS
     const { name, title, text } = this.state;
     return (
@@ -131,21 +128,21 @@ class AdminForm extends Component {
               />
             </div>
           )}
-          {(this.props.pageName !== "catalog" ||
-            this.props.pageName !== "gallery") && (
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                value={title}
-                name="title"
-                onChange={this.handleChange}
-                type="text"
-                className="form-control"
-                id="title"
-                placeholder="title"
-              />
-            </div>
-          )}
+          {this.props.pageName !== "catalog" &&
+            this.props.pageName !== "gallery" && (
+              <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input
+                  value={title}
+                  name="title"
+                  onChange={this.handleChange}
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  placeholder="title"
+                />
+              </div>
+            )}
           <div className="form-group">
             <label htmlFor="text">Text</label>
             <textarea

@@ -82,37 +82,24 @@ class App extends React.Component {
             <Route
               exact
               path="/catalog"
-              render={() => (
-                <Catalog auth={auth} reduxStore={this.props.reduxStore} />
-              )}
+              render={() => <Catalog auth={auth} />}
             />
             <Route
               exact
               path="/gallery"
-              render={() => (
-                <Gallery auth={auth} reduxStore={this.props.reduxStore} />
-              )}
+              render={() => <Gallery auth={auth} />}
             />
-            <Route
-              exact
-              path="/news"
-              render={() => (
-                <News auth={auth} reduxStore={this.props.reduxStore} />
-              )}
-            />
+            <Route exact path="/news" render={() => <News auth={auth} />} />
             <Route
               exact
               path="/projects"
-              render={() => (
-                <Projects auth={auth} reduxStore={this.props.reduxStore} />
-              )}
+              render={() => <Projects auth={auth} />}
             />
             <Route
               exact
               path="/projects/:id"
               render={props => (
                 <SingleProject
-                  reduxStore={this.props.reduxStore}
                   projects={this.findProject(props.match.params.id)}
                 />
               )}

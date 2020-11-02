@@ -33,12 +33,12 @@ class Gallery extends Component {
         .reverse()
         .map((item, index) => (
           <GalleryPosts
-            src={item.src}
             text={item.text}
-            auth={auth}
-            editPostInputs={this.editPostInputs}
+            src={item.src}
             key={index}
             id={galleryIds[index]}
+            editPostInputs={this.editPostInputs}
+            auth={auth}
             pageName="gallery"
           />
         ));

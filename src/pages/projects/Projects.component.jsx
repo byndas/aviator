@@ -49,14 +49,14 @@ class Projects extends Component {
         .reverse()
         .map((item, index) => (
           <PagePosts
-            auth={auth}
-            editPostInputs={this.editPostInputs}
             name={item.name}
             title={item.title}
             text={item.text}
             src={item.src}
             key={index}
             id={projectsIds[index]}
+            editPostInputs={this.editPostInputs}
+            auth={auth}
             pageName="projects"
           />
         ));
